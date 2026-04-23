@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>विविध जिनवाणी संग्रह MP3 — धन्यकुमार जैन द्वारा</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="player">
+    <h1 class="player-title">🎵 विविध जिनवाणी संग्रह MP3 धन्यकुमार जैन द्वारा</h1>
+
+    <!-- Currently playing info -->
+    <div class="now-playing">
+      <p class="label">Now Playing</p>
+      <p class="song-name" id="song-name">—</p>
+    </div>
+
+    <!-- Audio element -->
+    <audio id="audio"></audio>
+
+    <!-- Progress bar -->
+    <div class="progress-container" id="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div class="time-info">
+      <span id="current-time">0:00</span>
+      <span id="duration">0:00</span>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button id="btn-prev" title="Previous">&#9664;&#9664;</button>
+      <button id="btn-play" title="Play">&#9654;</button>
+      <button id="btn-next" title="Next">&#9654;&#9654;</button>
+    </div>
+
+    <!-- Playlist -->
+    <ul class="playlist" id="playlist"></ul>
+
+    <!-- Error message -->
+    <p class="error" id="error-msg"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
