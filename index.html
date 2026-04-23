@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,40 +8,126 @@
 </head>
 <body>
 
-  <div class="player">
-    <h1 class="player-title">🎵 विविध जिनवाणी संग्रह MP3 धन्यकुमार जैन द्वारा</h1>
-
-    <!-- Currently playing info -->
-    <div class="now-playing">
-      <p class="label">Now Playing</p>
-      <p class="song-name" id="song-name">—</p>
+  <!-- ── TOP BAR ── -->
+  <header class="topbar">
+    <span class="app-title">🎵 जिनवाणी संग्रह</span>
+    <div class="topbar-actions">
+      <button id="btn-theme" title="Toggle theme">🌙</button>
+      <button id="btn-export" title="Export data">⬆</button>
+      <button id="btn-import-trigger" title="Import data">⬇</button>
+      <input type="file" id="btn-import" accept=".json" hidden />
     </div>
+  </header>
 
-    <!-- Audio element -->
-    <audio id="audio"></audio>
+  <!-- ── MAIN LAYOUT ── -->
+  <main class="layout">
 
-    <!-- Progress bar -->
-    <div class="progress-container" id="progress-container">
-      <div class="progress-bar" id="progress-bar"></div>
+    <!-- LEFT: Library + Search -->
+    <section class="panel panel-library">
+
+      <!-- Search -->
+      <div class="search-wrap">
+        <input type="search" id="search" placeholder="🔍 खोजें… (search)" autocomplete="off" />
+      </div>
+
+      <!-- Tab bar -->
+      <div class="tabs">
+        <button class="tab active" data-tab="all">सभी गीत</button>
+        <button class="tab" data-tab="favorites">❤ पसंदीदा</button>
+        <button class="tab" data-tab="playlists">📋 Playlists</button>
+        <button class="tab" data-tab="recent">🕐 Recent</button>
+      </div>
+
+      <!-- Song list -->
+      <ul class="song-list" id="song-list"></ul>
+
+      <!-- Favorites empty state -->
+      <p class="empty-state" id="empty-state" hidden>कोई गीत नहीं मिला।</p>
+
+      <!-- Playlist panel (shown when playlists tab active) -->
+      <div id="playlist-panel" hidden>
+        <div class="playlist-header">
+          <input id="new-playlist-name" type="text" placeholder="New playlist name…" />
+          <button id="btn-create-playlist">+ Create</button>
+        </div>
+        <ul id="playlist-list"></ul>
+        <!-- Songs inside selected playlist -->
+        <div id="playlist-songs-view" hidden>
+          <button id="btn-back-playlists">← Back</button>
+          <h3 id="playlist-songs-title"></h3>
+          <button id="btn-play-playlist">▶ Play All</button>
+          <button id="btn-shuffle-playlist">🔀 Shuffle</button>
+          <ul id="playlist-songs-list"></ul>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- RIGHT: Full Player -->
+    <section class="panel panel-player" id="full-player">
+      <div class="album-art" id="album-art">🎵</div>
+
+      <div class="song-info">
+        <p class="song-title" id="player-title">—</p>
+      </div>
+
+      <!-- Waveform / progress visualization -->
+      <canvas id="waveform" height="48"></canvas>
+
+      <!-- Progress -->
+      <div class="progress-wrap">
+        <div class="progress-track" id="progress-track">
+          <div class="progress-fill" id="progress-fill"></div>
+          <div class="progress-thumb" id="progress-thumb"></div>
+        </div>
+      </div>
+      <div class="time-row">
+        <span id="cur-time">0:00</span>
+        <span id="dur-time">0:00</span>
+      </div>
+
+      <!-- Volume -->
+      <div class="volume-row">
+        <span>🔈</span>
+        <input type="range" id="volume" min="0" max="1" step="0.02" value="1" />
+        <span>🔊</span>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <button id="btn-mode" title="Playback mode">🔁</button>
+        <button id="btn-prev">⏮</button>
+        <button id="btn-play-pause" class="btn-main">▶</button>
+        <button id="btn-next">⏭</button>
+        <button id="btn-fav" title="Favorite">🤍</button>
+      </div>
+
+      <!-- Add to playlist -->
+      <div class="add-to-playlist-row">
+        <select id="playlist-select"><option value="">+ Add to playlist…</option></select>
+        <button id="btn-add-to-playlist">Add</button>
+      </div>
+
+      <p class="error-msg" id="error-msg"></p>
+    </section>
+
+  </main>
+
+  <!-- ── MINI PLAYER (sticky bottom, mobile) ── -->
+  <div class="mini-player" id="mini-player" hidden>
+    <div class="mini-info" id="mini-expand">
+      <span class="mini-title" id="mini-title">—</span>
     </div>
-    <div class="time-info">
-      <span id="current-time">0:00</span>
-      <span id="duration">0:00</span>
+    <div class="mini-progress-bar"><div class="mini-progress-fill" id="mini-progress-fill"></div></div>
+    <div class="mini-controls">
+      <button id="mini-prev">⏮</button>
+      <button id="mini-play">▶</button>
+      <button id="mini-next">⏭</button>
     </div>
-
-    <!-- Controls -->
-    <div class="controls">
-      <button id="btn-prev" title="Previous">&#9664;&#9664;</button>
-      <button id="btn-play" title="Play">&#9654;</button>
-      <button id="btn-next" title="Next">&#9654;&#9654;</button>
-    </div>
-
-    <!-- Playlist -->
-    <ul class="playlist" id="playlist"></ul>
-
-    <!-- Error message -->
-    <p class="error" id="error-msg"></p>
   </div>
+
+  <!-- Hidden audio element -->
+  <audio id="audio"></audio>
 
   <script src="script.js"></script>
 </body>
