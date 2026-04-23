@@ -1,7 +1,0 @@
-# No third-party dependencies required.
-# Both add-song.py and serve.py use Python standard library only.
-# Python 3.6+ recommended.
-
-# To build serve.exe:
-# pip install pyinstaller
-# pyinstaller --onefile --console serve.py

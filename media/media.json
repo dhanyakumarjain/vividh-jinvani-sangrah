@@ -101,16 +101,5 @@
       }
     }
   ],
-  "songs": [
-   
-    {
-      "id": "song-007",
-      "title": "Runaway",
-      "artist": "Kanye West ft. Pusha T",
-      "album": "My Beautiful Dark Twisted Fantasy",
-      "altName": ["runaway video version", "toast to the douchebags", "kanye", "pusha t", "mbdtf"],
-      "duration": 278,
-      "file": "media/Kanye West - Runaway (Video Version) ft. Pusha T.mp3"
-    }
-  ]
+  "songs": []
 }
