@@ -1,8 +1,14 @@
 import http.server
 import socketserver
 import webbrowser
+import os
+import pathlib
 
 PORT = 8080
+
+# Always serve from the project root (one level up from this script)
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+os.chdir(ROOT)
 
 handler = http.server.SimpleHTTPRequestHandler
 handler.extensions_map.update({'.js': 'application/javascript'})
