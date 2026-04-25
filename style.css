@@ -32,15 +32,44 @@ body {
 
 .player-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 1.5rem;
+}
+
+.player-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.player-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.player-logo {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
 }
 
 .player-title {
   font-size: 1.25rem;
   color: var(--accent);
   letter-spacing: 0.5px;
+}
+
+.player-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin: 0;
+  display: none;
+}
+
+.player-subtitle.visible {
+  display: block;
 }
 
 .player-header .icon-btn {
@@ -286,8 +315,8 @@ body {
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
   right: 0;
+  min-width: 220px;
   background: var(--modal-bg);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -405,6 +434,12 @@ body {
   border-radius: 3px;
   font-weight: 700;
   flex-shrink: 0;
+}
+
+.badge-seeded {
+  font-size: 0.65rem;
+  opacity: 0.6;
+  margin-left: 2px;
 }
 
 .song-item .fav-btn {

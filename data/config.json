@@ -1,0 +1,106 @@
+{
+  "title": "जिनवाणी प्लेयर",
+  "subtitle": "By Dhanyakumar Jain",
+  "logo": "",
+  "themes": [
+    {
+      "id": "spotify",
+      "name": "Spotify",
+      "dot": "#1DB954",
+      "dark": {
+        "--bg-page": "#1a1a2e",
+        "--bg-card": "#16213e",
+        "--bg-accent-area": "#0f3460",
+        "--accent": "#1DB954",
+        "--accent-hover": "#1ED760",
+        "--text": "#e0e0e0",
+        "--text-secondary": "#888",
+        "--text-dim": "#555",
+        "--heart": "#E91E63",
+        "--border": "#0f3460",
+        "--shadow": "rgba(0,0,0,0.5)",
+        "--modal-bg": "#16213e"
+      },
+      "light": {
+        "--bg-page": "#f0f0f3",
+        "--bg-card": "#ffffff",
+        "--bg-accent-area": "#e0e0e0",
+        "--accent": "#1DB954",
+        "--accent-hover": "#1AA34A",
+        "--text": "#1D1D1F",
+        "--text-secondary": "#6E6E73",
+        "--text-dim": "#aaa",
+        "--heart": "#E91E63",
+        "--border": "#d1d1d6",
+        "--shadow": "rgba(0,0,0,0.12)",
+        "--modal-bg": "#ffffff"
+      }
+    },
+    {
+      "id": "warm",
+      "name": "Warm",
+      "dot": "#E94560",
+      "dark": {
+        "--bg-page": "#1a1a2e",
+        "--bg-card": "#16213e",
+        "--bg-accent-area": "#0f3460",
+        "--accent": "#E94560",
+        "--accent-hover": "#FF5A75",
+        "--text": "#eaeaea",
+        "--text-secondary": "#8888a0",
+        "--text-dim": "#4a4a5a",
+        "--heart": "#E94560",
+        "--border": "#2a2a40",
+        "--shadow": "rgba(0,0,0,0.5)",
+        "--modal-bg": "#1f1f3a"
+      },
+      "light": {
+        "--bg-page": "#faf8f5",
+        "--bg-card": "#ffffff",
+        "--bg-accent-area": "#ebe7e0",
+        "--accent": "#D4385F",
+        "--accent-hover": "#C02E50",
+        "--text": "#2D2D2D",
+        "--text-secondary": "#8a8a8e",
+        "--text-dim": "#c5c0b8",
+        "--heart": "#D4385F",
+        "--border": "#ddd8d0",
+        "--shadow": "rgba(0,0,0,0.08)",
+        "--modal-bg": "#ffffff"
+      }
+    },
+    {
+      "id": "blue",
+      "name": "Blue",
+      "dot": "#66C0F4",
+      "dark": {
+        "--bg-page": "#0c1524",
+        "--bg-card": "#132238",
+        "--bg-accent-area": "#1a3350",
+        "--accent": "#66C0F4",
+        "--accent-hover": "#80CCFF",
+        "--text": "#c7d5e0",
+        "--text-secondary": "#7a8a99",
+        "--text-dim": "#4a5568",
+        "--heart": "#F472B6",
+        "--border": "#2a3f55",
+        "--shadow": "rgba(0,0,0,0.5)",
+        "--modal-bg": "#22354a"
+      },
+      "light": {
+        "--bg-page": "#f0f4f8",
+        "--bg-card": "#ffffff",
+        "--bg-accent-area": "#e2e8f0",
+        "--accent": "#3B82F6",
+        "--accent-hover": "#2563EB",
+        "--text": "#1e293b",
+        "--text-secondary": "#64748b",
+        "--text-dim": "#cbd5e1",
+        "--heart": "#EC4899",
+        "--border": "#cbd5e1",
+        "--shadow": "rgba(0,0,0,0.08)",
+        "--modal-bg": "#ffffff"
+      }
+    }
+  ]
+}

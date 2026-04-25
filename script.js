@@ -48,19 +48,42 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadSongs() {
   try {
-    const res = await fetch('media/media.json');
-    const data = await res.json();
-    songs = data.songs || [];
+    const [config, songData, playlistData] = await Promise.all([
+      fetch('data/config.json').then(r => r.json()),
+      fetch('data/songs.json').then(r => r.json()),
+      fetch('data/playlists.json').then(r => r.json()),
+    ]);
 
-    if (data.title) {
-      $('#playerTitle').textContent = '♫ ' + data.title;
-      document.title = data.title;
+    songs = songData.songs || [];
+
+    if (config.title) {
+      $('#playerTitle').textContent = '♫ ' + config.title;
+      document.title = config.title;
     }
 
-    if (data.themes && data.themes.length) {
-      themeDefs = data.themes;
+    if (config.subtitle) {
+      const sub = $('#playerSubtitle');
+      sub.textContent = config.subtitle;
+      sub.classList.add('visible');
+    }
+
+    if (config.logo) {
+      const logo = $('#playerLogo');
+      logo.src = config.logo;
+      logo.style.display = 'block';
+    }
+
+    if (config.themes && config.themes.length) {
+      themeDefs = config.themes;
       renderThemeCards();
       applyTheme();
+    }
+
+    // Load seeded playlists from playlists.json, merge with user playlists
+    if (playlistData.playlists && playlistData.playlists.length) {
+      const seeded = playlistData.playlists.map(pl => ({ ...pl, seeded: true }));
+      playlists = playlists.filter(pl => !pl.seeded);
+      playlists = [...seeded, ...playlists];
     }
 
     await Promise.all(songs.map(async (s) => {
@@ -399,8 +422,8 @@ function renderPLDropdown() {
   const el = $('#ddPlaylistList');
   el.innerHTML = playlists.map(pl => `
     <div class="dd-item" data-plid="${pl.id}">
-      <span>${pl.name}</span>
-      <button class="icon-btn" data-plmenu="${pl.id}">&#8943;</button>
+      <span>${pl.name}${pl.seeded ? ' <span class="badge-seeded">&#128190;</span>' : ''}</span>
+      ${!pl.seeded ? `<button class="icon-btn" data-plmenu="${pl.id}">&#8943;</button>` : ''}
     </div>`).join('');
 
   el.querySelectorAll('.dd-item').forEach(d => {
@@ -477,7 +500,8 @@ function addToRecent(songId) {
 function showSongCtx(event, songId, isPlView) {
   const menu = $('#contextMenu');
   let html = `<button class="ctx-item" data-action="add" data-sid="${songId}">+ Add to Playlist</button>`;
-  if (isPlView && state.activePlaylistId)
+  const activePl = playlists.find(p => p.id === state.activePlaylistId);
+  if (isPlView && state.activePlaylistId && activePl && !activePl.seeded)
     html += `<button class="ctx-item danger" data-action="remove" data-sid="${songId}">Remove from Playlist</button>`;
   menu.innerHTML = html;
   menu.querySelectorAll('.ctx-item').forEach(b => b.addEventListener('click', () => {
@@ -515,8 +539,9 @@ function closeModal(id) { document.getElementById(id).classList.remove('open'); 
 function openAddToPL(songId) {
   addToPlaylistSongId = songId;
   const c = $('#playlistCheckboxes');
-  c.innerHTML = playlists.length
-    ? playlists.map(pl => `<label class="pl-check"><input type="checkbox" value="${pl.id}" ${pl.songIds.includes(songId) ? 'checked' : ''}>${pl.name}</label>`).join('')
+  const userPlaylists = playlists.filter(pl => !pl.seeded);
+  c.innerHTML = userPlaylists.length
+    ? userPlaylists.map(pl => `<label class="pl-check"><input type="checkbox" value="${pl.id}" ${pl.songIds.includes(songId) ? 'checked' : ''}>${pl.name}</label>`).join('')
     : '<p style="color:var(--text-secondary);font-size:0.8rem;padding:4px">No playlists yet.</p>';
   openModal('addToPlaylistModal');
 }
@@ -622,7 +647,7 @@ function saveState() {
 }
 
 function saveFavorites() { localStorage.setItem(STORAGE.FAVORITES, JSON.stringify(favorites)); }
-function savePlaylists() { localStorage.setItem(STORAGE.PLAYLISTS, JSON.stringify(playlists)); }
+function savePlaylists() { localStorage.setItem(STORAGE.PLAYLISTS, JSON.stringify(playlists.filter(pl => !pl.seeded))); }
 function saveRecent() { localStorage.setItem(STORAGE.RECENT, JSON.stringify(recentlyPlayed)); }
 function saveTheme() { localStorage.setItem(STORAGE.THEME, JSON.stringify(theme)); }
 
