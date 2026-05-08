@@ -129,6 +129,25 @@ body {
   font-size: 1.25rem;
   color: var(--accent);
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  line-height: 1.3;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.player-title2 {
+  font-size: 1.25rem;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  white-space: pre;
+  line-height: 1.3;
+  margin: 0;
+  display: none;
+  font-weight: 600;
+}
+
+.player-title2.visible {
+  display: block;
 }
 
 .player-subtitle {
@@ -136,6 +155,7 @@ body {
   color: var(--text-secondary);
   margin: 0;
   display: none;
+  margin-top: 2px;
 }
 
 .player-subtitle.visible {
@@ -839,6 +859,132 @@ body {
     font-size: 0.85rem;
     min-height: 44px;
     align-items: center;
+  }
+}
+
+/* ==================== RESPONSIVE TITLE ==================== */
+
+@media (max-width: 600px) {
+  .spiritual-artwork {
+    margin-left: -10px;
+    margin-right: 8px;
+  }
+  
+  .spiritual-image {
+    height: 110px;
+  }
+  
+  .player-title,
+  .player-title2 {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .spiritual-artwork {
+    margin-left: -15px;
+    margin-right: 6px;
+  }
+  
+  .spiritual-image {
+    height: 100px;
+  }
+  
+  .player-title,
+  .player-title2 {
+    font-size: 1.1rem;
+  }
+  
+  .player-title-row {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 450px) {
+  .spiritual-artwork {
+    margin-left: -20px;
+    margin-right: 5px;
+  }
+  
+  .spiritual-image {
+    height: 90px;
+  }
+  
+  .player-title,
+  .player-title2 {
+    font-size: 1.05rem;
+    letter-spacing: 0.4px;
+  }
+  
+  .player-title-row {
+    gap: 5px;
+  }
+}
+
+@media (max-width: 400px) {
+  .spiritual-artwork {
+    margin-left: -25px;
+    margin-right: 4px;
+  }
+  
+  .spiritual-image {
+    height: 85px;
+  }
+  
+  .player-title,
+  .player-title2 {
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+  }
+  
+  .player-header .icon-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .spiritual-artwork {
+    margin-left: -30px;
+    margin-right: 3px;
+  }
+  
+  .spiritual-image {
+    height: 80px;
+  }
+  
+  .player-title,
+  .player-title2 {
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
+  }
+  
+  .player-title-row {
+    gap: 4px;
+  }
+  
+  .player-header .icon-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .spiritual-artwork {
+    margin-left: -35px;
+    margin-right: 2px;
+  }
+  
+  .spiritual-image {
+    height: 75px;
+  }
+  
+  .player-title,
+  .player-title2 {
+    font-size: 0.9rem;
+    letter-spacing: 0.1px;
   }
 }
 

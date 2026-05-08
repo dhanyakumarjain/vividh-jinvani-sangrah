@@ -57,8 +57,14 @@ async function loadSongs() {
     songs = songData.songs || [];
 
     if (config.title) {
-      $('#playerTitle').textContent = '♫ ' + config.title;
+      $('#playerTitle').textContent = config.title;
       document.title = config.title;
+    }
+
+    if (config.title2) {
+      const title2 = $('#playerTitle2');
+      title2.textContent = config.title2;
+      title2.classList.add('visible');
     }
 
     if (config.subtitle) {
