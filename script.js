@@ -24,7 +24,7 @@ let state = {
 let favorites = [];
 let playlists = [];
 let recentlyPlayed = [];
-let theme = { scheme: 'spotify', mode: 'dark' };
+let theme = { scheme: 'fire', mode: 'dark' };
 let addToPlaylistSongId = null;
 let editingPlaylistId = null;
 let deletingPlaylistId = null;
@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupControls();
   setupEvents();
   restoreState();
+  fetchLastUpdated();
 });
 
 // ==================== SONGS ====================
@@ -207,8 +208,22 @@ function setupControls() {
   });
 
   audio.addEventListener('ended', () => {
-    if (state.repeat === 'one') { audio.currentTime = 0; audio.play(); return; }
-    nextSong();
+    if (state.repeat === 'all') { 
+      nextSong();
+    } else {
+      // When repeat is off, stop at the end of queue
+      const avail = currentQueue.filter(id => {
+        const song = getSong(id);
+        return song && song.available !== false;
+      });
+      const idx = avail.indexOf(state.currentSongId);
+      if (idx < avail.length - 1) {
+        nextSong();
+      } else {
+        pauseSong();
+        audio.currentTime = 0;
+      }
+    }
   });
 
   audio.addEventListener('error', () => {
@@ -257,8 +272,7 @@ function setupControls() {
   $('#btnShuffle').classList.toggle('active', state.shuffle);
 
   $('#btnRepeat').addEventListener('click', () => {
-    const modes = ['off', 'all', 'one'];
-    state.repeat = modes[(modes.indexOf(state.repeat) + 1) % 3];
+    state.repeat = state.repeat === 'off' ? 'all' : 'off';
     updateRepeatBtn();
     saveState();
   });
@@ -283,19 +297,40 @@ function setupControls() {
 
 function updateNowPlaying() {
   const song = getSong(state.currentSongId);
+  const songNameEl = $('#songName');
+  
   if (song) {
-    $('#songName').textContent = song.title + ' · ' + song.artist;
+    const songText = song.title + ' · ' + song.artist;
+    songNameEl.innerHTML = `<span class="song-name-inner" data-text="${songText.replace(/"/g, '&quot;')}">${songText}</span>`;
   } else {
-    $('#songName').innerHTML = '&mdash;';
+    songNameEl.innerHTML = '&mdash;';
   }
   $('#btnPlay').innerHTML = state.isPlaying ? '&#9646;&#9646;' : '&#9654;';
+  
+  // Update play button label
+  const playLabel = $('#btnPlay').parentElement.querySelector('.ctrl-label');
+  if (playLabel) {
+    playLabel.textContent = state.isPlaying ? 'Pause' : 'Play';
+  }
 }
 
 function updateRepeatBtn() {
   const btn = $('#btnRepeat');
-  btn.classList.toggle('active', state.repeat !== 'off');
-  btn.title = state.repeat === 'off' ? 'Repeat' : state.repeat === 'all' ? 'Repeat All' : 'Repeat One';
-  btn.innerHTML = state.repeat === 'one' ? '&#8635;<sup style="font-size:0.5em">1</sup>' : '&#8635;';
+  const label = btn.parentElement.querySelector('.ctrl-label');
+  
+  btn.classList.toggle('active', state.repeat === 'all');
+  
+  if (state.repeat === 'off') {
+    btn.innerHTML = '&#8635;';
+    btn.title = 'Repeat: Off';
+    btn.style.opacity = '0.5';
+    if (label) label.textContent = 'Repeat';
+  } else {
+    btn.innerHTML = '&#8635;';
+    btn.title = 'Repeat: All';
+    btn.style.opacity = '1';
+    if (label) label.textContent = 'Rep All';
+  }
 }
 
 function updateVolumeIcon() {
@@ -305,7 +340,11 @@ function updateVolumeIcon() {
 
 function updateVolumeSliderFill() {
   const pct = state.volume;
-  $('#volumeSlider').style.background = `linear-gradient(to right, var(--accent) ${pct}%, var(--bg-accent-area) ${pct}%)`;
+  const slider = $('#volumeSlider');
+  // Create a gradient that shows the filled portion
+  slider.style.background = `linear-gradient(to right, var(--accent) 0%, var(--accent) ${pct}%, rgba(0, 0, 0, 0.5) ${pct}%, rgba(0, 0, 0, 0.5) 100%)`;
+  slider.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+  slider.style.boxShadow = 'inset 0 1px 3px rgba(0, 0, 0, 0.6)';
 }
 
 function restoreState() {
@@ -364,9 +403,10 @@ function renderSongItems(list, emptyMsg, isPlView) {
     const active = state.currentSongId === s.id;
     const fav = favorites.includes(s.id);
     const na = !s.available;
+    const songText = `${s.title} · ${s.artist}`;
     return `<li class="song-item${active ? ' active' : ''}${na ? ' unavailable' : ''}" data-id="${s.id}">
       <span class="idx">${active && state.isPlaying ? '&#9654;' : i + 1}</span>
-      <span class="name">${s.title} &middot; ${s.artist}</span>
+      <span class="name"><span class="name-inner" data-text="${songText.replace(/"/g, '&quot;')}">${songText}</span></span>
       ${na ? '<span class="badge-na">N/A</span>' : ''}
       <button class="icon-btn fav-btn${fav ? ' on' : ''}" data-fav="${s.id}">${fav ? '&#9829;' : '&#9825;'}</button>
       <button class="icon-btn menu-btn" data-menu="${s.id}" data-plv="${!!isPlView}">&#8943;</button>
@@ -393,9 +433,10 @@ function renderRecentItems(q) {
     const active = state.currentSongId === s.id;
     const fav = favorites.includes(s.id);
     const na = !s.available;
+    const songText = `${s.title} · ${s.artist}`;
     return `<li class="song-item${active ? ' active' : ''}${na ? ' unavailable' : ''}" data-id="${s.id}">
       <span class="idx">${active && state.isPlaying ? '&#9654;' : i + 1}</span>
-      <span class="name">${s.title} &middot; ${s.artist}</span>
+      <span class="name"><span class="name-inner" data-text="${songText.replace(/"/g, '&quot;')}">${songText}</span></span>
       <span class="recent-time">${timeAgo(s.playedAt)}</span>
       ${na ? '<span class="badge-na">N/A</span>' : ''}
       <button class="icon-btn fav-btn${fav ? ' on' : ''}" data-fav="${s.id}">${fav ? '&#9829;' : '&#9825;'}</button>
@@ -837,3 +878,48 @@ function timeAgo(ts) {
 }
 
 function showError(msg) { $('#errorMsg').textContent = msg; }
+
+// ==================== VERSION INFO ====================
+
+async function fetchLastUpdated() {
+  try {
+    // Fetch from config.json which is already loaded
+    const response = await fetch('data/config.json');
+    if (response.ok) {
+      const data = await response.json();
+      if (data.lastUpdated) {
+        displayLastUpdated(data.lastUpdated);
+        return;
+      }
+    }
+  } catch (e) {
+    console.error('Could not fetch last updated date:', e);
+  }
+  
+  // Fallback if no lastUpdated field
+  displayLastUpdated(null);
+}
+
+function displayLastUpdated(dateString) {
+  const versionDateEl = $('#versionDate');
+  if (!versionDateEl) return;
+  
+  if (!dateString) {
+    versionDateEl.textContent = 'Unknown';
+    return;
+  }
+  
+  try {
+    const date = new Date(dateString);
+    const options = { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    };
+    versionDateEl.textContent = date.toLocaleDateString('en-US', options);
+  } catch (e) {
+    versionDateEl.textContent = dateString;
+  }
+}

@@ -6,7 +6,7 @@
   <title>MusicBox</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body data-scheme="spotify" data-mode="dark">
+<body data-scheme="fire" data-mode="dark">
 
   <div class="player">
     <div class="player-header">
@@ -46,11 +46,26 @@
     </div>
 
     <div class="controls">
-      <button class="ctrl-btn small" id="btnRepeat" title="Repeat">&#8635;</button>
-      <button class="ctrl-btn" id="btnPrev" title="Previous">&#9664;&#9664;</button>
-      <button class="ctrl-btn play-btn" id="btnPlay" title="Play">&#9654;</button>
-      <button class="ctrl-btn" id="btnNext" title="Next">&#9654;&#9654;</button>
-      <button class="ctrl-btn small" id="btnShuffle" title="Shuffle">&#8652;</button>
+      <div class="ctrl-wrap">
+        <button class="ctrl-btn small" id="btnRepeat" title="Repeat">&#8635;</button>
+        <span class="ctrl-label">Repeat</span>
+      </div>
+      <div class="ctrl-wrap">
+        <button class="ctrl-btn" id="btnPrev" title="Previous">&#9664;&#9664;</button>
+        <span class="ctrl-label">Prev</span>
+      </div>
+      <div class="ctrl-wrap">
+        <button class="ctrl-btn play-btn" id="btnPlay" title="Play">&#9654;</button>
+        <span class="ctrl-label">Play</span>
+      </div>
+      <div class="ctrl-wrap">
+        <button class="ctrl-btn" id="btnNext" title="Next">&#9654;&#9654;</button>
+        <span class="ctrl-label">Next</span>
+      </div>
+      <div class="ctrl-wrap">
+        <button class="ctrl-btn small" id="btnShuffle" title="Shuffle">&#8652;</button>
+        <span class="ctrl-label">Shuffle</span>
+      </div>
     </div>
 
     <div class="volume-row">
@@ -107,6 +122,10 @@
             <input type="file" id="importFile" accept=".json" hidden>
           </div>
           <p class="hint">Export/import favorites, playlists, history &amp; preferences.</p>
+        </div>
+        <div class="version-info" id="versionInfo">
+          <span class="version-label">Last Updated:</span>
+          <span class="version-date" id="versionDate">Loading...</span>
         </div>
       </div>
     </div>

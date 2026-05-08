@@ -199,20 +199,53 @@ body {
 .now-playing .song-name {
   font-size: 0.88rem;
   color: var(--text);
-  word-break: break-word;
   line-height: 1.3;
   font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  display: block;
+}
+
+.now-playing .song-name-inner {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* Auto-scrolling animation for now playing text - no hover needed */
+.now-playing .song-name-inner[data-text] {
+  animation: scrollLeftContinuous 15s linear infinite;
+  animation-delay: 1s;
+}
+
+@keyframes scrollLeftContinuous {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 1rem));
+  }
+}
+
+.now-playing .song-name-inner[data-text]::after {
+  content: '  •  ' attr(data-text);
+  padding-left: 2rem;
 }
 
 /* ==================== PROGRESS BAR ==================== */
 
 .progress-container {
-  background: var(--bg-accent-area);
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 4px;
-  height: 5px;
+  height: 6px;
   cursor: pointer;
   margin-bottom: 0.25rem;
   position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    inset 0 1px 3px rgba(0, 0, 0, 0.6),
+    0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
 }
 
 .progress-bar {
@@ -221,6 +254,39 @@ body {
   background: var(--accent);
   border-radius: 4px;
   pointer-events: none;
+  position: relative;
+  /* Force solid color with multiple fallbacks */
+  box-shadow: 
+    0 0 15px currentColor,
+    0 0 8px rgba(255, 255, 255, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  color: var(--accent);
+  min-height: 6px;
+}
+
+/* Add a bright highlight on top for maximum visibility */
+.progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 4px 4px 0 0;
+}
+
+/* Add a subtle shadow at bottom for depth */
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0 0 4px 4px;
 }
 
 .progress-input {
@@ -240,13 +306,20 @@ body {
 
 .progress-input::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.15s;
+  /* High contrast border and shadows for visibility */
+  border: 3px solid #ffffff;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(0, 0, 0, 0.3),
+    0 0 15px currentColor;
+  color: var(--accent);
 }
 
 .progress-container:hover .progress-input::-webkit-slider-thumb {
@@ -254,14 +327,20 @@ body {
 }
 
 .progress-input::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: var(--accent);
-  border: none;
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.15s;
+  /* High contrast border and shadows for visibility */
+  border: 3px solid #ffffff;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(0, 0, 0, 0.3),
+    0 0 15px currentColor;
+  color: var(--accent);
 }
 
 .progress-container:hover .progress-input::-moz-range-thumb {
@@ -290,42 +369,128 @@ body {
 .controls {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 0.7rem;
+  align-items: flex-start;
+  gap: 0.8rem;
   margin-bottom: 0.7rem;
+}
+
+.ctrl-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ctrl-label {
+  font-size: 0.62rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  opacity: 0.7;
+  transition: opacity 0.2s, color 0.2s;
+  user-select: none;
+}
+
+.ctrl-wrap:hover .ctrl-label {
+  opacity: 1;
+  color: var(--accent);
 }
 
 .ctrl-btn {
   background: var(--bg-accent-area);
   color: var(--accent);
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 0.85rem;
+  width: 46px;
+  height: 46px;
+  font-size: 0.95rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s, transform 0.1s, color 0.2s;
+  transition: background 0.2s, transform 0.1s, color 0.2s, box-shadow 0.2s;
+  position: relative;
+  /* Glossy effect */
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.ctrl-btn:hover { background: var(--accent); color: var(--bg-card); }
-.ctrl-btn:active { transform: scale(0.93); }
+/* Glossy highlight on top */
+.ctrl-btn::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 15%;
+  right: 15%;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), transparent);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  pointer-events: none;
+}
+
+.ctrl-btn:hover { 
+  background: var(--accent); 
+  color: var(--bg-card);
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    0 0 20px currentColor,
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.ctrl-btn:active { 
+  transform: scale(0.93);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
 
 .ctrl-btn.small {
-  width: 32px;
-  height: 32px;
-  font-size: 0.8rem;
+  width: 38px;
+  height: 38px;
+  font-size: 0.9rem;
 }
 
 .ctrl-btn.small.active {
   color: var(--bg-card);
   background: var(--accent);
+  box-shadow: 
+    0 4px 16px currentColor,
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .play-btn {
-  width: 48px;
-  height: 48px;
-  font-size: 1rem;
+  width: 56px;
+  height: 56px;
+  font-size: 1.1rem;
+  /* Extra emphasis for play button */
+  box-shadow: 
+    0 6px 16px rgba(0, 0, 0, 0.4),
+    0 0 0 2px var(--accent),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.play-btn::before {
+  top: 3px;
+  height: 45%;
+}
+
+.play-btn:hover {
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    0 0 30px currentColor,
+    0 0 0 3px var(--accent),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.4);
+  transform: scale(1.05);
 }
 
 /* ==================== VOLUME ==================== */
@@ -341,39 +506,89 @@ body {
 .volume-row .icon-btn {
   font-size: 1.1rem;
   color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  position: relative;
+  /* Subtle glossy effect */
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.volume-row .icon-btn::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 20%;
+  right: 20%;
+  height: 35%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  pointer-events: none;
 }
 
 .volume-row .icon-btn:hover {
   color: var(--text);
+  background: var(--bg-accent-area);
+  box-shadow: 
+    0 3px 10px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .volume-slider {
   -webkit-appearance: none;
   appearance: none;
   flex: 1;
-  height: 4px;
-  border-radius: 2px;
-  background: var(--bg-accent-area);
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
   outline: none;
   cursor: pointer;
+  position: relative;
 }
 
 .volume-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.5),
+    0 0 10px currentColor;
+  color: var(--accent);
+  transition: transform 0.15s;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
 }
 
 .volume-slider::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: var(--accent);
-  border: none;
+  border: 2px solid #ffffff;
   cursor: pointer;
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.5),
+    0 0 10px currentColor;
+  color: var(--accent);
+  transition: transform 0.15s;
+}
+
+.volume-slider::-moz-range-thumb:hover {
+  transform: scale(1.15);
 }
 
 /* ==================== TABS ==================== */
@@ -518,6 +733,27 @@ body {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  position: relative;
+  display: block;
+  max-width: 100%;
+}
+
+.song-item .name-inner {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* Scrolling animation for long text on hover/touch */
+.song-item:hover .name-inner,
+.song-item:active .name-inner {
+  animation: scrollLeftContinuous 15s linear infinite;
+  animation-delay: 0.5s;
+}
+
+.song-item:hover .name-inner::after,
+.song-item:active .name-inner::after {
+  content: '  •  ' attr(data-text);
+  padding-left: 2rem;
 }
 
 .song-item .badge-na {
@@ -561,7 +797,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  opacity: 0;
+  opacity: 0.6;
   transition: opacity 0.1s;
 }
 
@@ -742,6 +978,27 @@ body {
 
 .data-btns { display: flex; gap: 6px; }
 .hint { margin-top: 5px; font-size: 0.65rem; color: var(--text-dim); }
+
+/* ==================== VERSION INFO ==================== */
+
+.version-info {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  opacity: 0.7;
+}
+
+.version-label {
+  font-weight: 600;
+  margin-right: 0.3rem;
+}
+
+.version-date {
+  font-family: 'Courier New', monospace;
+}
 
 /* ==================== BUTTONS & FORMS ==================== */
 
@@ -969,6 +1226,30 @@ body {
     height: 28px;
     font-size: 1rem;
   }
+  
+  /* Adjust control buttons for very small screens */
+  .controls {
+    gap: 0.9rem;
+  }
+  
+  .ctrl-btn {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .ctrl-btn.small {
+    width: 42px;
+    height: 42px;
+  }
+  
+  .play-btn {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .ctrl-label {
+    font-size: 0.6rem;
+  }
 }
 
 @media (max-width: 340px) {
@@ -995,7 +1276,56 @@ body {
     padding: 1.5rem 1rem;
     max-width: 100%;
   }
-  .controls { gap: 0.6rem; }
+  
+  /* Larger buttons with more spacing for elderly users */
+  .controls { 
+    gap: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .ctrl-btn {
+    width: 52px;
+    height: 52px;
+    font-size: 1.05rem;
+    /* Enhanced glossy effect for mobile */
+    box-shadow: 
+      0 5px 15px rgba(0, 0, 0, 0.35),
+      inset 0 2px 0 rgba(255, 255, 255, 0.25),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+  }
+  
+  .ctrl-btn::before {
+    top: 3px;
+    height: 42%;
+  }
+  
+  .ctrl-btn.small {
+    width: 46px;
+    height: 46px;
+    font-size: 1rem;
+  }
+  
+  .play-btn {
+    width: 64px;
+    height: 64px;
+    font-size: 1.25rem;
+    box-shadow: 
+      0 7px 20px rgba(0, 0, 0, 0.45),
+      0 0 0 3px var(--accent),
+      inset 0 3px 0 rgba(255, 255, 255, 0.35),
+      inset 0 -3px 0 rgba(0, 0, 0, 0.35);
+  }
+  
+  .play-btn::before {
+    top: 4px;
+    height: 48%;
+  }
+  
+  .ctrl-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3px;
+    font-weight: 700;
+  }
   
   .player-header {
     gap: 8px;
@@ -1009,26 +1339,92 @@ body {
     font-size: 1.1rem;
   }
   
+  /* Larger progress bar for easier interaction */
+  .progress-container {
+    height: 8px;
+    margin-bottom: 0.4rem;
+    border-width: 2px;
+  }
+  
+  .progress-bar {
+    min-height: 8px;
+  }
+  
+  .progress-bar::before {
+    height: 3px;
+  }
+  
+  .progress-input {
+    top: -10px;
+    height: 28px;
+  }
+  
+  .progress-input::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+    border-width: 4px;
+  }
+  
+  .progress-input::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-width: 4px;
+  }
+  
+  /* Larger time display */
+  .time-info {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Larger volume controls */
+  .volume-row {
+    margin-bottom: 1.2rem;
+    padding: 0 0.8rem;
+  }
+  
+  .vol-icon svg,
+  .volume-row .icon-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 1.3rem;
+  }
+  
+  .volume-slider {
+    height: 6px;
+  }
+  
+  .volume-slider::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .volume-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+  }
+  
   /* Make song items more touch-friendly */
   .song-item {
-    padding: 0.7rem 0.6rem;
-    min-height: 48px;
+    padding: 0.85rem 0.7rem;
+    min-height: 56px;
+    font-size: 0.88rem;
   }
   
   .song-item .idx {
-    min-width: 1.8rem;
-    font-size: 0.75rem;
+    min-width: 2rem;
+    font-size: 0.8rem;
   }
   
   .song-item .name {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
   }
   
   .song-item .fav-btn,
   .song-item .menu-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 1rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
   }
   
   /* Increase tap target size for better mobile UX */
@@ -1046,6 +1442,29 @@ body {
   .song-item .menu-btn {
     position: relative;
   }
+  
+  /* Larger tabs for easier touch */
+  .tab {
+    padding: 10px 6px;
+    font-size: 0.8rem;
+    min-height: 44px;
+  }
+  
+  /* Larger search input */
+  .search-input {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    min-height: 44px;
+  }
+  
+  /* Larger now playing text */
+  .now-playing .song-name {
+    font-size: 0.9rem;
+  }
+  
+  .now-playing .label {
+    font-size: 0.7rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1062,14 +1481,56 @@ body {
   
   /* Make dropdown items more touch-friendly */
   .dd-item {
-    padding: 10px 12px;
-    font-size: 0.85rem;
-    min-height: 44px;
+    padding: 12px 14px;
+    font-size: 0.88rem;
+    min-height: 48px;
   }
   
   .dd-item .icon-btn {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+  
+  /* Larger control buttons for tablets */
+  .ctrl-btn {
+    width: 50px;
+    height: 50px;
     font-size: 1rem;
+  }
+  
+  .ctrl-btn.small {
+    width: 44px;
+    height: 44px;
+    font-size: 0.95rem;
+  }
+  
+  .play-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.15rem;
+  }
+  
+  .controls {
+    gap: 1rem;
+  }
+  
+  /* Larger progress bar */
+  .progress-container {
+    height: 7px;
+  }
+  
+  .progress-bar {
+    min-height: 7px;
+  }
+  
+  .progress-input::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .progress-input::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
   }
 }

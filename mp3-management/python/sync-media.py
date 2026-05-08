@@ -2,6 +2,7 @@
 sync-media.py
 Scans media/ subfolders, each folder = one playlist.
 Rebuilds data/songs.json and data/playlists.json from scratch.
+Updates lastUpdated timestamp in config.json.
 
 Usage:
     python sync-media.py
@@ -18,12 +19,14 @@ Media folder structure:
 import os
 import json
 import re
+from datetime import datetime
 
 SCRIPT_DIR   = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MEDIA_DIR    = os.path.join(SCRIPT_DIR, "media")
 DATA_DIR     = os.path.join(SCRIPT_DIR, "data")
 SONGS_PATH   = os.path.join(DATA_DIR, "songs.json")
 PLAYLISTS_PATH = os.path.join(DATA_DIR, "playlists.json")
+CONFIG_PATH  = os.path.join(DATA_DIR, "config.json")
 
 
 def make_display_name(filename):
@@ -128,7 +131,33 @@ def main():
     with open(PLAYLISTS_PATH, "w", encoding="utf-8") as f:
         json.dump(playlists_data, f, ensure_ascii=False, indent=2)
     print(f"Wrote {len(playlists)} playlist(s) to data/playlists.json")
+    
+    # Update lastUpdated in config.json
+    update_config_timestamp()
+    
     print("\nDone! Run git-push.bat to deploy.")
+
+
+def update_config_timestamp():
+    """Update the lastUpdated field in config.json with current timestamp"""
+    try:
+        # Read existing config
+        if os.path.exists(CONFIG_PATH):
+            with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+                config = json.load(f)
+        else:
+            config = {}
+        
+        # Update timestamp
+        config["lastUpdated"] = datetime.now().isoformat()
+        
+        # Write back
+        with open(CONFIG_PATH, "w", encoding="utf-8") as f:
+            json.dump(config, f, ensure_ascii=False, indent=2)
+        
+        print(f"Updated lastUpdated in config.json: {config['lastUpdated']}")
+    except Exception as e:
+        print(f"Warning: Could not update config.json timestamp: {e}")
 
 
 if __name__ == "__main__":
