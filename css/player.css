@@ -1,0 +1,94 @@
+/* ==================== PLAYER PANEL ==================== */
+.player {
+  flex: 1;
+  min-width: 0;
+  background: #0f0b06;
+  border-radius: 0 18px 18px 0;
+  padding: 1.4rem 1.4rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
+}
+
+/* ==================== PLAYER HEADER ==================== */
+.player-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+.player-title-wrap { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+.player-title-row  { display: flex; align-items: center; gap: 8px; }
+
+.player-logo {
+  height: 26px;
+  width: auto;
+  object-fit: contain;
+}
+
+.player-title {
+  font-size: 1.15rem;
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  display: none;
+  line-height: 1.4;
+}
+.player-subtitle.visible { display: block; }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.heart-btn {
+  font-size: 1.3rem;
+  color: var(--text-dim);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+.heart-btn.on { color: var(--accent); }
+.heart-btn:hover { color: var(--accent); }
+
+.player-header .icon-btn {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.2s, background 0.2s;
+}
+.player-header .icon-btn:hover { color: var(--text); background: var(--bg-accent-area); }
+
+/* ==================== NOW PLAYING ==================== */
+.now-playing {
+  margin-bottom: 0.6rem;
+  min-height: 2rem;
+}
+.now-playing .song-name {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  word-break: break-word;
+  line-height: 1.4;
+}

@@ -1,0 +1,47 @@
+/* ==================== APP FRAME ==================== */
+.app-frame {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 900px;
+  min-height: 520px;
+  background: #0d0900;
+  border-radius: 18px;
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 0 60px rgba(0,0,0,0.9), 0 0 30px rgba(139,105,20,0.15);
+  overflow: hidden;
+}
+
+/* ==================== DECORATIVE CORNERS ==================== */
+.corner {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  z-index: 10;
+  pointer-events: none;
+}
+.corner::before, .corner::after {
+  content: "";
+  position: absolute;
+  background: var(--border-gold);
+}
+.corner::before { width: 100%; height: 2px; top: 0; left: 0; }
+.corner::after  { width: 2px; height: 100%; top: 0; left: 0; }
+
+.corner-tl { top: 0;    left: 0; }
+.corner-tr { top: 0;    right: 0; transform: scaleX(-1); }
+.corner-bl { bottom: 0; left: 0;  transform: scaleY(-1); }
+.corner-br { bottom: 0; right: 0; transform: scale(-1); }
+
+.border-top, .border-bottom, .border-left, .border-right {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
+  pointer-events: none;
+  z-index: 9;
+  opacity: 0.3;
+}
+.border-top    { top: 0;    left: 60px; right: 60px; height: 1px; }
+.border-bottom { bottom: 0; left: 60px; right: 60px; height: 1px; }
+.border-left   { left: 0;   top: 60px; bottom: 60px; width: 1px; background: linear-gradient(180deg, transparent, var(--border-gold), transparent); }
+.border-right  { right: 0;  top: 60px; bottom: 60px; width: 1px; background: linear-gradient(180deg, transparent, var(--border-gold), transparent); }

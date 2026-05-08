@@ -1,0 +1,38 @@
+/* ==================== RESET & BASE ==================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI", -apple-system, sans-serif;
+  padding: 2rem 1.5rem;
+  background: #0a0a0a;
+  color: var(--text, #e0d5c0);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button { font-family: inherit; border: none; cursor: pointer; background: none; color: inherit; }
+input  { font-family: inherit; }
+
+/* ==================== CSS VARIABLES ==================== */
+body {
+  --bg-page:        #0a0a0a;
+  --bg-card:        #141008;
+  --bg-artwork:     #1a0f00;
+  --bg-accent-area: #251800;
+  --accent:         #E8820C;
+  --accent-hover:   #FF9A20;
+  --accent-dim:     rgba(232,130,12,0.15);
+  --accent-glow:    rgba(232,130,12,0.4);
+  --text:           #f0e6d0;
+  --text-secondary: #a08060;
+  --text-dim:       #5a4030;
+  --heart:          #E8820C;
+  --border:         #2a1e0e;
+  --border-gold:    #8B6914;
+  --shadow:         rgba(0,0,0,0.8);
+  --modal-bg:       #1a1208;
+  --card-border:    #3a2810;
+}

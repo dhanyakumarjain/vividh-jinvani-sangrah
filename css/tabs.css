@@ -1,0 +1,92 @@
+/* ==================== TABS ==================== */
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.6rem;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  border-bottom: 2px solid transparent;
+  text-align: center;
+  transition: color 0.2s, border-color 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.tab svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.tab span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.tab:hover { color: var(--text-secondary); }
+.tab.active { 
+  color: var(--accent); 
+  border-bottom-color: var(--accent); 
+}
+
+.tab-dd-wrap { 
+  position: relative; 
+  flex: 1; 
+  display: flex; 
+  min-width: 0;
+}
+.tab-dd-wrap .tab { flex: 1; }
+
+.tab-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 220px;
+  background: var(--modal-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 4px;
+  z-index: 50;
+  box-shadow: 0 4px 16px var(--shadow);
+  margin-top: 4px;
+}
+
+.tab-dropdown.open { display: block; }
+
+.dd-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--text);
+  text-align: left;
+  transition: background 0.1s;
+}
+
+.dd-item:hover { background: var(--bg-accent-area); }
+.dd-item .icon-btn { opacity: 0; font-size: 14px; }
+.dd-item:hover .icon-btn { opacity: 1; }
+
+.dd-new {
+  color: var(--accent);
+  border-top: 1px solid var(--border);
+  margin-top: 2px;
+}
+
+#ddPlaylistList:empty + .dd-new { border-top: none; margin-top: 0; }

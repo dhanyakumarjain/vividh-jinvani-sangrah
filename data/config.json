@@ -1,7 +1,8 @@
 {
-  "title": "जिनवाणी प्लेयर",
-  "subtitle": "By Dhanyakumar Jain",
+  "title": "विविध जिनवाणी संग्रह- Play List",
+  "subtitle": "जैन पूजा पाठ स्तुति स्त्रोत्र आरती भजन प्रवचन इत्त्यादी",
   "logo": "",
+  "spiritualCaption": "धन्यकुमार जैन द्वारा संकलित",
   "themes": [
     {
       "id": "spotify",
@@ -19,7 +20,8 @@
         "--heart": "#E91E63",
         "--border": "#0f3460",
         "--shadow": "rgba(0,0,0,0.5)",
-        "--modal-bg": "#16213e"
+        "--modal-bg": "#16213e",
+        "--spiritual-caption": "#FFD700"
       },
       "light": {
         "--bg-page": "#f0f0f3",
@@ -33,7 +35,8 @@
         "--heart": "#E91E63",
         "--border": "#d1d1d6",
         "--shadow": "rgba(0,0,0,0.12)",
-        "--modal-bg": "#ffffff"
+        "--modal-bg": "#ffffff",
+        "--spiritual-caption": "#D4AF37"
       }
     },
     {

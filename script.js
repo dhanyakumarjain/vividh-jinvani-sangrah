@@ -67,6 +67,12 @@ async function loadSongs() {
       sub.classList.add('visible');
     }
 
+    if (config.spiritualCaption) {
+      const caption = $('#spiritualCaption');
+      caption.textContent = config.spiritualCaption;
+      caption.classList.add('visible');
+    }
+
     if (config.logo) {
       const logo = $('#playerLogo');
       logo.src = config.logo;
@@ -86,10 +92,8 @@ async function loadSongs() {
       playlists = [...seeded, ...playlists];
     }
 
-    await Promise.all(songs.map(async (s) => {
-      try { const r = await fetch(s.file, { method: 'HEAD' }); s.available = r.ok; }
-      catch { s.available = false; }
-    }));
+    // Mark all songs as available by default (check on play instead)
+    songs.forEach(s => s.available = true);
   } catch { songs = []; }
 }
 
@@ -99,7 +103,7 @@ function getSong(id) { return songs.find(s => s.id === id); }
 
 function playSong(id) {
   const song = getSong(id);
-  if (!song || !song.available) return;
+  if (!song) return;
 
   if (state.currentSongId !== id) {
     audio.src = song.file;
@@ -107,11 +111,21 @@ function playSong(id) {
     addToRecent(id);
   }
 
-  audio.play().catch(() => showError('Could not play file.'));
-  state.isPlaying = true;
-  updateNowPlaying();
-  updateList();
-  saveState();
+  audio.play()
+    .then(() => {
+      state.isPlaying = true;
+      song.available = true;
+      updateNowPlaying();
+      updateList();
+      saveState();
+    })
+    .catch(() => {
+      song.available = false;
+      showError(`Could not play "${song.title}". File may be missing or unavailable.`);
+      state.isPlaying = false;
+      updateNowPlaying();
+      updateList();
+    });
 }
 
 function pauseSong() {
@@ -124,7 +138,10 @@ function pauseSong() {
 
 function togglePlay() {
   if (!state.currentSongId) {
-    const first = currentQueue.find(id => getSong(id)?.available);
+    const first = currentQueue.find(id => {
+      const song = getSong(id);
+      return song && song.available !== false;
+    });
     if (first) playSong(first);
     return;
   }
@@ -132,7 +149,10 @@ function togglePlay() {
 }
 
 function nextSong() {
-  const avail = currentQueue.filter(id => getSong(id)?.available);
+  const avail = currentQueue.filter(id => {
+    const song = getSong(id);
+    return song && song.available !== false;
+  });
   if (!avail.length) return;
 
   if (state.shuffle) {
@@ -149,7 +169,10 @@ function nextSong() {
 
 function prevSong() {
   if (audio.currentTime > 3) { audio.currentTime = 0; return; }
-  const avail = currentQueue.filter(id => getSong(id)?.available);
+  const avail = currentQueue.filter(id => {
+    const song = getSong(id);
+    return song && song.available !== false;
+  });
   if (!avail.length) return;
   const idx = avail.indexOf(state.currentSongId);
   if (idx > 0) playSong(avail[idx - 1]);
@@ -183,9 +206,16 @@ function setupControls() {
   });
 
   audio.addEventListener('error', () => {
-    showError('Could not load file. Check that it exists in /media.');
+    const song = getSong(state.currentSongId);
+    if (song) {
+      song.available = false;
+      showError(`Error loading "${song.title}". File may be missing or corrupted.`);
+    } else {
+      showError('Could not load file. Check that it exists in /media.');
+    }
     state.isPlaying = false;
     updateNowPlaying();
+    updateList();
   });
 
   let seeking = false;
@@ -374,8 +404,8 @@ function attachListEvents() {
   $$('.song-item').forEach(li => {
     li.addEventListener('click', (e) => {
       if (e.target.closest('.fav-btn') || e.target.closest('.menu-btn')) return;
-      const s = getSong(li.dataset.id);
-      if (s && s.available) playSong(s.id);
+      const song = getSong(li.dataset.id);
+      if (song) playSong(song.id);
     });
   });
   $$('.fav-btn').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); toggleFavorite(b.dataset.fav); }));
