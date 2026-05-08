@@ -469,9 +469,11 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .song-item:hover { background: var(--bg-accent-area); color: var(--text); }
+.song-item:active { background: var(--border); }
 .song-item.active { background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); font-weight: 600; }
 
 .song-item.unavailable {
@@ -545,6 +547,20 @@ body {
 
 .song-item:hover .menu-btn { opacity: 1; }
 .song-item .menu-btn:hover { color: var(--text); background: var(--bg-accent-area); }
+
+/* Always show menu button on mobile/touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .song-item .menu-btn {
+    opacity: 1;
+  }
+}
+
+/* Alternative: Show on smaller screens regardless of touch capability */
+@media (max-width: 768px) {
+  .song-item .menu-btn {
+    opacity: 1;
+  }
+}
 
 .song-item .recent-time {
   font-size: 0.62rem;
@@ -803,10 +819,28 @@ body {
   color: var(--text);
   text-align: left;
   transition: background 0.1s;
+  white-space: nowrap;
 }
 
 .ctx-item:hover { background: var(--bg-accent-area); }
+.ctx-item:active { background: var(--accent); color: var(--bg-card); }
 .ctx-item.danger { color: #DC3545; }
+
+/* Mobile-friendly context menu */
+@media (max-width: 768px) {
+  .context-menu {
+    min-width: 180px;
+    padding: 6px;
+    border-radius: 12px;
+  }
+  
+  .ctx-item {
+    padding: 12px 14px;
+    font-size: 0.85rem;
+    min-height: 44px;
+    align-items: center;
+  }
+}
 
 /* ==================== MOBILE ==================== */
 
@@ -827,5 +861,69 @@ body {
   
   .player-title {
     font-size: 1.1rem;
+  }
+  
+  /* Make song items more touch-friendly */
+  .song-item {
+    padding: 0.7rem 0.6rem;
+    min-height: 48px;
+  }
+  
+  .song-item .idx {
+    min-width: 1.8rem;
+    font-size: 0.75rem;
+  }
+  
+  .song-item .name {
+    font-size: 0.85rem;
+  }
+  
+  .song-item .fav-btn,
+  .song-item .menu-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+  
+  /* Increase tap target size for better mobile UX */
+  .song-item .fav-btn::before,
+  .song-item .menu-btn::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+  }
+  
+  .song-item .fav-btn,
+  .song-item .menu-btn {
+    position: relative;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Ensure buttons are always visible on tablets too */
+  .song-item .menu-btn {
+    opacity: 1;
+  }
+  
+  /* Better spacing for playlist dropdown on mobile */
+  .tab-dropdown {
+    min-width: 200px;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  /* Make dropdown items more touch-friendly */
+  .dd-item {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    min-height: 44px;
+  }
+  
+  .dd-item .icon-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
   }
 }

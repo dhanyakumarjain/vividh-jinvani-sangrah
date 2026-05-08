@@ -407,6 +407,22 @@ function attachListEvents() {
       const song = getSong(li.dataset.id);
       if (song) playSong(song.id);
     });
+    
+    // Prevent touch event propagation on buttons for better mobile UX
+    const menuBtn = li.querySelector('.menu-btn');
+    const favBtn = li.querySelector('.fav-btn');
+    
+    if (menuBtn) {
+      menuBtn.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+      }, { passive: true });
+    }
+    
+    if (favBtn) {
+      favBtn.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+      }, { passive: true });
+    }
   });
   $$('.fav-btn').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); toggleFavorite(b.dataset.fav); }));
   $$('.menu-btn').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); showSongCtx(e, b.dataset.menu, b.dataset.plv === 'true'); }));
@@ -555,8 +571,34 @@ function showPLCtx(event, plId) {
 
 function posCtx(menu, e) {
   menu.classList.add('open');
-  menu.style.left = Math.min(e.clientX, innerWidth - 180) + 'px';
-  menu.style.top = Math.min(e.clientY, innerHeight - 80) + 'px';
+  
+  // Get menu dimensions
+  const menuWidth = 180; // Approximate width
+  const menuHeight = 100; // Approximate height
+  
+  // Calculate position
+  let left = e.clientX;
+  let top = e.clientY;
+  
+  // Adjust if menu would go off-screen horizontally
+  if (left + menuWidth > window.innerWidth) {
+    left = window.innerWidth - menuWidth - 10;
+  }
+  
+  // Adjust if menu would go off-screen vertically
+  if (top + menuHeight > window.innerHeight) {
+    top = window.innerHeight - menuHeight - 10;
+  }
+  
+  // On mobile, center the menu better
+  if (window.innerWidth <= 768) {
+    // Position menu near the touch point but ensure it's fully visible
+    left = Math.max(10, Math.min(left, window.innerWidth - menuWidth - 10));
+    top = Math.max(10, Math.min(top, window.innerHeight - menuHeight - 10));
+  }
+  
+  menu.style.left = left + 'px';
+  menu.style.top = top + 'px';
 }
 
 function closeCtx() { $('#contextMenu').classList.remove('open'); }
