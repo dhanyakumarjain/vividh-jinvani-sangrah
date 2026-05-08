@@ -74,9 +74,11 @@ async function loadSongs() {
       sub.classList.add('visible');
     }
 
-    if (config.spiritualCaption) {
+    if (config.spiritualCaption1 || config.spiritualCaption2) {
       const caption = $('#spiritualCaption');
-      caption.textContent = config.spiritualCaption;
+      const line1 = config.spiritualCaption1 || '';
+      const line2 = config.spiritualCaption2 || '';
+      caption.innerHTML = `${line1}<br>${line2}`;
       caption.classList.add('visible');
     }
 
