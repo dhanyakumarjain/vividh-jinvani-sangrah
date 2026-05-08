@@ -659,7 +659,7 @@ function renderThemeCards() {
   const container = $('#themeOptions');
   container.innerHTML = themeDefs.map(t =>
     `<button class="theme-card${t.id === theme.scheme ? ' active' : ''}" data-scheme="${t.id}">
-      <span class="theme-dot" style="background:${t.dot}"></span> ${t.name}
+      <span class="theme-dot" style="background:${t.dot};${t.dot.includes('gradient') ? 'border:none;' : ''}"></span> ${t.name}
     </button>`
   ).join('');
   container.querySelectorAll('.theme-card').forEach(c => {
