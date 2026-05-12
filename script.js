@@ -124,6 +124,13 @@ function getSong(id) { return songs.find(s => s.id === id); }
 
 // ==================== PLAYBACK ====================
 
+// Helper function for Google Analytics event tracking
+function trackEvent(eventName, eventParams = {}) {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', eventName, eventParams);
+  }
+}
+
 function playSong(id) {
   const song = getSong(id);
   if (!song) return;
@@ -141,13 +148,33 @@ function playSong(id) {
       updateNowPlaying();
       updateList();
       saveState();
+      
+      // Track song play event
+      trackEvent('song_play', {
+        song_id: song.id,
+        song_title: song.title,
+        song_artist: song.artist || 'Unknown',
+        song_album: song.album || 'Unknown',
+        playlist: state.activePlaylistId || 'library',
+        view: state.activeView,
+        shuffle_enabled: state.shuffle,
+        repeat_mode: state.repeat
+      });
     })
-    .catch(() => {
+    .catch((error) => {
       song.available = false;
       showError(`Could not play "${song.title}". File may be missing or unavailable.`);
       state.isPlaying = false;
       updateNowPlaying();
       updateList();
+      
+      // Track play error
+      trackEvent('playback_error', {
+        song_id: song.id,
+        song_title: song.title,
+        error_type: 'play_failed',
+        error_message: error.message || 'Unknown error'
+      });
     });
 }
 
@@ -157,6 +184,17 @@ function pauseSong() {
   updateNowPlaying();
   updateList();
   saveState();
+  
+  // Track song pause event
+  const song = getSong(state.currentSongId);
+  if (song) {
+    trackEvent('song_pause', {
+      song_id: song.id,
+      song_title: song.title,
+      current_time: Math.floor(audio.currentTime),
+      duration: Math.floor(audio.duration)
+    });
+  }
 }
 
 function togglePlay() {
@@ -178,6 +216,13 @@ function nextSong() {
   });
   if (!avail.length) return;
 
+  // Track next button click
+  trackEvent('player_next', {
+    from_song_id: state.currentSongId,
+    shuffle_enabled: state.shuffle,
+    repeat_mode: state.repeat
+  });
+
   if (state.shuffle) {
     const others = avail.filter(id => id !== state.currentSongId);
     playSong((others.length ? others : avail)[Math.floor(Math.random() * (others.length || avail.length))]);
@@ -191,7 +236,22 @@ function nextSong() {
 }
 
 function prevSong() {
-  if (audio.currentTime > 3) { audio.currentTime = 0; return; }
+  if (audio.currentTime > 3) { 
+    // Track restart current song
+    trackEvent('player_restart', {
+      song_id: state.currentSongId,
+      current_time: Math.floor(audio.currentTime)
+    });
+    audio.currentTime = 0; 
+    return; 
+  }
+  
+  // Track previous button click
+  trackEvent('player_previous', {
+    from_song_id: state.currentSongId,
+    repeat_mode: state.repeat
+  });
+  
   const avail = currentQueue.filter(id => {
     const song = getSong(id);
     return song && song.available !== false;
@@ -224,6 +284,18 @@ function setupControls() {
   });
 
   audio.addEventListener('ended', () => {
+    // Track song completion
+    const song = getSong(state.currentSongId);
+    if (song) {
+      trackEvent('song_complete', {
+        song_id: song.id,
+        song_title: song.title,
+        duration: Math.floor(audio.duration),
+        repeat_mode: state.repeat,
+        shuffle_enabled: state.shuffle
+      });
+    }
+    
     if (state.repeat === 'all') { 
       nextSong();
     } else {
@@ -247,8 +319,20 @@ function setupControls() {
     if (song) {
       song.available = false;
       showError(`Error loading "${song.title}". File may be missing or corrupted.`);
+      
+      // Track playback error
+      trackEvent('playback_error', {
+        song_id: song.id,
+        song_title: song.title,
+        error_type: 'file_load_error'
+      });
     } else {
       showError('Could not load file. Check that it exists in /media.');
+      
+      // Track unknown error
+      trackEvent('playback_error', {
+        error_type: 'unknown_file'
+      });
     }
     state.isPlaying = false;
     updateNowPlaying();
@@ -271,7 +355,20 @@ function setupControls() {
 
   $('#progressInput').addEventListener('change', () => {
     if (audio.duration) {
-      audio.currentTime = ($('#progressInput').value / 1000) * audio.duration;
+      const newTime = ($('#progressInput').value / 1000) * audio.duration;
+      const oldTime = audio.currentTime;
+      audio.currentTime = newTime;
+      
+      // Track seek event
+      const song = getSong(state.currentSongId);
+      if (song) {
+        trackEvent('player_seek', {
+          song_id: song.id,
+          from_time: Math.floor(oldTime),
+          to_time: Math.floor(newTime),
+          duration: Math.floor(audio.duration)
+        });
+      }
     }
     seeking = false;
   });
@@ -284,6 +381,11 @@ function setupControls() {
     state.shuffle = !state.shuffle;
     $('#btnShuffle').classList.toggle('active', state.shuffle);
     saveState();
+    
+    // Track shuffle toggle
+    trackEvent('shuffle_toggle', {
+      enabled: state.shuffle
+    });
   });
   $('#btnShuffle').classList.toggle('active', state.shuffle);
 
@@ -291,6 +393,11 @@ function setupControls() {
     state.repeat = state.repeat === 'off' ? 'all' : 'off';
     updateRepeatBtn();
     saveState();
+    
+    // Track repeat toggle
+    trackEvent('repeat_toggle', {
+      mode: state.repeat
+    });
   });
   updateRepeatBtn();
 
@@ -299,8 +406,14 @@ function setupControls() {
     audio.volume = state.isMuted ? 0 : state.volume / 100;
     updateVolumeIcon();
     saveState();
+    
+    // Track mute toggle
+    trackEvent('volume_mute', {
+      muted: state.isMuted
+    });
   });
 
+  let volumeChangeTimeout;
   $('#volumeSlider').addEventListener('input', () => {
     state.volume = parseInt($('#volumeSlider').value);
     state.isMuted = false;
@@ -308,6 +421,14 @@ function setupControls() {
     updateVolumeIcon();
     updateVolumeSliderFill();
     saveState();
+    
+    // Track volume change (debounced to avoid too many events)
+    clearTimeout(volumeChangeTimeout);
+    volumeChangeTimeout = setTimeout(() => {
+      trackEvent('volume_change', {
+        volume: state.volume
+      });
+    }, 500);
   });
 }
 
@@ -517,6 +638,12 @@ function switchView(view, plId) {
   closePLDropdown();
   renderView();
   saveState();
+  
+  // Track view change
+  trackEvent('view_change', {
+    view: view,
+    playlist_id: plId || null
+  });
 }
 
 // ==================== TABS ====================
@@ -554,8 +681,20 @@ function closePLDropdown() { $('#playlistDropdown').classList.remove('open'); }
 
 function toggleFavorite(id) {
   const idx = favorites.indexOf(id);
-  if (idx === -1) favorites.push(id); else favorites.splice(idx, 1);
+  const isAdding = idx === -1;
+  if (isAdding) favorites.push(id); else favorites.splice(idx, 1);
   saveFavorites();
+  
+  // Track favorite toggle
+  const song = getSong(id);
+  if (song) {
+    trackEvent(isAdding ? 'favorite_add' : 'favorite_remove', {
+      song_id: song.id,
+      song_title: song.title,
+      total_favorites: favorites.length
+    });
+  }
+  
   if (state.activeView === 'favorites') renderView();
   else {
     $$(`.fav-btn[data-fav="${id}"]`).forEach(b => {
@@ -572,25 +711,71 @@ function createPlaylist(name) {
   const pl = { id: 'pl-' + Date.now(), name: name.trim(), songIds: [] };
   playlists.push(pl);
   savePlaylists();
+  
+  // Track playlist creation
+  trackEvent('playlist_create', {
+    playlist_id: pl.id,
+    playlist_name: pl.name,
+    total_playlists: playlists.filter(p => !p.seeded).length
+  });
+  
   return pl;
 }
 
 function renamePlaylist(id, name) {
   const pl = playlists.find(p => p.id === id);
-  if (pl) { pl.name = name.trim(); savePlaylists(); if (state.activeView === 'playlist' && state.activePlaylistId === id) renderView(); }
+  if (pl) { 
+    const oldName = pl.name;
+    pl.name = name.trim(); 
+    savePlaylists(); 
+    
+    // Track playlist rename
+    trackEvent('playlist_rename', {
+      playlist_id: id,
+      old_name: oldName,
+      new_name: pl.name
+    });
+    
+    if (state.activeView === 'playlist' && state.activePlaylistId === id) renderView(); 
+  }
 }
 
 function deletePlaylist(id) {
+  const pl = playlists.find(p => p.id === id);
   playlists = playlists.filter(p => p.id !== id);
   savePlaylists();
+  
+  // Track playlist deletion
+  if (pl) {
+    trackEvent('playlist_delete', {
+      playlist_id: id,
+      playlist_name: pl.name,
+      song_count: pl.songIds.length,
+      total_playlists: playlists.filter(p => !p.seeded).length
+    });
+  }
+  
   if (state.activeView === 'playlist' && state.activePlaylistId === id) switchView('library');
 }
 
 function removeSongFromPL(plId, songId) {
   const pl = playlists.find(p => p.id === plId);
   if (!pl) return;
+  const song = getSong(songId);
   pl.songIds = pl.songIds.filter(id => id !== songId);
   savePlaylists();
+  
+  // Track song removal from playlist
+  if (song) {
+    trackEvent('playlist_remove_song', {
+      playlist_id: plId,
+      playlist_name: pl.name,
+      song_id: songId,
+      song_title: song.title,
+      remaining_songs: pl.songIds.length
+    });
+  }
+  
   if (state.activeView === 'playlist' && state.activePlaylistId === plId) renderView();
 }
 
@@ -683,13 +868,34 @@ function openAddToPL(songId) {
 
 function saveAddToPL() {
   if (!addToPlaylistSongId) return;
+  const song = getSong(addToPlaylistSongId);
+  let addedTo = [];
+  let removedFrom = [];
+  
   $$('#playlistCheckboxes input[type="checkbox"]').forEach(cb => {
     const pl = playlists.find(p => p.id === cb.value);
     if (!pl) return;
-    if (cb.checked && !pl.songIds.includes(addToPlaylistSongId)) pl.songIds.push(addToPlaylistSongId);
-    else if (!cb.checked) pl.songIds = pl.songIds.filter(id => id !== addToPlaylistSongId);
+    if (cb.checked && !pl.songIds.includes(addToPlaylistSongId)) {
+      pl.songIds.push(addToPlaylistSongId);
+      addedTo.push(pl.name);
+    }
+    else if (!cb.checked && pl.songIds.includes(addToPlaylistSongId)) {
+      pl.songIds = pl.songIds.filter(id => id !== addToPlaylistSongId);
+      removedFrom.push(pl.name);
+    }
   });
   savePlaylists();
+  
+  // Track song added to playlists
+  if (song && addedTo.length > 0) {
+    trackEvent('playlist_add_song', {
+      song_id: song.id,
+      song_title: song.title,
+      playlists_added: addedTo.join(', '),
+      count: addedTo.length
+    });
+  }
+  
   closeModal('addToPlaylistModal');
   addToPlaylistSongId = null;
   if (state.activeView === 'playlist') renderView();
@@ -753,11 +959,32 @@ function applyTheme() {
 }
 
 function setTheme(scheme, mode) {
+  const oldScheme = theme.scheme;
+  const oldMode = theme.mode;
+  
   if (scheme) theme.scheme = scheme;
   if (mode) theme.mode = mode;
   applyTheme();
   saveTheme();
   updateVolumeSliderFill();
+  
+  // Track theme change
+  if (scheme && scheme !== oldScheme) {
+    trackEvent('theme_change', {
+      old_theme: oldScheme,
+      new_theme: scheme,
+      mode: theme.mode
+    });
+  }
+  
+  // Track mode change
+  if (mode && mode !== oldMode) {
+    trackEvent('theme_mode_change', {
+      theme: theme.scheme,
+      old_mode: oldMode,
+      new_mode: mode
+    });
+  }
 }
 
 function renderThemeCards() {
@@ -813,6 +1040,13 @@ function exportSettings() {
   a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
   a.download = `musicbox-v2-backup-${new Date().toISOString().slice(0, 10)}.json`;
   a.click();
+  
+  // Track settings export
+  trackEvent('settings_export', {
+    favorites_count: favorites.length,
+    playlists_count: playlists.filter(p => !p.seeded).length,
+    recent_count: recentlyPlayed.length
+  });
 }
 
 function importSettings(file) {
@@ -837,6 +1071,14 @@ function importSettings(file) {
         updateRepeatBtn(); saveState();
       }
       renderView(); updateNowPlaying();
+      
+      // Track settings import
+      trackEvent('settings_import', {
+        favorites_count: favorites.length,
+        playlists_count: playlists.filter(p => !p.seeded).length,
+        recent_count: recentlyPlayed.length
+      });
+      
       alert('Imported!');
     } catch { alert('Invalid file.'); }
   };
@@ -873,7 +1115,24 @@ function setupEvents() {
   $('#playlistNameInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') savePLName(); });
   $('#btnConfirmDelete').addEventListener('click', confirmDelete);
 
-  $('#searchInput').addEventListener('input', () => renderView());
+  let searchTimeout;
+  $('#searchInput').addEventListener('input', (e) => {
+    renderView();
+    
+    // Track search (debounced to avoid too many events)
+    const query = e.target.value.trim();
+    if (query.length >= 2) {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        trackEvent('search', {
+          query: query,
+          view: state.activeView,
+          query_length: query.length
+        });
+      }, 1000);
+    }
+  });
+  
   window.addEventListener('beforeunload', saveState);
 }
 
