@@ -2,73 +2,93 @@
   "songs": [
     {
       "id": "s0001",
-      "title": "ऋषिमण्डल जाप्य मंत्र JIN 001",
-      "artist": "",
-      "album": "",
-      "altName": [],
-      "duration": 0,
-      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/p1/%E0%A4%8B%E0%A4%B7%E0%A4%BF%E0%A4%AE%E0%A4%A3%E0%A5%8D%E0%A4%A1%E0%A4%B2%20%E0%A4%9C%E0%A4%BE%E0%A4%AA%E0%A5%8D%E0%A4%AF%20%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%20JIN%20001.mp3",
-      "size_mb": 0.6
-    },
-    {
-      "id": "s0002",
-      "title": "ऋषिमण्डल जाप्य मंत्र JIN 009",
-      "artist": "",
-      "album": "",
-      "altName": [],
-      "duration": 0,
-      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/p1/%E0%A4%8B%E0%A4%B7%E0%A4%BF%E0%A4%AE%E0%A4%A3%E0%A5%8D%E0%A4%A1%E0%A4%B2%20%E0%A4%9C%E0%A4%BE%E0%A4%AA%E0%A5%8D%E0%A4%AF%20%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%20JIN%20009.mp3",
-      "size_mb": 4.4
-    },
-    {
-      "id": "s0003",
-      "title": "आलोचना पाठ _ श्रावक प्रतिक्रमण _ Shravak Pratikraman _ Aalochna Path _ Neha Bhajan(MP3_160K)",
-      "artist": "",
-      "album": "",
-      "altName": [],
-      "duration": 0,
-      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/p2/%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20_%20%E0%A4%B6%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%B5%E0%A4%95%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%A4%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B0%E0%A4%AE%E0%A4%A3%20_%20Shravak%20Pratikraman%20_%20Aalochna%20Path%20_%20Neha%20Bhajan%28MP3_160K%29.mp3",
-      "size_mb": 28.3
-    },
-    {
-      "id": "s0004",
-      "title": "श्रावक प्रतिकमण _ जैन लघु प्रतिकमण _ नरक के दुखो का चिंतन _ ए(MP3_1",
-      "artist": "",
-      "album": "",
-      "altName": [],
-      "duration": 0,
-      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/p2/%E0%A4%B6%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%B5%E0%A4%95%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%A4%E0%A4%BF%E0%A4%95%E0%A4%AE%E0%A4%A3%20_%20%E0%A4%9C%E0%A5%88%E0%A4%A8%20%E0%A4%B2%E0%A4%98%E0%A5%81%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%A4%E0%A4%BF%E0%A4%95%E0%A4%AE%E0%A4%A3%20_%20%E0%A4%A8%E0%A4%B0%E0%A4%95%20%E0%A4%95%E0%A5%87%20%E0%A4%A6%E0%A5%81%E0%A4%96%E0%A5%8B%20%E0%A4%95%E0%A4%BE%20%E0%A4%9A%E0%A4%BF%E0%A4%82%E0%A4%A4%E0%A4%A8%20_%20%E0%A4%8F%28MP3_1.mp3",
-      "size_mb": 58.8
-    },
-    {
-      "id": "s0005",
-      "title": "✽0264.01 Rushi Mandal ऋषिमंडळ पूजा Ravindra Jain",
-      "artist": "",
-      "album": "",
-      "altName": [],
-      "duration": 0,
-      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/p3/%E2%9C%BD0264.01%20Rushi%20Mandal%20%E0%A4%8B%E0%A4%B7%E0%A4%BF%E0%A4%AE%E0%A4%82%E0%A4%A1%E0%A4%B3%20%E0%A4%AA%E0%A5%82%E0%A4%9C%E0%A4%BE%20Ravindra%20Jain.mp3",
-      "size_mb": 31.5
-    },
-    {
-      "id": "s0006",
       "title": "ऋषिमण्डल जाप्य मंत्र JIN 021",
       "artist": "",
       "album": "",
       "altName": [],
       "duration": 0,
-      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/%E0%A4%8B%E0%A4%B7%E0%A4%BF%E0%A4%AE%E0%A4%A3%E0%A5%8D%E0%A4%A1%E0%A4%B2%20%E0%A4%9C%E0%A4%BE%E0%A4%AA%E0%A5%8D%E0%A4%AF%20%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%20JIN%20021.mp3",
+      "file": "media/ऋषिमण्डल जाप्य मंत्र JIN 021.mp3",
       "size_mb": 10.2
     },
     {
-      "id": "s0007",
+      "id": "s0002",
       "title": "श्रावक प्रतिक्रमण  (नवीन संशोधन) ( 256kbps cbr )",
       "artist": "",
       "album": "",
       "altName": [],
       "duration": 0,
-      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/%E0%A4%B6%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%B5%E0%A4%95%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%A4%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B0%E0%A4%AE%E0%A4%A3%20%20%28%E0%A4%A8%E0%A4%B5%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A4%82%E0%A4%B6%E0%A5%8B%E0%A4%A7%E0%A4%A8%29%20%28%20256kbps%20cbr%20%29.mp3",
+      "file": "media/श्रावक प्रतिक्रमण  (नवीन संशोधन) ( 256kbps cbr ).mp3",
       "size_mb": 88.3
+    },
+    {
+      "id": "s0003",
+      "title": "ऋषिमण्डल जाप्य मंत्र JIN 001",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "media/p1/ऋषिमण्डल जाप्य मंत्र JIN 001.mp3",
+      "size_mb": 0.6
+    },
+    {
+      "id": "s0004",
+      "title": "ऋषिमण्डल जाप्य मंत्र JIN 009",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "media/p1/ऋषिमण्डल जाप्य मंत्र JIN 009.mp3",
+      "size_mb": 4.4
+    },
+    {
+      "id": "s0005",
+      "title": "आलोचना पाठ _ श्रावक प्रतिक्रमण _ Shravak Pratikraman _ Aalochna Path _ Neha Bhajan(MP3_160K)",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "media/p2/आलोचना पाठ _ श्रावक प्रतिक्रमण _ Shravak Pratikraman _ Aalochna Path _ Neha Bhajan(MP3_160K).mp3",
+      "size_mb": 28.3
+    },
+    {
+      "id": "s0006",
+      "title": "श्रावक प्रतिकमण _ जैन लघु प्रतिकमण _ नरक के दुखो का चिंतन _ ए(MP3_1",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "media/p2/श्रावक प्रतिकमण _ जैन लघु प्रतिकमण _ नरक के दुखो का चिंतन _ ए(MP3_1.mp3",
+      "size_mb": 58.8
+    },
+    {
+      "id": "s0007",
+      "title": "✽0264.01 Rushi Mandal ऋषिमंडळ पूजा Ravindra Jain",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "media/p3/✽0264.01 Rushi Mandal ऋषिमंडळ पूजा Ravindra Jain.mp3",
+      "size_mb": 31.5
+    },
+    {
+      "id": "s0008",
+      "title": "देव की 84 प्रकार से आसादना भाग 1 ( 160kbps )",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "media/p4/देव की 84 प्रकार से आसादना भाग 1 ( 160kbps ).mp3",
+      "size_mb": 10.5
+    },
+    {
+      "id": "s0009",
+      "title": "देव की 84 प्रकार से आसादना भाग 2 ( 160kbps )",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "media/p4/देव की 84 प्रकार से आसादना भाग 2 ( 160kbps ).mp3",
+      "size_mb": 9.5
     }
   ]
 }

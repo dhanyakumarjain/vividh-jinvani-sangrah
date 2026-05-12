@@ -1,34 +1,42 @@
 {
   "playlists": [
     {
-      "id": "pl-p1",
-      "name": "p1",
+      "id": "pl-general",
+      "name": "General",
       "songIds": [
         "s0001",
         "s0002"
       ]
     },
     {
-      "id": "pl-p2",
-      "name": "p2",
+      "id": "pl-p1",
+      "name": "p1",
       "songIds": [
         "s0003",
         "s0004"
       ]
     },
     {
-      "id": "pl-p3",
-      "name": "p3",
+      "id": "pl-p2",
+      "name": "p2",
       "songIds": [
-        "s0005"
+        "s0005",
+        "s0006"
       ]
     },
     {
-      "id": "pl-general",
-      "name": "General",
+      "id": "pl-p3",
+      "name": "p3",
       "songIds": [
-        "s0006",
         "s0007"
+      ]
+    },
+    {
+      "id": "pl-p4",
+      "name": "p4",
+      "songIds": [
+        "s0008",
+        "s0009"
       ]
     }
   ]
