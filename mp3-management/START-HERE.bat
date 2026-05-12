@@ -152,15 +152,16 @@ echo         - If Git shows errors
 echo.
 echo   ---
 echo.
-echo   [D] Delete All Songs (DANGER!)
+echo   [R] Reset Data (DANGER!)
 echo.
 echo       What it does:
-echo         - Deletes ALL songs from the internet
-echo         - Cannot be undone!
+echo         - Deletes ALL files from media/ folder
+echo         - Empties songs.json and playlists.json
+echo         - LOCAL only (does not affect Hugging Face)
 echo.
 echo       When to use:
-echo         - Only if starting completely fresh
-echo         - If you want to remove everything
+echo         - Starting completely fresh locally
+echo         - Clearing all local data
 echo.
 echo       WARNING: This is permanent!
 echo.
@@ -170,7 +171,7 @@ echo   [X] Exit
 echo.
 echo ========================================================================
 echo.
-set /p choice="Enter your choice (S, 1, 2, 3, T, H, F, D, or X): "
+set /p choice="Enter your choice (S, 1, 2, 3, T, H, F, R, or X): "
 
 if /i "%choice%"=="S" goto SETUP
 if /i "%choice%"=="1" goto STEP1
@@ -179,11 +180,11 @@ if /i "%choice%"=="3" goto STEP3
 if /i "%choice%"=="T" goto TEST
 if /i "%choice%"=="H" goto HELP
 if /i "%choice%"=="F" goto FIX
-if /i "%choice%"=="D" goto DELETE
+if /i "%choice%"=="R" goto RESET
 if /i "%choice%"=="X" goto EXIT
 
 echo.
-echo Invalid choice. Please enter S, 1, 2, 3, T, H, F, D, or X
+echo Invalid choice. Please enter S, 1, 2, 3, T, H, F, R, or X
 timeout /t 3 >nul
 goto MENU
 
@@ -348,7 +349,7 @@ echo NOTE: Only you can see this - it's not live yet!
 echo       To make it live, run "Step 3: Publish Website"
 echo.
 pause
-call "Test-Website.bat"
+call "TOOL-Test-Website.bat"
 echo.
 echo Press any key to return to menu...
 pause >nul
@@ -475,39 +476,36 @@ echo Press any key to return to menu...
 pause >nul
 goto MENU
 
-:DELETE
+:RESET
 cls
 echo.
 echo ========================================================================
-echo   DELETE ALL SONGS - WARNING!
+echo   RESET DATA - WARNING!
 echo ========================================================================
 echo.
 echo   !!!  THIS IS DANGEROUS  !!!
 echo.
-echo This will DELETE ALL SONGS from the internet.
+echo This will DELETE ALL local files and data.
 echo.
 echo What will happen:
-echo   - All MP3 files removed from cloud storage
-echo   - Your website will have no songs
-echo   - This CANNOT be undone!
+echo   - All files in media/ folder will be deleted
+echo   - songs.json will be emptied
+echo   - playlists.json will be emptied
+echo   - Changes are LOCAL only
 echo.
-echo When to use:
-echo   - Only if you want to start completely fresh
-echo   - If you want to remove everything and start over
+echo This does NOT affect Hugging Face.
 echo.
-echo IMPORTANT:
-echo   - Your local files in "media" are NOT deleted
-echo   - Only the online copies are removed
-echo   - You can re-upload later if needed
+echo To also clear Hugging Face:
+echo   1. Run this reset
+echo   2. Run STEP-1-Upload-Songs.bat (uploads empty folder)
+echo   3. Run STEP-2-Update-Website.bat (updates with empty data)
+echo   4. Run STEP-3-Publish-Website.bat (publishes empty website)
 echo.
-echo Are you ABSOLUTELY SURE you want to continue?
+echo WARNING: This cannot be undone!
 echo.
 pause
-call "Delete-All-Songs.bat"
-echo.
-echo ========================================================================
-echo Press any key to return to menu...
-pause >nul
+call "TOOL-Reset-Data.bat"
+pause
 goto MENU
 
 :EXIT

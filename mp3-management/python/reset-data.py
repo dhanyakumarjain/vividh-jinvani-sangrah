@@ -1,47 +1,99 @@
 """
 reset-data.py
-Resets songs.json and playlists.json to empty.
-Does NOT delete files from media/ folder (that's the HF clone).
+Clears local media folder and resets songs.json and playlists.json to empty.
+Does NOT push to Hugging Face - local only.
 """
 
 import os
 import json
+import shutil
 
 SCRIPT_DIR     = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+MEDIA_DIR      = os.path.join(SCRIPT_DIR, "media")
 SONGS_PATH     = os.path.join(SCRIPT_DIR, "data", "songs.json")
 PLAYLISTS_PATH = os.path.join(SCRIPT_DIR, "data", "playlists.json")
 
 
 def main():
     print("=" * 60)
-    print("  RESET WEBSITE DATA")
+    print("  RESET LOCAL DATA")
     print("=" * 60)
     print()
-    print("This will reset songs.json and playlists.json to empty.")
+    print("This will:")
+    print("  1. Delete ALL files from media/ folder")
+    print("  2. Empty songs.json and playlists.json")
     print()
-    print("NOTE: This does NOT delete files from media/ folder.")
-    print("      To delete songs, use Delete-All-Songs.bat instead.")
+    print("This does NOT push to Hugging Face.")
+    print("Changes are LOCAL only.")
+    print()
+    print("WARNING: This cannot be undone!")
     print()
     
-    confirm = input("Type YES to confirm: ").strip()
-    if confirm != "YES":
+    confirm = input("Type 'DELETE ALL' to confirm (case-sensitive): ").strip()
+    if confirm != "DELETE ALL":
         print("\nAborted.")
         return
+
+    deleted_files = 0
+    deleted_folders = 0
+
+    # Delete all files and folders from media/ (except .git)
+    if os.path.exists(MEDIA_DIR):
+        print()
+        print("Deleting files from media/ folder...")
+        print()
+        
+        for entry in os.listdir(MEDIA_DIR):
+            # Skip .git folder and .gitattributes
+            if entry in ['.git', '.gitattributes']:
+                continue
+            
+            entry_path = os.path.join(MEDIA_DIR, entry)
+            
+            if os.path.isdir(entry_path):
+                shutil.rmtree(entry_path)
+                print(f"  [DELETED] Folder: {entry}/")
+                deleted_folders += 1
+            else:
+                os.remove(entry_path)
+                print(f"  [DELETED] File: {entry}")
+                deleted_files += 1
+    else:
+        print("\n[INFO] Media folder does not exist")
+
+    print()
+    print(f"[OK] Deleted {deleted_files} file(s) and {deleted_folders} folder(s)")
 
     # Reset songs.json
     with open(SONGS_PATH, "w", encoding="utf-8") as f:
         json.dump({"songs": []}, f, indent=2)
-    print("\n[OK] Reset data/songs.json")
+    print("[OK] Reset data/songs.json")
 
     # Reset playlists.json
     with open(PLAYLISTS_PATH, "w", encoding="utf-8") as f:
         json.dump({"playlists": []}, f, indent=2)
     print("[OK] Reset data/playlists.json")
 
-    print("\nDone! Your website data has been reset.")
-    print("\nNext steps:")
-    print("  1. Run STEP-2-Update-Website.bat to regenerate from media/")
-    print("  2. Or manually edit the JSON files")
+    print()
+    print("=" * 60)
+    print("  DONE!")
+    print("=" * 60)
+    print()
+    print("Local data has been reset.")
+    print()
+    print("IMPORTANT:")
+    print("  - Files deleted from media/ folder")
+    print("  - JSON files emptied")
+    print("  - Changes are LOCAL only")
+    print("  - Hugging Face still has the old files")
+    print()
+    print("To delete from Hugging Face:")
+    print("  Run: Delete-All-Songs.bat")
+    print()
+    print("To add new songs:")
+    print("  1. Add files to media/ folder")
+    print("  2. Run: STEP-1-Upload-Songs.bat")
+    print("  3. Run: STEP-2-Update-Website.bat")
 
 
 if __name__ == "__main__":
