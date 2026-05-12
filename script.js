@@ -57,6 +57,13 @@ async function loadSongs() {
 
     songs = songData.songs || [];
 
+    // Sort songs alphabetically by title (case-insensitive)
+    songs.sort((a, b) => {
+      const titleA = (a.title || '').toLowerCase();
+      const titleB = (b.title || '').toLowerCase();
+      return titleA.localeCompare(titleB);
+    });
+
     if (config.title) {
       $('#playerTitle').textContent = config.title;
       document.title = config.title;
@@ -99,6 +106,13 @@ async function loadSongs() {
       const seeded = playlistData.playlists.map(pl => ({ ...pl, seeded: true }));
       playlists = playlists.filter(pl => !pl.seeded);
       playlists = [...seeded, ...playlists];
+      
+      // Sort playlists alphabetically by name (case-insensitive)
+      playlists.sort((a, b) => {
+        const nameA = (a.name || '').toLowerCase();
+        const nameB = (b.name || '').toLowerCase();
+        return nameA.localeCompare(nameB);
+      });
     }
 
     // Mark all songs as available by default (check on play instead)
