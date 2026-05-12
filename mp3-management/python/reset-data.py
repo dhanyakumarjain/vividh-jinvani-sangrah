@@ -1,49 +1,47 @@
 """
 reset-data.py
-Deletes all MP3s under media/ (including subfolders) and resets songs.json and playlists.json to empty.
+Resets songs.json and playlists.json to empty.
+Does NOT delete files from media/ folder (that's the HF clone).
 """
 
 import os
 import json
-import shutil
 
 SCRIPT_DIR     = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-MEDIA_DIR      = os.path.join(SCRIPT_DIR, "media")
 SONGS_PATH     = os.path.join(SCRIPT_DIR, "data", "songs.json")
 PLAYLISTS_PATH = os.path.join(SCRIPT_DIR, "data", "playlists.json")
 
 
 def main():
-    confirm = input("This will DELETE all MP3s and reset songs/playlists. Type YES to confirm: ").strip()
+    print("=" * 60)
+    print("  RESET WEBSITE DATA")
+    print("=" * 60)
+    print()
+    print("This will reset songs.json and playlists.json to empty.")
+    print()
+    print("NOTE: This does NOT delete files from media/ folder.")
+    print("      To delete songs, use Delete-All-Songs.bat instead.")
+    print()
+    
+    confirm = input("Type YES to confirm: ").strip()
     if confirm != "YES":
-        print("Aborted.")
+        print("\nAborted.")
         return
-
-    # Delete all MP3s and subfolders under media/
-    deleted = 0
-    if os.path.exists(MEDIA_DIR):
-        for entry in os.listdir(MEDIA_DIR):
-            entry_path = os.path.join(MEDIA_DIR, entry)
-            if os.path.isdir(entry_path):
-                shutil.rmtree(entry_path)
-                print(f"Deleted folder: media/{entry}")
-            elif entry.lower().endswith(".mp3"):
-                os.remove(entry_path)
-                print(f"Deleted: media/{entry}")
-                deleted += 1
-    print(f"\nDeleted {deleted} MP3 file(s) and all subfolders.")
 
     # Reset songs.json
     with open(SONGS_PATH, "w", encoding="utf-8") as f:
         json.dump({"songs": []}, f, indent=2)
-    print("Reset data/songs.json")
+    print("\n[OK] Reset data/songs.json")
 
     # Reset playlists.json
     with open(PLAYLISTS_PATH, "w", encoding="utf-8") as f:
         json.dump({"playlists": []}, f, indent=2)
-    print("Reset data/playlists.json")
+    print("[OK] Reset data/playlists.json")
 
-    print("\nDone.")
+    print("\nDone! Your website data has been reset.")
+    print("\nNext steps:")
+    print("  1. Run STEP-2-Update-Website.bat to regenerate from media/")
+    print("  2. Or manually edit the JSON files")
 
 
 if __name__ == "__main__":

@@ -1,136 +1,127 @@
 """
 sync-media.py
-Scans media/ subfolders, each folder = one playlist.
-Rebuilds data/songs.json and data/playlists.json from scratch.
+Fetches songs from Hugging Face dataset and rebuilds data/songs.json and data/playlists.json.
 Updates lastUpdated timestamp in config.json.
 
 Usage:
     python sync-media.py
-
-Media folder structure:
-    media/
-        Morning Bhakti/
-            song1.mp3
-            song2.mp3
-        Evening Aarti/
-            song3.mp3
 """
 
 import os
 import json
 import re
+import ssl
+import urllib.request
+import urllib.parse
 from datetime import datetime
 
 SCRIPT_DIR   = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-MEDIA_DIR    = os.path.join(SCRIPT_DIR, "media")
 DATA_DIR     = os.path.join(SCRIPT_DIR, "data")
 SONGS_PATH   = os.path.join(DATA_DIR, "songs.json")
 PLAYLISTS_PATH = os.path.join(DATA_DIR, "playlists.json")
 CONFIG_PATH  = os.path.join(DATA_DIR, "config.json")
 
-
-def make_display_name(filename):
-    name = os.path.splitext(filename)[0]
-    name = re.sub(r'^[\W\d\.]+', '', name).strip()
-    name = name.replace("_", " ").replace("-", " ").strip()
-    return name
+BASE_API = "https://huggingface.co/api/datasets/dhanyakumarjain/temp/tree/main"
+BASE_URL = "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main"
 
 
-def make_playlist_id(folder_name):
-    slug = folder_name.lower().strip()
-    slug = re.sub(r'[^\w\s-]', '', slug)
-    slug = re.sub(r'[\s]+', '-', slug)
-    return f"pl-{slug}"
+def fetch_tree(path=""):
+    """Fetch directory tree from Hugging Face API"""
+    url = BASE_API + ("/" + urllib.parse.quote(path, safe="") if path else "")
+    
+    # Create SSL context that doesn't verify certificates
+    # This is needed for some Windows environments with certificate issues
+    ssl_context = ssl.create_default_context()
+    ssl_context.check_hostname = False
+    ssl_context.verify_mode = ssl.CERT_NONE
+    
+    with urllib.request.urlopen(url, context=ssl_context) as resp:
+        return json.loads(resp.read())
+
+
+def slugify(text):
+    """Convert text to URL-friendly slug"""
+    text = text.strip().lower()
+    text = re.sub(r"[^\w\sऀ-ॿ-]", "", text)
+    text = re.sub(r"[\s_]+", "-", text)
+    return text
+
+
+def collect_entries(path=""):
+    """Recursively collect all MP3 files from Hugging Face dataset"""
+    entries = []
+    for item in fetch_tree(path):
+        if item["type"] == "directory":
+            entries.extend(collect_entries(item["path"]))
+        elif item["path"].endswith(".mp3"):
+            parts = item["path"].split("/")
+            encoded_path = "/".join(
+                urllib.parse.quote(segment, safe="") for segment in parts
+            )
+            folder = "/".join(parts[:-1]) if len(parts) > 1 else ""
+            entries.append({
+                "name": parts[-1].replace(".mp3", ""),
+                "folder": folder,
+                "url": f"{BASE_URL}/{encoded_path}",
+                "size_mb": round(item["size"] / (1024 * 1024), 1),
+            })
+    return entries
 
 
 def main():
     os.makedirs(DATA_DIR, exist_ok=True)
 
-    # Collect all unique songs across all folders
-    # key = filename (lowercase), value = song dict
-    all_songs = {}      # filename -> song dict
-    song_counter = [0]  # mutable for closure
+    print("Fetching songs from Hugging Face...")
+    entries = collect_entries()
+    print(f"Found {len(entries)} MP3 files")
 
-    def get_or_create_song(rel_path, filename):
-        key = filename.lower()
-        if key in all_songs:
-            return all_songs[key]["id"]
-        song_counter[0] += 1
-        song_id = f"s{song_counter[0]:04d}"
-        all_songs[key] = {
-            "id":       song_id,
-            "title":    make_display_name(filename),
-            "artist":   "",
-            "album":    "",
-            "altName":  [],
+    songs_list = []
+    playlists_map = {}
+    counter = 1
+
+    for entry in entries:
+        song_id = f"s{counter:04d}"
+        counter += 1
+
+        song_obj = {
+            "id": song_id,
+            "title": entry["name"],
+            "artist": "",
+            "album": "",
+            "altName": [],
             "duration": 0,
-            "file":     rel_path
+            "file": entry["url"],
+            "size_mb": entry["size_mb"],
         }
-        return song_id
+        songs_list.append(song_obj)
 
-    playlists = []
+        folder = entry["folder"] or "General"
+        if folder not in playlists_map:
+            playlists_map[folder] = []
+        playlists_map[folder].append(song_id)
+        
+        print(f"  [{folder}] {entry['name']} -> {song_id}")
 
-    # Scan subfolders of media/
-    if not os.path.exists(MEDIA_DIR):
-        print(f"ERROR: media/ folder not found at {MEDIA_DIR}")
-        return
-
-    folders = sorted([
-        f for f in os.listdir(MEDIA_DIR)
-        if os.path.isdir(os.path.join(MEDIA_DIR, f))
-    ])
-
-    if not folders:
-        print("No subfolders found in media/. Create folders like media/Morning Bhakti/ and put MP3s inside.")
-    
-    for folder in folders:
-        folder_path = os.path.join(MEDIA_DIR, folder)
-        mp3s = sorted([
-            f for f in os.listdir(folder_path)
-            if f.lower().endswith(".mp3")
-        ])
-
-        song_ids = []
-        for filename in mp3s:
-            rel_path = f"media/{folder}/{filename}"
-            key = filename.lower()
-            already_exists = key in all_songs
-            song_id = get_or_create_song(rel_path, filename)
-            song_ids.append(song_id)
-            status = "SKIP (duplicate)" if already_exists else "OK"
-            print(f"  [{folder}] {filename} -> {song_id} {status}")
-
-        playlists.append({
-            "id":      make_playlist_id(folder),
-            "name":    folder,
-            "songIds": song_ids
-        })
-        print(f"Playlist '{folder}': {len(song_ids)} song(s)")
-
-    # Also pick up MP3s directly in media/ root (no folder) — add to songs but no playlist
-    root_mp3s = sorted([
-        f for f in os.listdir(MEDIA_DIR)
-        if f.lower().endswith(".mp3")
-    ])
-    for filename in root_mp3s:
-        rel_path = f"media/{filename}"
-        key = filename.lower()
-        already_exists = key in all_songs
-        song_id = get_or_create_song(rel_path, filename)
-        status = "SKIP (duplicate)" if already_exists else "OK"
-        print(f"  [root] {filename} -> {song_id} {status}")
-
-    # Write songs.json
-    songs_data = {"songs": list(all_songs.values())}
+    # Write songs.json as array
+    songs_out = {"songs": songs_list}
     with open(SONGS_PATH, "w", encoding="utf-8") as f:
-        json.dump(songs_data, f, ensure_ascii=False, indent=2)
-    print(f"\nWrote {len(all_songs)} song(s) to data/songs.json")
+        json.dump(songs_out, f, ensure_ascii=False, indent=2)
+    print(f"\nWrote {len(songs_list)} song(s) to {SONGS_PATH}")
 
     # Write playlists.json
-    playlists_data = {"playlists": playlists}
+    playlists_list = []
+    for folder, song_ids in playlists_map.items():
+        pl_id = f"pl-{slugify(folder)}"
+        playlists_list.append({
+            "id": pl_id,
+            "name": folder,
+            "songIds": song_ids,
+        })
+
+    playlists_out = {"playlists": playlists_list}
     with open(PLAYLISTS_PATH, "w", encoding="utf-8") as f:
-        json.dump(playlists_data, f, ensure_ascii=False, indent=2)
-    print(f"Wrote {len(playlists)} playlist(s) to data/playlists.json")
+        json.dump(playlists_out, f, ensure_ascii=False, indent=2)
+    print(f"Wrote {len(playlists_list)} playlist(s) to {PLAYLISTS_PATH}")
     
     # Update lastUpdated in config.json
     update_config_timestamp()
