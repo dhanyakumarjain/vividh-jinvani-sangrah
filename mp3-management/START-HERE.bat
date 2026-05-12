@@ -139,6 +139,12 @@ echo       Shows detailed instructions and examples
 echo.
 echo   ---
 echo.
+echo   [Q] FAQ - Common Questions
+echo.
+echo       Answers to frequently asked questions
+echo.
+echo   ---
+echo.
 echo   [F] Fix Problems
 echo.
 echo       What it does:
@@ -171,7 +177,7 @@ echo   [X] Exit
 echo.
 echo ========================================================================
 echo.
-set /p choice="Enter your choice (S, 1, 2, 3, T, H, F, R, or X): "
+set /p choice="Enter your choice (S, 1, 2, 3, T, H, Q, F, R, or X): "
 
 if /i "%choice%"=="S" goto SETUP
 if /i "%choice%"=="1" goto STEP1
@@ -179,12 +185,13 @@ if /i "%choice%"=="2" goto STEP2
 if /i "%choice%"=="3" goto STEP3
 if /i "%choice%"=="T" goto TEST
 if /i "%choice%"=="H" goto HELP
+if /i "%choice%"=="Q" goto FAQ
 if /i "%choice%"=="F" goto FIX
 if /i "%choice%"=="R" goto RESET
 if /i "%choice%"=="X" goto EXIT
 
 echo.
-echo Invalid choice. Please enter S, 1, 2, 3, T, H, F, R, or X
+echo Invalid choice. Please enter S, 1, 2, 3, T, H, Q, F, R, or X
 timeout /t 3 >nul
 goto MENU
 
@@ -443,6 +450,18 @@ echo For detailed technical documentation, see: README.md
 echo.
 echo Press any key to return to menu...
 pause >nul
+goto MENU
+
+:FAQ
+cls
+echo.
+echo ========================================================================
+echo   FAQ - FREQUENTLY ASKED QUESTIONS
+echo ========================================================================
+echo.
+echo Opening FAQ...
+echo.
+call "FAQ.bat"
 goto MENU
 
 :FIX
