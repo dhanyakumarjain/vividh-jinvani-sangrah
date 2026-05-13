@@ -1,8 +1,8 @@
 {
   "playlists": [
     {
-      "id": "pl-general-songs",
-      "name": "General Songs",
+      "id": "pl-daily-songs",
+      "name": "Daily Songs",
       "songIds": [
         "s0001",
         "s0002",

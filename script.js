@@ -124,11 +124,11 @@ async function loadSongs() {
       playlists = playlists.filter(pl => !pl.seeded);
       playlists = [...seeded, ...playlists];
       
-      // Sort playlists: "General Songs" always first, then seeded playlists, then user playlists
+      // Sort playlists: "Daily Songs" always first, then seeded playlists, then user playlists
       playlists.sort((a, b) => {
-        // "General Songs" playlist always comes first
-        const aIsGeneral = (a.name || '').toLowerCase() === 'general songs';
-        const bIsGeneral = (b.name || '').toLowerCase() === 'general songs';
+        // "Daily Songs" playlist always comes first
+        const aIsGeneral = (a.name || '').toLowerCase() === 'Daily Songs';
+        const bIsGeneral = (b.name || '').toLowerCase() === 'Daily Songs';
         
         if (aIsGeneral) return -1;
         if (bIsGeneral) return 1;
@@ -885,10 +885,10 @@ function createPlaylist(name) {
   const pl = { id: 'pl-' + Date.now(), name: name.trim(), songIds: [] };
   playlists.push(pl);
   
-  // Re-sort playlists: "General Songs" always first, then seeded, then user playlists
+  // Re-sort playlists: "Daily Songs" always first, then seeded, then user playlists
   playlists.sort((a, b) => {
-    const aIsGeneral = (a.name || '').toLowerCase() === 'general songs';
-    const bIsGeneral = (b.name || '').toLowerCase() === 'general songs';
+    const aIsGeneral = (a.name || '').toLowerCase() === 'Daily Songs';
+    const bIsGeneral = (b.name || '').toLowerCase() === 'Daily Songs';
     if (aIsGeneral) return -1;
     if (bIsGeneral) return 1;
     if (a.seeded && !b.seeded) return -1;

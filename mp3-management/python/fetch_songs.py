@@ -58,7 +58,7 @@ if __name__ == "__main__":
             "size_mb": entry["size_mb"],
         }
 
-        folder = entry["folder"] or "General Songs"
+        folder = entry["folder"] or "Daily Songs"
         if folder not in playlists_map:
             playlists_map[folder] = []
         playlists_map[folder].append(song_id)
