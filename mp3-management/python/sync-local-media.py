@@ -146,7 +146,7 @@ def main():
         }
         songs_list.append(song_obj)
         
-        folder = entry["folder"] or "General"
+        folder = entry["folder"] or "General Songs"
         if folder not in playlists_map:
             playlists_map[folder] = []
         playlists_map[folder].append(song_id)
