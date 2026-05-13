@@ -57,6 +57,23 @@ async function loadSongs() {
 
     songs = songData.songs || [];
 
+    // Remove duplicate songs based on filename only (not full path)
+    // This handles cases where same file exists in root and in folders
+    const uniqueSongs = [];
+    const seenFilenames = new Set();
+    
+    for (const song of songs) {
+      // Extract just the filename from the path (after last slash)
+      const filename = song.file.split('/').pop();
+      
+      if (!seenFilenames.has(filename)) {
+        seenFilenames.add(filename);
+        uniqueSongs.push(song);
+      }
+    }
+    
+    songs = uniqueSongs;
+
     // Sort songs alphabetically by title (case-insensitive)
     songs.sort((a, b) => {
       const titleA = (a.title || '').toLowerCase();
@@ -107,8 +124,20 @@ async function loadSongs() {
       playlists = playlists.filter(pl => !pl.seeded);
       playlists = [...seeded, ...playlists];
       
-      // Sort playlists alphabetically by name (case-insensitive)
+      // Sort playlists: "General" always first, then seeded playlists, then user playlists
       playlists.sort((a, b) => {
+        // "General" playlist always comes first
+        const aIsGeneral = (a.name || '').toLowerCase() === 'general';
+        const bIsGeneral = (b.name || '').toLowerCase() === 'general';
+        
+        if (aIsGeneral) return -1;
+        if (bIsGeneral) return 1;
+        
+        // Then seeded playlists come before user playlists
+        if (a.seeded && !b.seeded) return -1;
+        if (!a.seeded && b.seeded) return 1;
+        
+        // Within same type, sort alphabetically (case-insensitive)
         const nameA = (a.name || '').toLowerCase();
         const nameB = (b.name || '').toLowerCase();
         return nameA.localeCompare(nameB);
@@ -132,17 +161,25 @@ function trackEvent(eventName, eventParams = {}) {
 }
 
 function playSong(id) {
+  console.log('🎵 [PLAY] playSong called with id:', id, 'current id:', state.currentSongId);
   const song = getSong(id);
-  if (!song) return;
+  if (!song) {
+    console.log('❌ [PLAY] Song not found');
+    return;
+  }
 
   if (state.currentSongId !== id) {
+    console.log('🔄 [PLAY] Changing song - setting new src:', song.file);
     audio.src = song.file;
     state.currentSongId = id;
     addToRecent(id);
+  } else {
+    console.log('▶️ [PLAY] Same song - just playing');
   }
 
   audio.play()
     .then(() => {
+      console.log('✅ [PLAY] Play started successfully');
       state.isPlaying = true;
       song.available = true;
       updateNowPlaying();
@@ -272,15 +309,33 @@ function setupControls() {
   updateVolumeIcon();
 
   audio.addEventListener('timeupdate', () => {
-    if (!audio.duration || seeking) return;
+    if (!audio.duration) {
+      console.log('⏱️ [TIMEUPDATE] No duration yet');
+      return;
+    }
+    if (seeking) {
+      console.log('⏱️ [TIMEUPDATE] Skipping update - user is seeking');
+      return;
+    }
     const pct = (audio.currentTime / audio.duration) * 100;
     $('#progressBar').style.width = pct + '%';
     $('#progressInput').value = (audio.currentTime / audio.duration) * 1000;
     $('#currentTime').textContent = fmt(audio.currentTime);
+    console.log('⏱️ [TIMEUPDATE] Updated progress - currentTime:', audio.currentTime.toFixed(2), 'progress value:', $('#progressInput').value);
   });
 
   audio.addEventListener('loadedmetadata', () => {
+    console.log('📀 [AUDIO] Metadata loaded - duration:', audio.duration);
     $('#duration').textContent = fmt(audio.duration);
+  });
+  
+  // Add seeking event listeners to track audio element state
+  audio.addEventListener('seeking', () => {
+    console.log('🔍 [AUDIO] Audio element is seeking to:', audio.currentTime);
+  });
+  
+  audio.addEventListener('seeked', () => {
+    console.log('✅ [AUDIO] Audio element seeked complete at:', audio.currentTime);
   });
 
   audio.addEventListener('ended', () => {
@@ -340,37 +395,156 @@ function setupControls() {
   });
 
   let seeking = false;
+  let seekTimeout = null;
 
-  $('#progressInput').addEventListener('mousedown', () => { seeking = true; });
-  $('#progressInput').addEventListener('touchstart', () => { seeking = true; }, { passive: true });
-
-  $('#progressInput').addEventListener('input', () => {
+  // Handle seeking start
+  const startSeeking = () => {
+    console.log('🎯 [SEEK] Start seeking');
     seeking = true;
-    if (!audio.duration) return;
+    // Clear any pending seek
+    if (seekTimeout) {
+      clearTimeout(seekTimeout);
+      seekTimeout = null;
+    }
+  };
+  
+  // Handle seeking end and apply the new time
+  const endSeeking = () => {
+    console.log('🎯 [SEEK] End seeking called, seeking flag:', seeking);
+    
+    // Clear any existing timeout
+    if (seekTimeout) {
+      clearTimeout(seekTimeout);
+    }
+    
+    // Debounce the actual seek operation
+    seekTimeout = setTimeout(() => {
+      console.log('🎯 [SEEK] Executing debounced seek');
+      console.log('🎯 [SEEK] Audio readyState:', audio.readyState, '(0=HAVE_NOTHING, 1=HAVE_METADATA, 2=HAVE_CURRENT_DATA, 3=HAVE_FUTURE_DATA, 4=HAVE_ENOUGH_DATA)');
+      console.log('🎯 [SEEK] Audio paused:', audio.paused);
+      console.log('🎯 [SEEK] Audio ended:', audio.ended);
+      console.log('🎯 [SEEK] Audio seeking:', audio.seeking);
+      
+      if (audio.duration) {
+        const newTime = ($('#progressInput').value / 1000) * audio.duration;
+        const oldTime = audio.currentTime;
+        
+        console.log('🎯 [SEEK] Audio duration:', audio.duration);
+        console.log('🎯 [SEEK] Progress input value:', $('#progressInput').value);
+        console.log('🎯 [SEEK] Old time:', oldTime);
+        console.log('🎯 [SEEK] New time:', newTime);
+        console.log('🎯 [SEEK] Time difference:', Math.abs(newTime - oldTime));
+        
+        // Check buffered ranges
+        if (audio.buffered.length > 0) {
+          console.log('📊 [SEEK] Buffered ranges:');
+          for (let i = 0; i < audio.buffered.length; i++) {
+            console.log(`   Range ${i}: ${audio.buffered.start(i).toFixed(2)}s - ${audio.buffered.end(i).toFixed(2)}s`);
+          }
+          
+          // Check if target time is in any buffered range
+          let isBuffered = false;
+          for (let i = 0; i < audio.buffered.length; i++) {
+            if (newTime >= audio.buffered.start(i) && newTime <= audio.buffered.end(i)) {
+              isBuffered = true;
+              console.log(`✅ [SEEK] Target time ${newTime.toFixed(2)}s IS buffered in range ${i}`);
+              break;
+            }
+          }
+          
+          if (!isBuffered) {
+            console.log(`⚠️ [SEEK] Target time ${newTime.toFixed(2)}s is NOT buffered yet`);
+            console.log(`💡 [SEEK] Seeking anyway - browser will buffer on demand`);
+          }
+        }
+        
+        // Only update if the time actually changed
+        if (Math.abs(newTime - oldTime) > 0.5) {
+          console.log('✅ [SEEK] Applying seek to:', newTime);
+          
+          // CRITICAL FIX: Use seekable instead of just setting currentTime
+          // Check if the position is seekable
+          if (audio.seekable.length > 0) {
+            const seekableStart = audio.seekable.start(0);
+            const seekableEnd = audio.seekable.end(0);
+            console.log(`📍 [SEEK] Seekable range: ${seekableStart.toFixed(2)}s - ${seekableEnd.toFixed(2)}s`);
+            
+            // Clamp the seek position to the seekable range
+            const clampedTime = Math.max(seekableStart, Math.min(newTime, seekableEnd));
+            
+            if (clampedTime !== newTime) {
+              console.log(`⚠️ [SEEK] Clamping seek from ${newTime.toFixed(2)}s to ${clampedTime.toFixed(2)}s`);
+            }
+            
+            audio.currentTime = clampedTime;
+            console.log('🔍 [SEEK] After setting - audio.currentTime is now:', audio.currentTime);
+          } else {
+            console.log('❌ [SEEK] No seekable ranges available!');
+            // Try anyway
+            audio.currentTime = newTime;
+            console.log('🔍 [SEEK] After setting (no seekable check) - audio.currentTime is now:', audio.currentTime);
+          }
+          
+          // Track seek event
+          const song = getSong(state.currentSongId);
+          if (song) {
+            trackEvent('player_seek', {
+              song_id: song.id,
+              from_time: Math.floor(oldTime),
+              to_time: Math.floor(newTime),
+              duration: Math.floor(audio.duration)
+            });
+          }
+        } else {
+          console.log('⏭️ [SEEK] Skipping seek - time difference too small');
+        }
+      } else {
+        console.log('❌ [SEEK] No audio duration');
+      }
+      
+      seeking = false;
+      seekTimeout = null;
+      console.log('🎯 [SEEK] Seeking flag reset to false');
+    }, 50); // 50ms debounce
+  };
+
+  console.log('🎵 [INIT] Setting up progress bar event listeners');
+
+  $('#progressInput').addEventListener('mousedown', (e) => {
+    console.log('🖱️ [EVENT] mousedown on progress bar');
+    startSeeking();
+  });
+  
+  $('#progressInput').addEventListener('touchstart', (e) => {
+    console.log('👆 [EVENT] touchstart on progress bar');
+    startSeeking();
+  }, { passive: true });
+
+  $('#progressInput').addEventListener('input', (e) => {
+    console.log('📊 [EVENT] input - value:', e.target.value, 'seeking:', seeking);
+    if (!audio.duration) {
+      console.log('⚠️ [EVENT] No audio duration yet');
+      return;
+    }
     const val = $('#progressInput').value;
     const pct = val / 10;
     $('#progressBar').style.width = pct + '%';
     $('#currentTime').textContent = fmt((val / 1000) * audio.duration);
   });
 
-  $('#progressInput').addEventListener('change', () => {
-    if (audio.duration) {
-      const newTime = ($('#progressInput').value / 1000) * audio.duration;
-      const oldTime = audio.currentTime;
-      audio.currentTime = newTime;
-      
-      // Track seek event
-      const song = getSong(state.currentSongId);
-      if (song) {
-        trackEvent('player_seek', {
-          song_id: song.id,
-          from_time: Math.floor(oldTime),
-          to_time: Math.floor(newTime),
-          duration: Math.floor(audio.duration)
-        });
-      }
-    }
-    seeking = false;
+  $('#progressInput').addEventListener('change', (e) => {
+    console.log('🔄 [EVENT] change event - value:', e.target.value);
+    endSeeking();
+  });
+  
+  $('#progressInput').addEventListener('mouseup', (e) => {
+    console.log('🖱️ [EVENT] mouseup on progress bar');
+    endSeeking();
+  });
+  
+  $('#progressInput').addEventListener('touchend', (e) => {
+    console.log('👆 [EVENT] touchend on progress bar');
+    endSeeking();
   });
 
   $('#btnPlay').addEventListener('click', togglePlay);
@@ -710,6 +884,20 @@ function toggleFavorite(id) {
 function createPlaylist(name) {
   const pl = { id: 'pl-' + Date.now(), name: name.trim(), songIds: [] };
   playlists.push(pl);
+  
+  // Re-sort playlists: "General" always first, then seeded, then user playlists
+  playlists.sort((a, b) => {
+    const aIsGeneral = (a.name || '').toLowerCase() === 'general';
+    const bIsGeneral = (b.name || '').toLowerCase() === 'general';
+    if (aIsGeneral) return -1;
+    if (bIsGeneral) return 1;
+    if (a.seeded && !b.seeded) return -1;
+    if (!a.seeded && b.seeded) return 1;
+    const nameA = (a.name || '').toLowerCase();
+    const nameB = (b.name || '').toLowerCase();
+    return nameA.localeCompare(nameB);
+  });
+  
   savePlaylists();
   
   // Track playlist creation
@@ -726,7 +914,21 @@ function renamePlaylist(id, name) {
   const pl = playlists.find(p => p.id === id);
   if (pl) { 
     const oldName = pl.name;
-    pl.name = name.trim(); 
+    pl.name = name.trim();
+    
+    // Re-sort playlists: "General" always first, then seeded, then user playlists
+    playlists.sort((a, b) => {
+      const aIsGeneral = (a.name || '').toLowerCase() === 'general';
+      const bIsGeneral = (b.name || '').toLowerCase() === 'general';
+      if (aIsGeneral) return -1;
+      if (bIsGeneral) return 1;
+      if (a.seeded && !b.seeded) return -1;
+      if (!a.seeded && b.seeded) return 1;
+      const nameA = (a.name || '').toLowerCase();
+      const nameB = (b.name || '').toLowerCase();
+      return nameA.localeCompare(nameB);
+    });
+    
     savePlaylists(); 
     
     // Track playlist rename

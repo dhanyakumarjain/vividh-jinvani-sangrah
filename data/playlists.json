@@ -1,3 +1,13 @@
 {
-  "playlists": []
+  "playlists": [
+    {
+      "id": "pl-general",
+      "name": "General",
+      "songIds": [
+        "s0001",
+        "s0002",
+        "s0003"
+      ]
+    }
+  ]
 }
