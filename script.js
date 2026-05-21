@@ -331,6 +331,11 @@ function setupControls() {
     $('#progressInput').value = (audio.currentTime / audio.duration) * 1000;
     $('#currentTime').textContent = fmt(audio.currentTime);
     console.log('⏱️ [TIMEUPDATE] Updated progress - currentTime:', audio.currentTime.toFixed(2), 'progress value:', $('#progressInput').value);
+    
+    // Save state periodically (every 5 seconds) to remember playback position
+    if (!audio.paused && Math.floor(audio.currentTime) % 5 === 0) {
+      saveState();
+    }
   });
 
   audio.addEventListener('loadedmetadata', () => {
@@ -672,6 +677,21 @@ function restoreState() {
     const song = getSong(state.currentSongId);
     if (song && song.available) {
       audio.src = song.file;
+      
+      // Restore playback position when metadata is loaded
+      if (state.savedTime && state.savedTime > 0) {
+        audio.addEventListener('loadedmetadata', function restoreTime() {
+          // Only restore if the saved time is valid for this song
+          if (state.savedTime < audio.duration) {
+            audio.currentTime = state.savedTime;
+            console.log(`Restored playback position: ${state.savedTime.toFixed(1)}s`);
+          }
+          // Remove this listener after restoring once
+          audio.removeEventListener('loadedmetadata', restoreTime);
+          state.savedTime = 0; // Clear saved time
+        }, { once: true });
+      }
+      
       updateNowPlaying();
       updateList();
     } else {
@@ -1269,8 +1289,14 @@ function renderThemeCards() {
 
 function saveState() {
   localStorage.setItem(STORAGE.STATE, JSON.stringify({
-    currentSongId: state.currentSongId, volume: state.volume, isMuted: state.isMuted,
-    shuffle: state.shuffle, repeat: state.repeat, activeView: state.activeView, activePlaylistId: state.activePlaylistId
+    currentSongId: state.currentSongId, 
+    currentTime: audio.currentTime || 0,
+    volume: state.volume, 
+    isMuted: state.isMuted,
+    shuffle: state.shuffle, 
+    repeat: state.repeat, 
+    activeView: state.activeView, 
+    activePlaylistId: state.activePlaylistId
   }));
 }
 
@@ -1284,6 +1310,7 @@ function loadFromStorage() {
     const s = JSON.parse(localStorage.getItem(STORAGE.STATE));
     if (s) {
       state.currentSongId = s.currentSongId || null;
+      state.savedTime = s.currentTime || 0;  // Store saved time for later restoration
       state.volume = s.volume ?? 80;
       state.isMuted = s.isMuted || false;
       state.shuffle = s.shuffle || false;

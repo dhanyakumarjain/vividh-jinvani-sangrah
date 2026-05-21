@@ -111,6 +111,43 @@ def main():
     
     os.makedirs(DATA_DIR, exist_ok=True)
     
+    # Load existing songs and playlists
+    existing_songs = []
+    existing_playlists = []
+    existing_song_files = set()
+    max_song_id = 0
+    
+    if os.path.exists(SONGS_PATH):
+        try:
+            with open(SONGS_PATH, "r", encoding="utf-8") as f:
+                songs_data = json.load(f)
+                existing_songs = songs_data.get("songs", [])
+                
+                # Track existing files and find max ID
+                for song in existing_songs:
+                    existing_song_files.add(song["file"])
+                    # Extract ID number (e.g., "s0001" -> 1)
+                    song_id = song.get("id", "s0000")
+                    try:
+                        id_num = int(song_id[1:])  # Remove 's' prefix
+                        if id_num > max_song_id:
+                            max_song_id = id_num
+                    except:
+                        pass
+                
+                print(f"[INFO] Found {len(existing_songs)} existing song(s)")
+        except Exception as e:
+            print(f"[WARNING] Could not load existing songs: {e}")
+    
+    if os.path.exists(PLAYLISTS_PATH):
+        try:
+            with open(PLAYLISTS_PATH, "r", encoding="utf-8") as f:
+                playlists_data = json.load(f)
+                existing_playlists = playlists_data.get("playlists", [])
+                print(f"[INFO] Found {len(existing_playlists)} existing playlist(s)")
+        except Exception as e:
+            print(f"[WARNING] Could not load existing playlists: {e}")
+    
     # Scan media folder
     entries = scan_media_folder()
     
@@ -125,14 +162,29 @@ def main():
     print(f"[OK] Found {len(entries)} audio file(s)")
     print()
     
-    # Build songs list
-    songs_list = []
+    # Build songs list - keep existing, add new
+    songs_list = existing_songs.copy()
     playlists_map = {}
-    counter = 1
+    
+    # Rebuild playlists map from existing playlists
+    for playlist in existing_playlists:
+        playlists_map[playlist["name"]] = playlist["songIds"].copy()
+    
+    counter = max_song_id + 1
+    new_songs_count = 0
     
     for entry in entries:
+        file_path = f"media/{entry['file']}"
+        
+        # Check if this file already exists
+        if file_path in existing_song_files:
+            # File already exists, skip it
+            continue
+        
+        # New file - add it
         song_id = f"s{counter:04d}"
         counter += 1
+        new_songs_count += 1
         
         song_obj = {
             "id": song_id,
@@ -141,7 +193,7 @@ def main():
             "album": "",
             "altName": [],
             "duration": 0,
-            "file": f"media/{entry['file']}",
+            "file": file_path,
             "size_mb": entry["size_mb"],
         }
         songs_list.append(song_obj)
@@ -151,14 +203,21 @@ def main():
             playlists_map[folder] = []
         playlists_map[folder].append(song_id)
         
-        print(f"  [{folder}] {entry['name']} -> {song_id}")
+        print(f"  [NEW] [{folder}] {entry['name']} -> {song_id}")
+    
+    if new_songs_count == 0:
+        print("[INFO] No new songs to add. All files already exist.")
+        print()
+        return
+    
+    print()
+    print(f"[OK] Added {new_songs_count} new song(s)")
     
     # Write songs.json
     songs_out = {"songs": songs_list}
     with open(SONGS_PATH, "w", encoding="utf-8") as f:
         json.dump(songs_out, f, ensure_ascii=False, indent=2)
-    print()
-    print(f"[OK] Wrote {len(songs_list)} song(s) to {SONGS_PATH}")
+    print(f"[OK] Updated {SONGS_PATH} (Total: {len(songs_list)} songs)")
     
     # Write playlists.json
     playlists_list = []
@@ -173,7 +232,7 @@ def main():
     playlists_out = {"playlists": playlists_list}
     with open(PLAYLISTS_PATH, "w", encoding="utf-8") as f:
         json.dump(playlists_out, f, ensure_ascii=False, indent=2)
-    print(f"[OK] Wrote {len(playlists_list)} playlist(s) to {PLAYLISTS_PATH}")
+    print(f"[OK] Updated {PLAYLISTS_PATH} (Total: {len(playlists_list)} playlists)")
     
     # Update config timestamp
     update_config_timestamp()
@@ -182,6 +241,11 @@ def main():
     print("=" * 60)
     print("  DONE!")
     print("=" * 60)
+    print()
+    print(f"Summary:")
+    print(f"  - New songs added: {new_songs_count}")
+    print(f"  - Total songs: {len(songs_list)}")
+    print(f"  - Total playlists: {len(playlists_list)}")
     print()
     print("Next steps:")
     print("  1. Test website locally: Test-Website.bat")
