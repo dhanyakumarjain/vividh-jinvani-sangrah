@@ -5,7 +5,7 @@ const STORAGE = {
   RECENT: 'mp2_recentlyPlayed',
   THEME: 'mp2_theme'
 };
-const MAX_RECENT = 20;
+const MAX_RECENT = 10;
 
 let songs = [];
 let themeDefs = [];
