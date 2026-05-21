@@ -124,20 +124,29 @@ async function loadSongs() {
       playlists = playlists.filter(pl => !pl.seeded);
       playlists = [...seeded, ...playlists];
       
-      // Sort playlists: "Daily Songs" always first, then seeded playlists, then user playlists
+      // Sort playlists: user playlists with 4-digit prefix first (sorted numerically), then seeded, then other user playlists
       playlists.sort((a, b) => {
-        // "Daily Songs" playlist always comes first
-        const aIsGeneral = (a.name || '').toLowerCase() === 'Daily Songs';
-        const bIsGeneral = (b.name || '').toLowerCase() === 'Daily Songs';
+        const aHasDigits = /^\d{4}\s/.test(a.name || '');
+        const bHasDigits = /^\d{4}\s/.test(b.name || '');
         
-        if (aIsGeneral) return -1;
-        if (bIsGeneral) return 1;
+        // Both have 4-digit prefix - sort numerically by the number
+        if (aHasDigits && bHasDigits) {
+          const aNum = parseInt((a.name || '').substring(0, 4)) || 0;
+          const bNum = parseInt((b.name || '').substring(0, 4)) || 0;
+          if (aNum !== bNum) return aNum - bNum;
+          // If same number, sort alphabetically by rest of name
+          return (a.name || '').localeCompare(b.name || '');
+        }
         
-        // Then seeded playlists come before user playlists
+        // One has 4-digit prefix, one doesn't - digit prefix comes first
+        if (aHasDigits) return -1;
+        if (bHasDigits) return 1;
+        
+        // Neither has 4-digit prefix - seeded before other user playlists
         if (a.seeded && !b.seeded) return -1;
         if (!a.seeded && b.seeded) return 1;
         
-        // Within same type, sort alphabetically (case-insensitive)
+        // Both same type - sort alphabetically
         const nameA = (a.name || '').toLowerCase();
         const nameB = (b.name || '').toLowerCase();
         return nameA.localeCompare(nameB);
@@ -885,14 +894,29 @@ function createPlaylist(name) {
   const pl = { id: 'pl-' + Date.now(), name: name.trim(), songIds: [] };
   playlists.push(pl);
   
-  // Re-sort playlists: "Daily Songs" always first, then seeded, then user playlists
+  // Re-sort playlists: user playlists with 4-digit prefix first (sorted numerically), then seeded, then other user playlists
   playlists.sort((a, b) => {
-    const aIsGeneral = (a.name || '').toLowerCase() === 'Daily Songs';
-    const bIsGeneral = (b.name || '').toLowerCase() === 'Daily Songs';
-    if (aIsGeneral) return -1;
-    if (bIsGeneral) return 1;
+    const aHasDigits = /^\d{4}\s/.test(a.name || '');
+    const bHasDigits = /^\d{4}\s/.test(b.name || '');
+    
+    // Both have 4-digit prefix - sort numerically by the number
+    if (aHasDigits && bHasDigits) {
+      const aNum = parseInt((a.name || '').substring(0, 4)) || 0;
+      const bNum = parseInt((b.name || '').substring(0, 4)) || 0;
+      if (aNum !== bNum) return aNum - bNum;
+      // If same number, sort alphabetically by rest of name
+      return (a.name || '').localeCompare(b.name || '');
+    }
+    
+    // One has 4-digit prefix, one doesn't - digit prefix comes first
+    if (aHasDigits) return -1;
+    if (bHasDigits) return 1;
+    
+    // Neither has 4-digit prefix - seeded before other user playlists
     if (a.seeded && !b.seeded) return -1;
     if (!a.seeded && b.seeded) return 1;
+    
+    // Both same type - sort alphabetically
     const nameA = (a.name || '').toLowerCase();
     const nameB = (b.name || '').toLowerCase();
     return nameA.localeCompare(nameB);
@@ -916,14 +940,29 @@ function renamePlaylist(id, name) {
     const oldName = pl.name;
     pl.name = name.trim();
     
-    // Re-sort playlists: "General" always first, then seeded, then user playlists
+    // Re-sort playlists: user playlists with 4-digit prefix first (sorted numerically), then seeded, then other user playlists
     playlists.sort((a, b) => {
-      const aIsGeneral = (a.name || '').toLowerCase() === 'general';
-      const bIsGeneral = (b.name || '').toLowerCase() === 'general';
-      if (aIsGeneral) return -1;
-      if (bIsGeneral) return 1;
+      const aHasDigits = /^\d{4}\s/.test(a.name || '');
+      const bHasDigits = /^\d{4}\s/.test(b.name || '');
+      
+      // Both have 4-digit prefix - sort numerically by the number
+      if (aHasDigits && bHasDigits) {
+        const aNum = parseInt((a.name || '').substring(0, 4)) || 0;
+        const bNum = parseInt((b.name || '').substring(0, 4)) || 0;
+        if (aNum !== bNum) return aNum - bNum;
+        // If same number, sort alphabetically by rest of name
+        return (a.name || '').localeCompare(b.name || '');
+      }
+      
+      // One has 4-digit prefix, one doesn't - digit prefix comes first
+      if (aHasDigits) return -1;
+      if (bHasDigits) return 1;
+      
+      // Neither has 4-digit prefix - seeded before other user playlists
       if (a.seeded && !b.seeded) return -1;
       if (!a.seeded && b.seeded) return 1;
+      
+      // Both same type - sort alphabetically
       const nameA = (a.name || '').toLowerCase();
       const nameB = (b.name || '').toLowerCase();
       return nameA.localeCompare(nameB);
@@ -1106,10 +1145,35 @@ function saveAddToPL() {
 function openNewPL(fromModal) {
   editingPlaylistId = null;
   $('#playlistNameTitle').textContent = 'New Playlist';
-  $('#playlistNameInput').value = '';
+  
+  // Count all existing user playlists that start with 4 digits (0000, 0001, 0002, etc.)
+  const userPlaylists = playlists.filter(p => !p.seeded && /^\d{4}\s/.test(p.name));
+  
+  // Find the highest number used
+  let maxNumber = 0;
+  userPlaylists.forEach(p => {
+    const match = p.name.match(/^(\d{4})\s/);
+    if (match) {
+      const num = parseInt(match[1]);
+      if (num > maxNumber) maxNumber = num;
+    }
+  });
+  
+  // Next number is maxNumber + 1
+  const nextNumber = maxNumber + 1;
+  const paddedNumber = String(nextNumber).padStart(4, '0');
+  
+  // Pre-fill with "0001 " format (or next available number)
+  $('#playlistNameInput').value = `${paddedNumber} `;
+  
   if (fromModal) closeModal('addToPlaylistModal');
   openModal('playlistNameModal');
-  setTimeout(() => $('#playlistNameInput').focus(), 100);
+  setTimeout(() => {
+    const input = $('#playlistNameInput');
+    input.focus();
+    // Place cursor at the end (after "0001 ")
+    input.setSelectionRange(input.value.length, input.value.length);
+  }, 100);
 }
 
 function openRenamePL(id) {
@@ -1224,8 +1288,9 @@ function loadFromStorage() {
       state.isMuted = s.isMuted || false;
       state.shuffle = s.shuffle || false;
       state.repeat = s.repeat || 'off';
-      state.activeView = s.activeView || 'library';
-      state.activePlaylistId = s.activePlaylistId || null;
+      // Always start with library view (All Songs) on page load
+      state.activeView = 'library';
+      state.activePlaylistId = null;
     }
   } catch {}
   try { favorites = JSON.parse(localStorage.getItem(STORAGE.FAVORITES)) || []; } catch { favorites = []; }
@@ -1287,6 +1352,39 @@ function importSettings(file) {
   reader.readAsText(file);
 }
 
+function clearAllData() {
+  const confirmed = confirm(
+    '⚠️ WARNING: This will delete ALL user data:\n\n' +
+    '• User-created playlists (0001, 0002, etc.)\n' +
+    '• Favorites\n' +
+    '• Recently played history\n' +
+    '• Theme preferences\n\n' +
+    'Seeded playlists from folders (0000, 0101, etc.) will NOT be deleted.\n\n' +
+    'This action CANNOT be undone!\n\n' +
+    'Do you want to continue?'
+  );
+  
+  if (!confirmed) return;
+  
+  // Clear all localStorage data
+  localStorage.removeItem(STORAGE.STATE);
+  localStorage.removeItem(STORAGE.FAVORITES);
+  localStorage.removeItem(STORAGE.PLAYLISTS);
+  localStorage.removeItem(STORAGE.RECENT);
+  localStorage.removeItem(STORAGE.THEME);
+  
+  // Track data clear
+  trackEvent('data_clear', {
+    favorites_count: favorites.length,
+    playlists_count: playlists.filter(p => !p.seeded).length,
+    recent_count: recentlyPlayed.length
+  });
+  
+  // Reload the page to reset everything
+  alert('All user data has been cleared. The page will now reload.');
+  window.location.reload();
+}
+
 // ==================== EVENTS ====================
 
 function setupEvents() {
@@ -1310,6 +1408,7 @@ function setupEvents() {
   $('#btnExport').addEventListener('click', exportSettings);
   $('#btnImport').addEventListener('click', () => $('#importFile').click());
   $('#importFile').addEventListener('change', (e) => { if (e.target.files[0]) importSettings(e.target.files[0]); e.target.value = ''; });
+  $('#btnClearData').addEventListener('click', clearAllData);
 
   $('#btnDoneAddToPlaylist').addEventListener('click', saveAddToPL);
   $('#btnCreateFromModal').addEventListener('click', () => openNewPL(true));

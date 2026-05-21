@@ -1,3 +1,614 @@
 {
-  "songs": []
+  "songs": [
+    {
+      "id": "s0001",
+      "title": "0101.01 णमोकार महामंत्र (चत्तारी मंगल ऐसो पंच) KORAS ✱",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.01%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%20%28%E0%A4%9A%E0%A4%A4%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%B0%E0%A5%80%20%E0%A4%AE%E0%A4%82%E0%A4%97%E0%A4%B2%20%E0%A4%90%E0%A4%B8%E0%A5%8B%20%E0%A4%AA%E0%A4%82%E0%A4%9A%29%20KORAS%20%E2%9C%B1.mp3",
+      "size_mb": 1.1
+    },
+    {
+      "id": "s0002",
+      "title": "0101.02 नवकार मंत्र जाप 108 बार CA Anjali Jain ✱",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.02%20%E0%A4%A8%E0%A4%B5%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%20%E0%A4%9C%E0%A4%BE%E0%A4%AA%20108%20%E0%A4%AC%E0%A4%BE%E0%A4%B0%20CA%20Anjali%20Jain%20%E2%9C%B1.mp3",
+      "size_mb": 88.4
+    },
+    {
+      "id": "s0003",
+      "title": "0101.03 णमोकार मन्त्रम् चत्तारि मङ्गल पाठ 48 ऋद्धि मन्त्रम् बृह ✽",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.03%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%A8%E0%A5%8D%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A4%AE%E0%A5%8D%20%E0%A4%9A%E0%A4%A4%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%B0%E0%A4%BF%20%E0%A4%AE%E0%A4%99%E0%A5%8D%E0%A4%97%E0%A4%B2%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%2048%20%E0%A4%8B%E0%A4%A6%E0%A5%8D%E0%A4%A7%E0%A4%BF%20%E0%A4%AE%E0%A4%A8%E0%A5%8D%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A4%AE%E0%A5%8D%20%E0%A4%AC%E0%A5%83%E0%A4%B9%20%E2%9C%BD.mp3",
+      "size_mb": 46.9
+    },
+    {
+      "id": "s0004",
+      "title": "0101.04 जाप ॐ र्ह्यम र्हीम रुम्ह अ सी आ ऊ सा 108 Corus Sup",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.04%20%E0%A4%9C%E0%A4%BE%E0%A4%AA%20%E0%A5%90%20%E0%A4%B0%E0%A5%8D%E0%A4%B9%E0%A5%8D%E0%A4%AF%E0%A4%AE%20%E0%A4%B0%E0%A5%8D%E0%A4%B9%E0%A5%80%E0%A4%AE%20%E0%A4%B0%E0%A5%81%E0%A4%AE%E0%A5%8D%E0%A4%B9%20%E0%A4%85%20%E0%A4%B8%E0%A5%80%20%E0%A4%86%20%E0%A4%8A%20%E0%A4%B8%E0%A4%BE%20108%20Corus%20Sup.mp3",
+      "size_mb": 49.3
+    },
+    {
+      "id": "s0005",
+      "title": "0101.05 जाप ॐ र्हीम अ सी आ ऊ सा नमः TABLA 108 SUP",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.05%20%E0%A4%9C%E0%A4%BE%E0%A4%AA%20%E0%A5%90%20%E0%A4%B0%E0%A5%8D%E0%A4%B9%E0%A5%80%E0%A4%AE%20%E0%A4%85%20%E0%A4%B8%E0%A5%80%20%E0%A4%86%20%E0%A4%8A%20%E0%A4%B8%E0%A4%BE%20%E0%A4%A8%E0%A4%AE%E0%A4%83%20TABLA%20108%20SUP.mp3",
+      "size_mb": 28.0
+    },
+    {
+      "id": "s0006",
+      "title": "0101.11 णमोकार महामंत्र चत्तारी मंगल  Eso Gundecha Sup ✱",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.11%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%20%E0%A4%9A%E0%A4%A4%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%B0%E0%A5%80%20%E0%A4%AE%E0%A4%82%E0%A4%97%E0%A4%B2%20%20Eso%20Gundecha%20Sup%20%E2%9C%B1.mp3",
+      "size_mb": 1.9
+    },
+    {
+      "id": "s0007",
+      "title": "0101.12 णमोकार मन्त्र Fast Musical",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.12%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%A8%E0%A5%8D%E0%A4%A4%E0%A5%8D%E0%A4%B0%20Fast%20Musical.mp3",
+      "size_mb": 1.7
+    },
+    {
+      "id": "s0008",
+      "title": "0101.13 नमोकार धुन NAMO NAMO single",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.13%20%E0%A4%A8%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%A7%E0%A5%81%E0%A4%A8%20NAMO%20NAMO%20single.mp3",
+      "size_mb": 1.5
+    },
+    {
+      "id": "s0009",
+      "title": "0101.14 णमोकार महामंत्र सुपर दिन 9 bar ✽",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.14%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%20%E0%A4%B8%E0%A5%81%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A4%BF%E0%A4%A8%209%20bar%20%E2%9C%BD.mp3",
+      "size_mb": 6.6
+    },
+    {
+      "id": "s0010",
+      "title": "0101.15 णमोकार महामंत्र चत्तारी मंगल पाठ JD",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.15%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%20%E0%A4%9A%E0%A4%A4%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%B0%E0%A5%80%20%E0%A4%AE%E0%A4%82%E0%A4%97%E0%A4%B2%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20JD.mp3",
+      "size_mb": 2.5
+    },
+    {
+      "id": "s0011",
+      "title": "0101.16 णमोकार महामंत्र Kamal Sethia ✱",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.16%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%20Kamal%20Sethia%20%E2%9C%B1.mp3",
+      "size_mb": 1.3
+    },
+    {
+      "id": "s0012",
+      "title": "0101.95 मंगलाचरण Excellent",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.95%20%E0%A4%AE%E0%A4%82%E0%A4%97%E0%A4%B2%E0%A4%BE%E0%A4%9A%E0%A4%B0%E0%A4%A3%20Excellent.mp3",
+      "size_mb": 2.3
+    },
+    {
+      "id": "s0013",
+      "title": "0101.96 णमोकार मंत्र Instrumental",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.96%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%20Instrumental.mp3",
+      "size_mb": 9.2
+    },
+    {
+      "id": "s0014",
+      "title": "0101.97 णमोकार पाठ परमेष्ठी मंत्रमाला (108 बार )",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.97%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A5%87%E0%A4%B7%E0%A5%8D%E0%A4%A0%E0%A5%80%20%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A4%AE%E0%A4%BE%E0%A4%B2%E0%A4%BE%20%28108%20%E0%A4%AC%E0%A4%BE%E0%A4%B0%20%29.mp3",
+      "size_mb": 36.9
+    },
+    {
+      "id": "s0015",
+      "title": "0101.98 णमोकार जाप 108 बार slow",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0/0101.98%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%9C%E0%A4%BE%E0%A4%AA%20108%20%E0%A4%AC%E0%A4%BE%E0%A4%B0%20slow.mp3",
+      "size_mb": 37.0
+    },
+    {
+      "id": "s0016",
+      "title": "0102.01 प्रातःकाल उठकर यह बोले जैन विधि से NAMOSTU Sup",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0102%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%29/0102.01%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%89%E0%A4%A0%E0%A4%95%E0%A4%B0%20%E0%A4%AF%E0%A4%B9%20%E0%A4%AC%E0%A5%8B%E0%A4%B2%E0%A5%87%20%E0%A4%9C%E0%A5%88%E0%A4%A8%20%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BF%20%E0%A4%B8%E0%A5%87%20NAMOSTU%20Sup.mp3",
+      "size_mb": 4.8
+    },
+    {
+      "id": "s0017",
+      "title": "0102.02 प्रातःकालीन जैन वंदना सिद्ध शिला पर विराजमान F SUP N ✽",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0102%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%29/0102.02%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%9C%E0%A5%88%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%20F%20SUP%20N%20%E2%9C%BD.mp3",
+      "size_mb": 7.3
+    },
+    {
+      "id": "s0018",
+      "title": "0102.03 प्रातःकालीन वंदना सिद्ध शिला पर विराजमान BhaktamberFoun NM SUP ✽",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0102%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%29/0102.03%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%20BhaktamberFoun%20NM%20SUP%20%E2%9C%BD.mp3",
+      "size_mb": 9.0
+    },
+    {
+      "id": "s0019",
+      "title": "0102.04 गणधरवलय रिद्धि मंत्र स्वर आर्यिका सुस्वरमती माताजी Sup",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0102%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%29/0102.04%20%E0%A4%97%E0%A4%A3%E0%A4%A7%E0%A4%B0%E0%A4%B5%E0%A4%B2%E0%A4%AF%20%E0%A4%B0%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%E0%A4%BF%20%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%20%E0%A4%B8%E0%A5%8D%E0%A4%B5%E0%A4%B0%20%E0%A4%86%E0%A4%B0%E0%A5%8D%E0%A4%AF%E0%A4%BF%E0%A4%95%E0%A4%BE%20%E0%A4%B8%E0%A5%81%E0%A4%B8%E0%A5%8D%E0%A4%B5%E0%A4%B0%E0%A4%AE%E0%A4%A4%E0%A5%80%20%E0%A4%AE%E0%A4%BE%E0%A4%A4%E0%A4%BE%E0%A4%9C%E0%A5%80%20Sup.mp3",
+      "size_mb": 6.7
+    },
+    {
+      "id": "s0020",
+      "title": "0102.04 प्रातःकालीन वंदना सिद्ध शिला पर विराजमान  M",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0102%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%29/0102.04%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%20%20M.mp3",
+      "size_mb": 5.2
+    },
+    {
+      "id": "s0021",
+      "title": "0102.05 प्रातःकालीन वंदना (सिद्ध शिला पर विराजमान) F",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0102%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%29/0102.05%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%29%20F.mp3",
+      "size_mb": 6.4
+    },
+    {
+      "id": "s0022",
+      "title": "0102.06 प्रातःकालीन वंदना (सिद्ध शिला पर विराजमान) M",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0102%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%29/0102.06%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%29%20M.mp3",
+      "size_mb": 4.9
+    },
+    {
+      "id": "s0023",
+      "title": "0102.07 प्रातःकालीन वंदना प्रतिक्रमण हे प्रभु both new nomu",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0102%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%29/0102.07%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%A4%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B0%E0%A4%AE%E0%A4%A3%20%E0%A4%B9%E0%A5%87%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%AD%E0%A5%81%20both%20new%20nomu.mp3",
+      "size_mb": 7.7
+    },
+    {
+      "id": "s0024",
+      "title": "0102.08 प्रातःकालीन वंदना उषा वंदना प्रार्थना दिन को मंगलमयी बनाएं जैन दर्शन morning prayer",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0102%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%29/0102.08%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%E0%A4%89%E0%A4%B7%E0%A4%BE%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%A5%E0%A4%A8%E0%A4%BE%20%E0%A4%A6%E0%A4%BF%E0%A4%A8%20%E0%A4%95%E0%A5%8B%20%E0%A4%AE%E0%A4%82%E0%A4%97%E0%A4%B2%E0%A4%AE%E0%A4%AF%E0%A5%80%20%E0%A4%AC%E0%A4%A8%E0%A4%BE%E0%A4%8F%E0%A4%82%20%E0%A4%9C%E0%A5%88%E0%A4%A8%20%E0%A4%A6%E0%A4%B0%E0%A5%8D%E0%A4%B6%E0%A4%A8%20morning%20prayer.mp3",
+      "size_mb": 6.2
+    },
+    {
+      "id": "s0025",
+      "title": "0103.01 सामायिक दिग्वंदना (नमोस्तु चारो दिशावोमे स्थित)",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0103%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%A8%E0%A4%AE%E0%A5%8B%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%81%20%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A5%8B%20%E0%A4%A6%E0%A4%BF%E0%A4%B6%E0%A4%BE%E0%A4%B5%E0%A5%8B%E0%A4%AE%E0%A5%87%20%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%BF%E0%A4%A4%29/0103.01%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%A8%E0%A4%AE%E0%A5%8B%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%81%20%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A5%8B%20%E0%A4%A6%E0%A4%BF%E0%A4%B6%E0%A4%BE%E0%A4%B5%E0%A5%8B%E0%A4%AE%E0%A5%87%20%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%BF%E0%A4%A4%29.mp3",
+      "size_mb": 1.1
+    },
+    {
+      "id": "s0026",
+      "title": "0103.02 सामायिक दिग्वंदना (नमोस्तु चारो दिशावोमे स्थित) nomu CORUS",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0103%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%A8%E0%A4%AE%E0%A5%8B%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%81%20%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A5%8B%20%E0%A4%A6%E0%A4%BF%E0%A4%B6%E0%A4%BE%E0%A4%B5%E0%A5%8B%E0%A4%AE%E0%A5%87%20%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%BF%E0%A4%A4%29/0103.02%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%A8%E0%A4%AE%E0%A5%8B%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%81%20%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A5%8B%20%E0%A4%A6%E0%A4%BF%E0%A4%B6%E0%A4%BE%E0%A4%B5%E0%A5%8B%E0%A4%AE%E0%A5%87%20%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%BF%E0%A4%A4%29%20nomu%20CORUS.mp3",
+      "size_mb": 2.4
+    },
+    {
+      "id": "s0027",
+      "title": "0104.01 आप चारों दिशाओं में किसको नमस्कार करते हैं",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0104%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%97%E0%A5%8D%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%BF%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A4%82%E0%A4%A4%E0%A4%B0%E0%A4%A4%20%E0%A4%95%E0%A5%87%E0%A4%B5%E0%A4%B2%E0%A5%80%20%29/0104.01%20%E0%A4%86%E0%A4%AA%20%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A5%8B%E0%A4%82%20%E0%A4%A6%E0%A4%BF%E0%A4%B6%E0%A4%BE%E0%A4%93%E0%A4%82%20%E0%A4%AE%E0%A5%87%E0%A4%82%20%E0%A4%95%E0%A4%BF%E0%A4%B8%E0%A4%95%E0%A5%8B%20%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A5%87%20%E0%A4%B9%E0%A5%88%E0%A4%82.mp3",
+      "size_mb": 0.7
+    },
+    {
+      "id": "s0028",
+      "title": "0104.02 सामायिक दिग्वंदना (प्राग्दिग्विदिगंतरत केवली )",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0104%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%97%E0%A5%8D%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%BF%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A4%82%E0%A4%A4%E0%A4%B0%E0%A4%A4%20%E0%A4%95%E0%A5%87%E0%A4%B5%E0%A4%B2%E0%A5%80%20%29/0104.02%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%97%E0%A5%8D%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%BF%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A4%82%E0%A4%A4%E0%A4%B0%E0%A4%A4%20%E0%A4%95%E0%A5%87%E0%A4%B5%E0%A4%B2%E0%A5%80%20%29.mp3",
+      "size_mb": 5.1
+    },
+    {
+      "id": "s0029",
+      "title": "0105.01 सामायिक पाठ भाषा (काल अनंत..) Jain Sangrah 9.40",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0105%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29/0105.01%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29%20Jain%20Sangrah%209.40.mp3",
+      "size_mb": 8.9
+    },
+    {
+      "id": "s0030",
+      "title": "0105.02 सामायिक पाठ भाषा (काल अनंत..) (M) Sup",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0105%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29/0105.02%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29%20%28M%29%20Sup.mp3",
+      "size_mb": 11.5
+    },
+    {
+      "id": "s0031",
+      "title": "0105.03 सामायिक पाठ काल अनंत JIN 1508",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0105%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29/0105.03%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4%20JIN%201508.mp3",
+      "size_mb": 25.2
+    },
+    {
+      "id": "s0032",
+      "title": "0105.04 सामायिक पाठ काल अनंत Mataji 050914",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0105%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29/0105.04%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4%20Mataji%20050914.mp3",
+      "size_mb": 16.8
+    },
+    {
+      "id": "s0033",
+      "title": "0105.05 सामायिक पाठ भाषा (काल अनंत..) New Nocmt 16.56",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0105%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29/0105.05%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29%20New%20Nocmt%2016.56.mp3",
+      "size_mb": 31.0
+    },
+    {
+      "id": "s0034",
+      "title": "0105.06 सामायिक पाठ काल अनंत Neha Bhajan",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0105%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29/0105.06%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4%20Neha%20Bhajan.mp3",
+      "size_mb": 28.5
+    },
+    {
+      "id": "s0035",
+      "title": "0105.07 सामायिक-पाठ भाषा काल-अनंत  6.55",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0105%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29/0105.07%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95-%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%E0%A4%95%E0%A4%BE%E0%A4%B2-%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4%20%206.55.mp3",
+      "size_mb": 6.3
+    },
+    {
+      "id": "s0036",
+      "title": "0105.08 सामायिक पाठ भाषा (काल अनंत..) New cmt 18.53",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0105%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29/0105.08%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29%20New%20cmt%2018.53.mp3",
+      "size_mb": 34.6
+    },
+    {
+      "id": "s0037",
+      "title": "0105.09 सामायिक पाठ काल अनंत Naniji Beed",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0105%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29/0105.09%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4%20Naniji%20Beed.mp3",
+      "size_mb": 16.3
+    },
+    {
+      "id": "s0038",
+      "title": "0106.01 आलोचना पाठ (वंदो पांचो परमगुरू) DUEL NEW",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0106%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%9C%E0%A5%8B%E0%A4%B9%E0%A4%B0%E0%A4%BF%E0%A4%B2%E0%A4%BE%E0%A4%B2%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29/0106.01%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29%20DUEL%20NEW.mp3",
+      "size_mb": 16.5
+    },
+    {
+      "id": "s0039",
+      "title": "0106.02 आलोचना पाठ (वंदो पांचो परमगुरू) Duel M NEW",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0106%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%9C%E0%A5%8B%E0%A4%B9%E0%A4%B0%E0%A4%BF%E0%A4%B2%E0%A4%BE%E0%A4%B2%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29/0106.02%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29%20Duel%20M%20NEW.mp3",
+      "size_mb": 17.2
+    },
+    {
+      "id": "s0040",
+      "title": "0106.03 आलोचना पाठ (वंदो पांचो परमगुरू) New Nomu MF",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0106%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%9C%E0%A5%8B%E0%A4%B9%E0%A4%B0%E0%A4%BF%E0%A4%B2%E0%A4%BE%E0%A4%B2%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29/0106.03%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29%20New%20Nomu%20MF.mp3",
+      "size_mb": 18.8
+    },
+    {
+      "id": "s0041",
+      "title": "0106.04 आलोचना पाठ NM ParasTV MF sup",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0106%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%9C%E0%A5%8B%E0%A4%B9%E0%A4%B0%E0%A4%BF%E0%A4%B2%E0%A4%BE%E0%A4%B2%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29/0106.04%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20NM%20ParasTV%20MF%20sup.mp3",
+      "size_mb": 16.7
+    },
+    {
+      "id": "s0042",
+      "title": "0106.05 आलोचना पाठ (वंदो पांचो परमगुरू) Duel New Sangeet",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0106%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%9C%E0%A5%8B%E0%A4%B9%E0%A4%B0%E0%A4%BF%E0%A4%B2%E0%A4%BE%E0%A4%B2%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29/0106.05%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29%20Duel%20New%20Sangeet.mp3",
+      "size_mb": 14.9
+    },
+    {
+      "id": "s0043",
+      "title": "0106.06 आलोचना पाठ (वंदो पांचो परमगुरू) Gaurav Jain",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0106%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%9C%E0%A5%8B%E0%A4%B9%E0%A4%B0%E0%A4%BF%E0%A4%B2%E0%A4%BE%E0%A4%B2%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29/0106.06%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29%20Gaurav%20Jain.mp3",
+      "size_mb": 16.8
+    },
+    {
+      "id": "s0044",
+      "title": "0106.07 आलोचना पाठ (वंदो पांचो परमगुरू With Samaik (M)",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0106%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%9C%E0%A5%8B%E0%A4%B9%E0%A4%B0%E0%A4%BF%E0%A4%B2%E0%A4%BE%E0%A4%B2%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29/0106.07%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%20With%20Samaik%20%28M%29.mp3",
+      "size_mb": 2.1
+    },
+    {
+      "id": "s0045",
+      "title": "0106.08 आलोचना पाठ (वंदो पांचो परमगुरू) New Last  स्लो",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0106%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%9C%E0%A5%8B%E0%A4%B9%E0%A4%B0%E0%A4%BF%E0%A4%B2%E0%A4%BE%E0%A4%B2%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29/0106.08%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29%20New%20Last%20%20%E0%A4%B8%E0%A5%8D%E0%A4%B2%E0%A5%8B.mp3",
+      "size_mb": 20.6
+    },
+    {
+      "id": "s0046",
+      "title": "0106.09 आलोचना पाठ (वंदो पांचो परमगुरू) सुबह शाम पढ़ने सुनने से सभी दोषों और रुकावटों",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0106%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%9C%E0%A5%8B%E0%A4%B9%E0%A4%B0%E0%A4%BF%E0%A4%B2%E0%A4%BE%E0%A4%B2%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29/0106.09%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29%20%E0%A4%B8%E0%A5%81%E0%A4%AC%E0%A4%B9%20%E0%A4%B6%E0%A4%BE%E0%A4%AE%20%E0%A4%AA%E0%A5%9D%E0%A4%A8%E0%A5%87%20%E0%A4%B8%E0%A5%81%E0%A4%A8%E0%A4%A8%E0%A5%87%20%E0%A4%B8%E0%A5%87%20%E0%A4%B8%E0%A4%AD%E0%A5%80%20%E0%A4%A6%E0%A5%8B%E0%A4%B7%E0%A5%8B%E0%A4%82%20%E0%A4%94%E0%A4%B0%20%E0%A4%B0%E0%A5%81%E0%A4%95%E0%A4%BE%E0%A4%B5%E0%A4%9F%E0%A5%8B%E0%A4%82.mp3",
+      "size_mb": 16.1
+    },
+    {
+      "id": "s0047",
+      "title": "0106.10 आलोचना पाठ (वंदो पांचो परमगुरू) आलोचना पाठ नेहा भजन",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0106%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%9C%E0%A5%8B%E0%A4%B9%E0%A4%B0%E0%A4%BF%E0%A4%B2%E0%A4%BE%E0%A4%B2%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29/0106.10%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%A8%E0%A5%87%E0%A4%B9%E0%A4%BE%20%E0%A4%AD%E0%A4%9C%E0%A4%A8.mp3",
+      "size_mb": 9.3
+    },
+    {
+      "id": "s0048",
+      "title": "0106.11 आलोचना पाठ मराठी चाटी Kari Alochna New CORUS 2912",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0106%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%9C%E0%A5%8B%E0%A4%B9%E0%A4%B0%E0%A4%BF%E0%A4%B2%E0%A4%BE%E0%A4%B2%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29/0106.11%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AE%E0%A4%B0%E0%A4%BE%E0%A4%A0%E0%A5%80%20%E0%A4%9A%E0%A4%BE%E0%A4%9F%E0%A5%80%20Kari%20Alochna%20New%20CORUS%202912.mp3",
+      "size_mb": 10.6
+    },
+    {
+      "id": "s0049",
+      "title": "0101.01 णमोकार महामंत्र (चत्तारी मंगल ऐसो पंच) KORAS ✱",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101.01%20%E0%A4%A3%E0%A4%AE%E0%A5%8B%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%20%28%E0%A4%9A%E0%A4%A4%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%B0%E0%A5%80%20%E0%A4%AE%E0%A4%82%E0%A4%97%E0%A4%B2%20%E0%A4%90%E0%A4%B8%E0%A5%8B%20%E0%A4%AA%E0%A4%82%E0%A4%9A%29%20KORAS%20%E2%9C%B1.mp3",
+      "size_mb": 1.1
+    },
+    {
+      "id": "s0050",
+      "title": "0101.02 नवकार मंत्र जाप 108 बार CA Anjali Jain ✱",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0101.02%20%E0%A4%A8%E0%A4%B5%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%20%E0%A4%9C%E0%A4%BE%E0%A4%AA%20108%20%E0%A4%AC%E0%A4%BE%E0%A4%B0%20CA%20Anjali%20Jain%20%E2%9C%B1.mp3",
+      "size_mb": 88.4
+    },
+    {
+      "id": "s0051",
+      "title": "0102.01 प्रातःकाल उठकर यह बोले जैन विधि से NAMOSTU Sup",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0102.01%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%89%E0%A4%A0%E0%A4%95%E0%A4%B0%20%E0%A4%AF%E0%A4%B9%20%E0%A4%AC%E0%A5%8B%E0%A4%B2%E0%A5%87%20%E0%A4%9C%E0%A5%88%E0%A4%A8%20%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BF%20%E0%A4%B8%E0%A5%87%20NAMOSTU%20Sup.mp3",
+      "size_mb": 4.8
+    },
+    {
+      "id": "s0052",
+      "title": "0102.02 प्रातःकालीन जैन वंदना सिद्ध शिला पर विराजमान F SUP N ✽",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0102.02%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%9C%E0%A5%88%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%20F%20SUP%20N%20%E2%9C%BD.mp3",
+      "size_mb": 7.3
+    },
+    {
+      "id": "s0053",
+      "title": "0102.03 प्रातःकालीन वंदना सिद्ध शिला पर विराजमान BhaktamberFoun NM SUP ✽",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0102.03%20%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%A4%E0%A4%83%E0%A4%95%E0%A4%BE%E0%A4%B2%E0%A5%80%E0%A4%A8%20%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%E0%A4%B8%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%20%E0%A4%B6%E0%A4%BF%E0%A4%B2%E0%A4%BE%20%E0%A4%AA%E0%A4%B0%20%E0%A4%B5%E0%A4%BF%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A4%AE%E0%A4%BE%E0%A4%A8%20BhaktamberFoun%20NM%20SUP%20%E2%9C%BD.mp3",
+      "size_mb": 9.0
+    },
+    {
+      "id": "s0054",
+      "title": "0102.04 गणधरवलय रिद्धि मंत्र स्वर आर्यिका सुस्वरमती माताजी Sup",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0102.04%20%E0%A4%97%E0%A4%A3%E0%A4%A7%E0%A4%B0%E0%A4%B5%E0%A4%B2%E0%A4%AF%20%E0%A4%B0%E0%A4%BF%E0%A4%A6%E0%A5%8D%E0%A4%A7%E0%A4%BF%20%E0%A4%AE%E0%A4%82%E0%A4%A4%E0%A5%8D%E0%A4%B0%20%E0%A4%B8%E0%A5%8D%E0%A4%B5%E0%A4%B0%20%E0%A4%86%E0%A4%B0%E0%A5%8D%E0%A4%AF%E0%A4%BF%E0%A4%95%E0%A4%BE%20%E0%A4%B8%E0%A5%81%E0%A4%B8%E0%A5%8D%E0%A4%B5%E0%A4%B0%E0%A4%AE%E0%A4%A4%E0%A5%80%20%E0%A4%AE%E0%A4%BE%E0%A4%A4%E0%A4%BE%E0%A4%9C%E0%A5%80%20Sup.mp3",
+      "size_mb": 6.7
+    },
+    {
+      "id": "s0055",
+      "title": "0104.01 आप चारों दिशाओं में किसको नमस्कार करते हैं",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0104.01%20%E0%A4%86%E0%A4%AA%20%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A5%8B%E0%A4%82%20%E0%A4%A6%E0%A4%BF%E0%A4%B6%E0%A4%BE%E0%A4%93%E0%A4%82%20%E0%A4%AE%E0%A5%87%E0%A4%82%20%E0%A4%95%E0%A4%BF%E0%A4%B8%E0%A4%95%E0%A5%8B%20%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%BE%E0%A4%B0%20%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A5%87%20%E0%A4%B9%E0%A5%88%E0%A4%82.mp3",
+      "size_mb": 0.7
+    },
+    {
+      "id": "s0056",
+      "title": "0104.02 सामायिक दिग्वंदना (प्राग्दिग्विदिगंतरत केवली )",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0104.02%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%97%E0%A5%8D%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%BF%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A4%82%E0%A4%A4%E0%A4%B0%E0%A4%A4%20%E0%A4%95%E0%A5%87%E0%A4%B5%E0%A4%B2%E0%A5%80%20%29.mp3",
+      "size_mb": 5.1
+    },
+    {
+      "id": "s0057",
+      "title": "0105.01 सामायिक पाठ भाषा (काल अनंत..) Jain Sangrah 9.40",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0105.01%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29%20Jain%20Sangrah%209.40.mp3",
+      "size_mb": 8.9
+    },
+    {
+      "id": "s0058",
+      "title": "0105.02 सामायिक पाठ भाषा (काल अनंत..) (M) Sup",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0105.02%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE%20%28%E0%A4%95%E0%A4%BE%E0%A4%B2%20%E0%A4%85%E0%A4%A8%E0%A4%82%E0%A4%A4..%29%20%28M%29%20Sup.mp3",
+      "size_mb": 11.5
+    },
+    {
+      "id": "s0059",
+      "title": "0106.01 आलोचना पाठ (वंदो पांचो परमगुरू) DUEL NEW",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0106.01%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29%20DUEL%20NEW.mp3",
+      "size_mb": 16.5
+    },
+    {
+      "id": "s0060",
+      "title": "0106.02 आलोचना पाठ (वंदो पांचो परमगुरू) Duel M NEW",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0106.02%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%28%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A5%8B%20%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A%E0%A5%8B%20%E0%A4%AA%E0%A4%B0%E0%A4%AE%E0%A4%97%E0%A5%81%E0%A4%B0%E0%A5%82%29%20Duel%20M%20NEW.mp3",
+      "size_mb": 17.2
+    },
+    {
+      "id": "s0061",
+      "title": "0106.11 आलोचना पाठ मराठी चाटी Kari Alochna New CORUS 2912",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0106.11%20%E0%A4%86%E0%A4%B2%E0%A5%8B%E0%A4%9A%E0%A4%A8%E0%A4%BE%20%E0%A4%AA%E0%A4%BE%E0%A4%A0%20%E0%A4%AE%E0%A4%B0%E0%A4%BE%E0%A4%A0%E0%A5%80%20%E0%A4%9A%E0%A4%BE%E0%A4%9F%E0%A5%80%20Kari%20Alochna%20New%20CORUS%202912.mp3",
+      "size_mb": 10.6
+    }
+  ]
 }

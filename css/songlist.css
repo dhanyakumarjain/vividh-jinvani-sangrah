@@ -18,6 +18,28 @@
 .search-input::placeholder { color: var(--text-dim); }
 .search-input:focus { border-color: var(--accent); }
 
+/* ==================== SECTION HEADER ==================== */
+.section-header {
+  padding: 0.8rem 0.7rem 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+  margin-top: 0.5rem;
+  margin-bottom: 0.3rem;
+  background: var(--bg-card);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  cursor: default;
+}
+
+.section-header:first-child {
+  margin-top: 0;
+}
+
 /* ==================== PLAYLIST / SONG LIST ==================== */
 .playlist-list {
   list-style: none;
