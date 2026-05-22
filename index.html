@@ -15,7 +15,7 @@
   gtag('config', 'G-BD4VBH0SJT');
 </script>
 </head>
-<body data-scheme="fire" data-mode="dark">
+<body data-scheme="lotus" data-mode="light">
 
   <div class="player">
     <div class="player-header">
@@ -113,8 +113,15 @@
       </div>
       <div class="modal-body">
         <div class="s-section">
-          <h4>Theme</h4>
-          <div class="theme-options" id="themeOptions"></div>
+          <h4>Data</h4>
+          <div class="data-btns">
+            <button class="btn" id="btnExport">&#8595; Export</button>
+            <button class="btn" id="btnImport">&#8593; Import</button>
+            <button class="btn btn-danger" id="btnClearData">&#128465; Clear Playlists</button>
+            <input type="file" id="importFile" accept=".json" hidden>
+          </div>
+          <p class="hint">Export/import favorites, playlists, history &amp; preferences.</p>
+          <p class="hint">Clear Playlists: Deletes user-created playlists, favorites, and history.</p>
         </div>
         <div class="s-section">
           <h4>Mode</h4>
@@ -124,19 +131,12 @@
           </div>
         </div>
         <div class="s-section">
-          <h4>Data</h4>
-          <div class="data-btns">
-            <button class="btn" id="btnExport">&#8595; Export</button>
-            <button class="btn" id="btnImport">&#8593; Import</button>
-            <button class="btn btn-danger" id="btnClearData">&#128465; Clear All</button>
-            <input type="file" id="importFile" accept=".json" hidden>
-          </div>
-          <p class="hint">Export/import favorites, playlists, history &amp; preferences.</p>
-          <p class="hint">Clear All: Deletes user-created playlists, favorites, and history.</p>
+          <h4>Theme</h4>
+          <div class="theme-options" id="themeOptions"></div>
         </div>
         <div class="version-info" id="versionInfo">
           <span class="version-label">Last Updated:</span>
-          <span class="version-date" id="versionDate">Loading...</span>
+          <span class="version-date" id="versionDate"><strong>Loading...</strong></span>
         </div>
       </div>
     </div>

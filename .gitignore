@@ -105,14 +105,34 @@ config.local.json
 secrets.json
 
 # ==================== PROJECT SPECIFIC ====================
+# Ignore backup folders
+*backup*/
+*-backup-*/
+media-backup*/
+
+# Ignore test files
+test-*.html
+test-*.js
+*-test.html
+
+# Ignore unrelated scripts
+Windows-Optimizer*.ps1
+*.exe
+
 # Ignore player image working files (keep only final versions)
-player image/*.psd
-player image/*.ai
-player image/*.xcf
+player image/
+*.psd
+*.ai
+*.xcf
 
 # Python script outputs
 mp3-management/python/*.pyc
 mp3-management/python/__pycache__/
+
+# Ignore cleanup and temporary documentation
+CLEANUP_PLAN.txt
+*-OLD.md
+*-DEPRECATED.md
 
 # ==================== KEEP THESE ====================
 # Force include important files even if they match patterns above

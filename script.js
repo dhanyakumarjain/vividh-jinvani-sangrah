@@ -24,7 +24,7 @@ let state = {
 let favorites = [];
 let playlists = [];
 let recentlyPlayed = [];
-let theme = { scheme: 'fire', mode: 'dark' };
+let theme = { scheme: 'lotus', mode: 'light' };
 let addToPlaylistSongId = null;
 let editingPlaylistId = null;
 let deletingPlaylistId = null;
@@ -1519,7 +1519,7 @@ function displayLastUpdated(dateString) {
   if (!versionDateEl) return;
   
   if (!dateString) {
-    versionDateEl.textContent = 'Unknown';
+    versionDateEl.innerHTML = '<strong>Unknown</strong>';
     return;
   }
   
@@ -1532,9 +1532,10 @@ function displayLastUpdated(dateString) {
       hour: '2-digit',
       minute: '2-digit'
     };
-    versionDateEl.textContent = date.toLocaleDateString('en-US', options);
+    const formattedDate = date.toLocaleDateString('en-US', options);
+    versionDateEl.innerHTML = `<strong>${formattedDate}</strong>`;
   } catch (e) {
-    versionDateEl.textContent = dateString;
+    versionDateEl.innerHTML = `<strong>${dateString}</strong>`;
   }
 }
 
