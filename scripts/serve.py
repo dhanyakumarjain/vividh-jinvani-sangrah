@@ -17,6 +17,18 @@ class RangeHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def end_headers(self):
         # Add CORS headers if needed
         self.send_header('Accept-Ranges', 'bytes')
+        
+        # Add cache control headers for data files
+        path = self.translate_path(self.path)
+        if path.endswith(('.json', '.html', '.js', '.css')):
+            # Don't cache data files and code - always check for updates
+            self.send_header('Cache-Control', 'no-cache, must-revalidate')
+            self.send_header('Pragma', 'no-cache')
+            self.send_header('Expires', '0')
+        elif path.endswith(('.mp3', '.m4a', '.mp4', '.jpg', '.png', '.gif')):
+            # Cache media files for 1 hour (they don't change often)
+            self.send_header('Cache-Control', 'public, max-age=3600')
+        
         super().end_headers()
     
     def send_head(self):

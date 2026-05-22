@@ -28,6 +28,7 @@ let theme = { scheme: 'fire', mode: 'dark' };
 let addToPlaylistSongId = null;
 let editingPlaylistId = null;
 let deletingPlaylistId = null;
+let currentDataVersion = null; // Track current data version
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
@@ -43,16 +44,26 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupEvents();
   restoreState();
   fetchLastUpdated();
+  
+  // Start checking for data updates every 30 seconds
+  startDataUpdateChecker();
 });
 
 // ==================== SONGS ====================
 
 async function loadSongs() {
   try {
-    const [config, songData, playlistData] = await Promise.all([
-      fetch('data/config.json').then(r => r.json()),
-      fetch('data/songs.json').then(r => r.json()),
-      fetch('data/playlists.json').then(r => r.json()),
+    // Add cache-busting parameter to force reload when data changes
+    // First, fetch config to get lastUpdated timestamp
+    const configResponse = await fetch(`data/config.json?t=${Date.now()}`);
+    const config = await configResponse.json();
+    
+    // Use lastUpdated as cache buster for other files
+    const cacheBuster = config.lastUpdated || Date.now();
+    
+    const [songData, playlistData] = await Promise.all([
+      fetch(`data/songs.json?v=${cacheBuster}`).then(r => r.json()),
+      fetch(`data/playlists.json?v=${cacheBuster}`).then(r => r.json()),
     ]);
 
     songs = songData.songs || [];
@@ -1526,3 +1537,82 @@ function displayLastUpdated(dateString) {
     versionDateEl.textContent = dateString;
   }
 }
+
+// ==================== AUTO UPDATE CHECKER ====================
+
+function startDataUpdateChecker() {
+  // Check for updates every 30 seconds
+  setInterval(checkForDataUpdates, 30000);
+}
+
+async function checkForDataUpdates() {
+  try {
+    // Fetch config with cache buster to get latest version
+    const response = await fetch(`data/config.json?t=${Date.now()}`);
+    if (!response.ok) return;
+    
+    const data = await response.json();
+    const latestVersion = data.lastUpdated;
+    
+    // If this is first check, just store the version
+    if (!currentDataVersion) {
+      currentDataVersion = latestVersion;
+      return;
+    }
+    
+    // If version changed, show update notification
+    if (latestVersion && latestVersion !== currentDataVersion) {
+      showUpdateNotification();
+    }
+  } catch (e) {
+    console.error('Error checking for updates:', e);
+  }
+}
+
+function showUpdateNotification() {
+  // Create notification element if it doesn't exist
+  let notification = document.getElementById('updateNotification');
+  
+  if (!notification) {
+    notification = document.createElement('div');
+    notification.id = 'updateNotification';
+    notification.className = 'update-notification';
+    notification.innerHTML = `
+      <div class="update-content">
+        <span class="update-icon">🔄</span>
+        <span class="update-text">New songs available!</span>
+        <button class="update-btn" onclick="reloadPage()">Refresh Now</button>
+        <button class="update-close" onclick="closeUpdateNotification()">×</button>
+      </div>
+    `;
+    document.body.appendChild(notification);
+  }
+  
+  // Show notification with animation
+  setTimeout(() => notification.classList.add('show'), 100);
+  
+  // Track update notification shown
+  trackEvent('update_notification_shown', {
+    old_version: currentDataVersion,
+    new_version: 'detected'
+  });
+}
+
+function closeUpdateNotification() {
+  const notification = document.getElementById('updateNotification');
+  if (notification) {
+    notification.classList.remove('show');
+    setTimeout(() => notification.remove(), 300);
+  }
+}
+
+function reloadPage() {
+  // Track reload action
+  trackEvent('manual_reload', {
+    source: 'update_notification'
+  });
+  
+  // Reload page to get new data
+  window.location.reload(true);
+}
+
