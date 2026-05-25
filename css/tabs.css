@@ -85,8 +85,10 @@
 
 .dd-new {
   color: var(--accent);
-  border-top: 1px solid var(--border);
-  margin-top: 2px;
 }
 
-#ddPlaylistList:empty + .dd-new { border-top: none; margin-top: 0; }
+.dd-new + #ddPlaylistList:not(:empty) {
+  border-top: 1px solid var(--border);
+  margin-top: 2px;
+  padding-top: 2px;
+}

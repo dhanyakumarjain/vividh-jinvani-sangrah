@@ -109,14 +109,6 @@ async function loadSongs() {
       sub.classList.add('visible');
     }
 
-    if (config.spiritualCaption1 || config.spiritualCaption2) {
-      const caption = $('#spiritualCaption');
-      const line1 = config.spiritualCaption1 || '';
-      const line2 = config.spiritualCaption2 || '';
-      caption.innerHTML = `${line1}<br>${line2}`;
-      caption.classList.add('visible');
-    }
-
     if (config.logo) {
       const logo = $('#playerLogo');
       logo.src = config.logo;
@@ -1061,18 +1053,70 @@ function addToRecent(songId) {
   if (state.activeView === 'recent') renderView();
 }
 
+// ==================== DOWNLOAD ====================
+
+function getSongDownloadName(song) {
+  try {
+    const fromUrl = decodeURIComponent(new URL(song.file).pathname.split('/').pop() || '');
+    if (/\.(mp3|m4a|wav|ogg)$/i.test(fromUrl)) return fromUrl;
+  } catch (_) {}
+  const safe = (song.title || 'song').replace(/[<>:"/\\|?*\x00-\x1f]/g, '_').trim() || 'song';
+  return `${safe}.mp3`;
+}
+
+async function downloadSong(songId) {
+  const song = getSong(songId);
+  if (!song?.file) {
+    showError('Song file not found.');
+    return;
+  }
+  if (song.available === false) {
+    showError(`"${song.title}" is not available to download.`);
+    return;
+  }
+
+  const filename = getSongDownloadName(song);
+  showError('Preparing download…');
+
+  const triggerDownload = (href, blobUrl) => {
+    const a = document.createElement('a');
+    a.href = href;
+    a.download = filename;
+    a.rel = 'noopener';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    if (blobUrl) URL.revokeObjectURL(blobUrl);
+    showError('');
+    trackEvent('download_song', { song_id: songId, song_title: song.title });
+  };
+
+  try {
+    const res = await fetch(song.file);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const blob = await res.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    triggerDownload(blobUrl, blobUrl);
+  } catch {
+    triggerDownload(song.file);
+  }
+}
+
 // ==================== CONTEXT MENUS ====================
 
 function showSongCtx(event, songId, isPlView) {
   const menu = $('#contextMenu');
-  let html = `<button class="ctx-item" data-action="add" data-sid="${songId}">+ Add to Playlist</button>`;
+  let html = `<button class="ctx-item" data-action="download" data-sid="${songId}">&#11015; Download</button>`;
+  html += `<button class="ctx-item" data-action="add" data-sid="${songId}">+ Add to Playlist</button>`;
   const activePl = playlists.find(p => p.id === state.activePlaylistId);
   if (isPlView && state.activePlaylistId && activePl && !activePl.seeded)
     html += `<button class="ctx-item danger" data-action="remove" data-sid="${songId}">Remove from Playlist</button>`;
   menu.innerHTML = html;
   menu.querySelectorAll('.ctx-item').forEach(b => b.addEventListener('click', () => {
-    if (b.dataset.action === 'add') openAddToPL(b.dataset.sid);
-    else removeSongFromPL(state.activePlaylistId, b.dataset.sid);
+    const { action, sid } = b.dataset;
+    if (action === 'download') downloadSong(sid);
+    else if (action === 'add') openAddToPL(sid);
+    else removeSongFromPL(state.activePlaylistId, sid);
     closeCtx();
   }));
   posCtx(menu, event);
@@ -1094,7 +1138,7 @@ function posCtx(menu, e) {
   
   // Get menu dimensions
   const menuWidth = 180; // Approximate width
-  const menuHeight = 100; // Approximate height
+  const menuHeight = Math.min(220, 44 * menu.querySelectorAll('.ctx-item').length + 16);
   
   // Calculate position
   let left = e.clientX;
