@@ -47,6 +47,7 @@ body {
   justify-content: space-between;
   margin-bottom: 1.2rem;
   gap: 12px;
+  position: relative;
 }
 
 /* ==================== SPIRITUAL ARTWORK ==================== */
@@ -63,7 +64,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .spiritual-image {
@@ -72,6 +73,7 @@ body {
   object-fit: contain;
   transition: transform 0.3s ease;
   animation: fadeIn 0.6s ease-in;
+  filter: drop-shadow(0 4px 12px var(--shadow));
 }
 
 .spiritual-image:hover {
@@ -79,14 +81,16 @@ body {
 }
 
 .spiritual-caption {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   color: var(--spiritual-caption, var(--text-secondary));
   text-align: center;
-  line-height: 1.2;
+  line-height: 1.45;
   margin: 0;
   display: none;
-  max-width: 110px;
+  max-width: 130px;
   word-wrap: break-word;
+  letter-spacing: 0.02em;
+  font-weight: 500;
 }
 
 .spiritual-caption.visible {
@@ -1119,153 +1123,185 @@ body {
   }
 }
 
-/* ==================== RESPONSIVE TITLE ==================== */
+/* ==================== TABLET & MOBILE HOME HERO ==================== */
+
+@media (max-width: 900px) {
+  body {
+    align-items: flex-start;
+    padding: max(0.75rem, env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right))
+      max(0.75rem, env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-left));
+  }
+
+  .player {
+    max-width: 100%;
+    border-radius: 20px;
+    padding: 1.35rem 1.15rem 1.5rem;
+  }
+
+  .player-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.85rem;
+    margin-bottom: 1.35rem;
+    padding-top: 2.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .player-header .icon-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+    z-index: 2;
+  }
+
+  .spiritual-artwork {
+    width: 100%;
+    margin: 0;
+    justify-content: center;
+  }
+
+  .spiritual-artwork-wrap {
+    width: 100%;
+    max-width: 320px;
+    gap: 10px;
+    padding: 1rem 1.1rem 0.85rem;
+    border-radius: 14px;
+    background: var(--bg-accent-area);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 16px var(--shadow);
+  }
+
+  .spiritual-image {
+    height: 145px;
+  }
+
+  .spiritual-image:hover {
+    transform: none;
+  }
+
+  .spiritual-caption {
+    max-width: 100%;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    padding: 0 0.25rem;
+  }
+
+  .player-title-wrap {
+    width: 100%;
+    align-items: center;
+    padding-top: 0;
+    gap: 4px;
+  }
+
+  .player-title-row {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .player-title,
+  .player-title2 {
+    white-space: normal;
+    text-wrap: balance;
+    line-height: 1.35;
+  }
+
+  .player-subtitle.visible {
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 
 @media (max-width: 600px) {
-  .spiritual-artwork {
-    margin-left: -10px;
-    margin-right: 8px;
+  .spiritual-artwork-wrap {
+    max-width: 100%;
   }
-  
+
   .spiritual-image {
-    height: 110px;
+    height: 130px;
   }
-  
+
   .player-title,
   .player-title2 {
-    font-size: 1.15rem;
+    font-size: 1.12rem;
   }
 }
 
-@media (max-width: 520px) {
-  .spiritual-artwork {
-    margin-left: -15px;
-    margin-right: 6px;
+@media (max-width: 480px) {
+  .player {
+    padding: 1.2rem 0.95rem 1.35rem;
+    border-radius: 18px;
   }
-  
-  .spiritual-image {
-    height: 100px;
-  }
-  
-  .player-title,
-  .player-title2 {
-    font-size: 1.1rem;
-  }
-  
-  .player-title-row {
-    gap: 6px;
-  }
-}
 
-@media (max-width: 450px) {
-  .spiritual-artwork {
-    margin-left: -20px;
-    margin-right: 5px;
+  .player-header {
+    padding-top: 2rem;
+    gap: 0.7rem;
+    margin-bottom: 1.2rem;
   }
-  
+
+  .spiritual-artwork-wrap {
+    padding: 0.85rem 0.9rem 0.75rem;
+    border-radius: 12px;
+  }
+
   .spiritual-image {
-    height: 90px;
+    height: 120px;
   }
-  
+
+  .spiritual-caption {
+    font-size: 0.74rem;
+  }
+
   .player-title,
   .player-title2 {
     font-size: 1.05rem;
-    letter-spacing: 0.4px;
   }
-  
-  .player-title-row {
-    gap: 5px;
-  }
-}
 
-@media (max-width: 400px) {
-  .spiritual-artwork {
-    margin-left: -25px;
-    margin-right: 4px;
-  }
-  
-  .spiritual-image {
-    height: 85px;
-  }
-  
-  .player-title,
-  .player-title2 {
-    font-size: 1rem;
-    letter-spacing: 0.3px;
-  }
-  
-  .player-header .icon-btn {
-    width: 30px;
-    height: 30px;
-    font-size: 1.1rem;
+  .player-subtitle.visible {
+    font-size: 0.76rem;
   }
 }
 
 @media (max-width: 360px) {
-  .spiritual-artwork {
-    margin-left: -30px;
-    margin-right: 3px;
-  }
-  
   .spiritual-image {
-    height: 80px;
+    height: 108px;
   }
-  
+
   .player-title,
   .player-title2 {
-    font-size: 0.95rem;
-    letter-spacing: 0.2px;
+    font-size: 0.98rem;
   }
-  
-  .player-title-row {
-    gap: 4px;
-  }
-  
-  .player-header .icon-btn {
-    width: 28px;
-    height: 28px;
-    font-size: 1rem;
-  }
-  
-  /* Adjust control buttons for very small screens */
+
   .controls {
     gap: 0.9rem;
   }
-  
+
   .ctrl-btn {
     width: 48px;
     height: 48px;
   }
-  
+
   .ctrl-btn.small {
     width: 42px;
     height: 42px;
   }
-  
+
   .play-btn {
     width: 60px;
     height: 60px;
   }
-  
+
   .ctrl-label {
     font-size: 0.6rem;
-  }
-}
-
-@media (max-width: 340px) {
-  .spiritual-artwork {
-    margin-left: -35px;
-    margin-right: 2px;
-  }
-  
-  .spiritual-image {
-    height: 75px;
-  }
-  
-  .player-title,
-  .player-title2 {
-    font-size: 0.9rem;
-    letter-spacing: 0.1px;
   }
 }
 
@@ -1325,18 +1361,6 @@ body {
     font-size: 0.65rem;
     letter-spacing: 0.3px;
     font-weight: 700;
-  }
-  
-  .player-header {
-    gap: 8px;
-  }
-  
-  .spiritual-image {
-    height: 100px;
-  }
-  
-  .player-title {
-    font-size: 1.1rem;
   }
   
   /* Larger progress bar for easier interaction */
