@@ -43,11 +43,11 @@ body {
 
 .player-header {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
+  gap: 8px;
   margin-bottom: 0.75rem;
   position: relative;
-  padding-right: 36px;
   min-height: 0;
 }
 
@@ -103,14 +103,16 @@ body {
   align-items: center;
   justify-content: center;
   gap: 2px;
-  grid-column: 1 / -1;
+  grid-column: 2;
   grid-row: 1;
-  justify-self: center;
+  justify-self: stretch;
+  align-self: center;
   text-align: center;
   min-width: 0;
-  max-width: calc(100% - 2.5rem);
-  padding: 0 0.5rem;
-  margin-left: 13ch;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 0.35rem;
+  margin: 0;
   pointer-events: none;
 }
 
@@ -178,13 +180,11 @@ body {
 }
 
 .player-header .icon-btn {
-  grid-column: 2;
+  grid-column: 3;
   grid-row: 1;
   justify-self: end;
   align-self: start;
-  position: absolute;
-  top: 0;
-  right: 0;
+  position: relative;
   font-size: 1.15rem;
   color: var(--text-secondary);
   width: 32px;
@@ -1177,9 +1177,11 @@ body {
     height: 88px;
   }
 
+  .player-header {
+    gap: 6px;
+  }
+
   .player-title-wrap {
-    margin-left: 0;
-    max-width: calc(100% - 5.5rem);
     padding-left: 0.25rem;
     padding-right: 0.25rem;
     gap: 3px;
@@ -1228,15 +1230,11 @@ body {
 
   .player-header {
     margin-bottom: 0.55rem;
-    padding-right: 34px;
+    gap: 5px;
   }
 
   .spiritual-image {
     height: 80px;
-  }
-
-  .player-title-wrap {
-    max-width: calc(100% - 5rem);
   }
 
   .player-title,
