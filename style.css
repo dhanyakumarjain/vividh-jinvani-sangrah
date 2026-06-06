@@ -516,6 +516,17 @@ body {
   transform: scale(1.05);
 }
 
+/* #9 — Pulse glow animation when playing */
+@keyframes playPulse {
+  0%   { box-shadow: 0 6px 16px rgba(0,0,0,0.4), 0 0 0 2px var(--accent), 0 0 0 4px var(--accent-dim); }
+  50%  { box-shadow: 0 6px 20px rgba(0,0,0,0.4), 0 0 0 2px var(--accent), 0 0 0 10px transparent, 0 0 24px var(--accent-glow); }
+  100% { box-shadow: 0 6px 16px rgba(0,0,0,0.4), 0 0 0 2px var(--accent), 0 0 0 4px var(--accent-dim); }
+}
+
+.play-btn.playing {
+  animation: playPulse 2s ease-in-out infinite;
+}
+
 /* ==================== VOLUME ==================== */
 
 .volume-row {
@@ -626,13 +637,30 @@ body {
 .tab {
   flex: 1;
   padding: 8px 4px;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 600;
   color: var(--text-secondary);
   border-bottom: 2px solid transparent;
   text-align: center;
   transition: color 0.15s, border-color 0.15s;
   white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+}
+
+.tab svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+
+.tab span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .tab:hover { color: var(--text); }
@@ -781,6 +809,27 @@ body {
   padding-left: 2rem;
 }
 
+/* #4 — Active (playing) song always scrolls its title */
+.song-item.active .name-inner {
+  animation: scrollLeftContinuous 12s linear infinite;
+  animation-delay: 0.8s;
+}
+
+.song-item.active .name-inner::after {
+  content: '  •  ' attr(data-text);
+  padding-left: 2rem;
+}
+
+/* #5 — Song duration badge */
+.song-dur {
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  min-width: 2.4rem;
+  text-align: right;
+}
+
 .song-item .badge-na {
   font-size: 0.6rem;
   background: var(--bg-accent-area);
@@ -920,6 +969,13 @@ body {
 }
 
 .modal-header h3 { font-size: 0.9rem; font-weight: 700; }
+
+.settings-author {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #6B2D0E;
+  padding-left: 2.5rem;
+}
 
 .modal-close { font-size: 1.2rem; color: var(--text-secondary); }
 .modal-close:hover { color: var(--text); }

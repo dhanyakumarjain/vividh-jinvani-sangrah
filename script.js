@@ -33,14 +33,57 @@ let currentDataVersion = null; // Track current data version
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
 
+// ==================== SORT UTILITY ====================
+// Sorts song titles: numeric prefixes (0101.01, 104.01 ...) in ascending
+// numeric order, then non-numeric titles alphabetically after all numbers.
+// A "numeric prefix" is the leading digit block before any space/letter, e.g.
+//   "0101.01 सामायिक..."  → key 101.01
+//   "104.01 ..."          → key 104.01
+//   "धीमी आवाज़..."        → no key → pushed to end
+function parseSongSortKey(title) {
+  const m = (title || '').match(/^(\d+(?:\.\d+)?)/);
+  return m ? parseFloat(m[1]) : null;
+}
+
+function compareSongTitles(a, b) {
+  const ka = parseSongSortKey(a.title);
+  const kb = parseSongSortKey(b.title);
+  if (ka !== null && kb !== null) {
+    if (ka !== kb) return ka - kb;
+    // Same numeric prefix → fall back to full title string compare
+    return (a.title || '').localeCompare(b.title || '');
+  }
+  // One has a number, the other doesn't → numbered comes first
+  if (ka !== null) return -1;
+  if (kb !== null) return 1;
+  // Both non-numeric → alphabetical
+  return (a.title || '').localeCompare(b.title || '');
+}
+
 // ==================== INIT ====================
 
 document.addEventListener('DOMContentLoaded', async () => {
   loadFromStorage();
+  // #8 — First-time visitors get Lavender light as default
+  if (!localStorage.getItem(STORAGE.THEME)) {
+    theme = { scheme: 'lavender', mode: 'light' };
+  }
   applyTheme();
   await loadSongs();
+  
+  // Default to Super Songs playlist on every page load
+  const superPl = playlists.find(p => p.name === '0000 Super Songs');
+  if (superPl) {
+    state.activeView = 'playlist';
+    state.activePlaylistId = superPl.id;
+  } else {
+    state.activeView = 'library';
+    state.activePlaylistId = null;
+  }
+  
   renderView();
   setupControls();
+  setupSwipeGestures(); // #6
   setupEvents();
   restoreState();
   fetchLastUpdated();
@@ -68,29 +111,23 @@ async function loadSongs() {
 
     songs = songData.songs || [];
 
-    // Remove duplicate songs based on filename only (not full path)
-    // This handles cases where same file exists in root and in folders
+    // Remove duplicate songs based on full file path
+    // (using filename-only dedup would wrongly drop songs in new folders
+    //  that share a filename with a song in another folder)
     const uniqueSongs = [];
-    const seenFilenames = new Set();
+    const seenPaths = new Set();
     
     for (const song of songs) {
-      // Extract just the filename from the path (after last slash)
-      const filename = song.file.split('/').pop();
-      
-      if (!seenFilenames.has(filename)) {
-        seenFilenames.add(filename);
+      if (!seenPaths.has(song.file)) {
+        seenPaths.add(song.file);
         uniqueSongs.push(song);
       }
     }
     
     songs = uniqueSongs;
 
-    // Sort songs alphabetically by title (case-insensitive)
-    songs.sort((a, b) => {
-      const titleA = (a.title || '').toLowerCase();
-      const titleB = (b.title || '').toLowerCase();
-      return titleA.localeCompare(titleB);
-    });
+    // Sort songs: numeric prefixes in numeric order, non-numeric titles after
+    songs.sort(compareSongTitles);
 
     if (config.title) {
       $('#playerTitle').textContent = config.title;
@@ -158,10 +195,79 @@ async function loadSongs() {
 
     // Mark all songs as available by default (check on play instead)
     songs.forEach(s => s.available = true);
+
+    // #5 — lazy-load durations in background (batched, non-blocking)
+    loadDurationsLazily();
   } catch { songs = []; }
 }
 
 function getSong(id) { return songs.find(s => s.id === id); }
+
+// #5 — Load song durations lazily in small batches to avoid blocking
+function loadDurationsLazily() {
+  const pending = songs.filter(s => !s.duration || s.duration === 0);
+  if (!pending.length) return;
+  let i = 0;
+  function loadNext() {
+    if (i >= pending.length) return;
+    const batch = pending.slice(i, i + 3); // 3 at a time
+    i += 3;
+    let done = 0;
+    batch.forEach(song => {
+      const a = new Audio();
+      a.preload = 'metadata';
+      a.addEventListener('loadedmetadata', () => {
+        song.duration = a.duration;
+        // Update any visible duration span for this song
+        const span = document.querySelector(`.song-item[data-id="${song.id}"] .song-dur`);
+        if (span) span.textContent = fmt(a.duration);
+        else if (!span) {
+          // If no span yet, add it if the item exists
+          const li = document.querySelector(`.song-item[data-id="${song.id}"]`);
+          if (li) {
+            const nameEl = li.querySelector('.name');
+            if (nameEl && !li.querySelector('.song-dur')) {
+              const d = document.createElement('span');
+              d.className = 'song-dur';
+              d.textContent = fmt(a.duration);
+              nameEl.insertAdjacentElement('afterend', d);
+            }
+          }
+        }
+        done++;
+        if (done === batch.length) setTimeout(loadNext, 200);
+      }, { once: true });
+      a.addEventListener('error', () => {
+        done++;
+        if (done === batch.length) setTimeout(loadNext, 200);
+      }, { once: true });
+      a.src = song.file;
+    });
+  }
+  // Start after a short delay so it doesn't compete with initial render
+  setTimeout(loadNext, 1500);
+}
+
+// #6 — Swipe left/right on song list to skip next/prev
+function setupSwipeGestures() {
+  const el = $('#songList');
+  let startX = 0, startY = 0, startTime = 0;
+  el.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    startTime = Date.now();
+  }, { passive: true });
+  el.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+    const dt = Date.now() - startTime;
+    // Must be fast (<400ms), mostly horizontal (dx > dy), and long enough (>60px)
+    if (dt < 400 && Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0) nextSong();   // swipe left → next
+      else prevSong();           // swipe right → prev
+    }
+  }, { passive: true });
+}
 
 // ==================== PLAYBACK ====================
 
@@ -628,12 +734,14 @@ function updateNowPlaying() {
   const songNameEl = $('#songName');
   
   if (song) {
-    const songText = song.title + ' · ' + song.artist;
+    const songText = song.title + (song.artist ? ' · ' + song.artist : '');
     songNameEl.innerHTML = `<span class="song-name-inner" data-text="${songText.replace(/"/g, '&quot;')}">${songText}</span>`;
   } else {
     songNameEl.innerHTML = '&mdash;';
   }
   $('#btnPlay').innerHTML = state.isPlaying ? '&#9646;&#9646;' : '&#9654;';
+  // #9 — toggle pulse glow
+  $('#btnPlay').classList.toggle('playing', state.isPlaying);
   
   // Update play button label
   const playLabel = $('#btnPlay').parentElement.querySelector('.ctrl-label');
@@ -720,7 +828,25 @@ function renderView() {
   } else if (view === 'playlist') {
     const pl = playlists.find(p => p.id === state.activePlaylistId);
     if (!pl) { switchView('library'); return; }
-    renderSongItems(filterQ(pl.songIds.map(id => getSong(id)).filter(Boolean), q), 'Empty playlist.', true);
+    // Resolve song IDs → song objects, deduplicate by ID and title, then sort.
+    // Title dedup handles copies of the same file placed in multiple folders
+    // (e.g. a song in 0098 प्रातः that is also in its original folder — both
+    // end with ✽ so both land in Super Songs, but they sound identical).
+    // For user-ordered playlists (userOrdered:true), preserve the manual order.
+    const seenIds = new Set();
+    const seenTitles = new Set();
+    const plSongs = pl.songIds
+      .map(id => getSong(id))
+      .filter(s => {
+        if (!s || seenIds.has(s.id)) return false;
+        const titleKey = (s.title || '').trim().toLowerCase();
+        if (seenTitles.has(titleKey)) return false;
+        seenIds.add(s.id);
+        seenTitles.add(titleKey);
+        return true;
+      });
+    if (!pl.userOrdered) plSongs.sort(compareSongTitles);
+    renderSongItems(filterQ(plSongs, q), 'Empty playlist.', true);
   }
   buildQueue();
 }
@@ -746,10 +872,12 @@ function renderSongItems(list, emptyMsg, isPlView) {
     const active = state.currentSongId === s.id;
     const fav = favorites.includes(s.id);
     const na = !s.available;
-    const songText = `${s.title} · ${s.artist}`;
+    const songText = `${s.title}${s.artist ? ' · ' + s.artist : ''}`;
+    const durStr = s.duration && s.duration > 0 ? fmt(s.duration) : '';
     return `<li class="song-item${active ? ' active' : ''}${na ? ' unavailable' : ''}" data-id="${s.id}">
       <span class="idx">${active && state.isPlaying ? '&#9654;' : i + 1}</span>
       <span class="name"><span class="name-inner" data-text="${songText.replace(/"/g, '&quot;')}">${songText}</span></span>
+      ${durStr ? `<span class="song-dur">${durStr}</span>` : ''}
       ${na ? '<span class="badge-na">N/A</span>' : ''}
       <button class="icon-btn fav-btn${fav ? ' on' : ''}" data-fav="${s.id}">${fav ? '&#9829;' : '&#9825;'}</button>
       <button class="icon-btn menu-btn" data-menu="${s.id}" data-plv="${!!isPlView}">&#8943;</button>
@@ -757,6 +885,10 @@ function renderSongItems(list, emptyMsg, isPlView) {
   }).join('');
 
   attachListEvents();
+
+  // #3 — scroll active song into view after render
+  const activeEl = ul.querySelector('.song-item.active');
+  if (activeEl) activeEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 }
 
 function renderRecentItems(q) {
@@ -823,16 +955,38 @@ function updateList() {
     const active = li.dataset.id === state.currentSongId;
     li.classList.toggle('active', active);
     li.querySelector('.idx').innerHTML = active && state.isPlaying ? '&#9654;' : (i + 1);
+    // #3 — scroll active song into view smoothly
+    if (active) {
+      li.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
   });
 }
 
 function buildQueue() {
   if (state.activeView === 'library') currentQueue = songs.map(s => s.id);
-  else if (state.activeView === 'favorites') currentQueue = songs.filter(s => favorites.includes(s.id)).map(s => s.id);
+  else if (state.activeView === 'favorites') currentQueue = [...songs.filter(s => favorites.includes(s.id))].sort(compareSongTitles).map(s => s.id);
   else if (state.activeView === 'recent') currentQueue = recentlyPlayed.map(r => r.songId);
   else if (state.activeView === 'playlist') {
     const pl = playlists.find(p => p.id === state.activePlaylistId);
-    currentQueue = pl ? pl.songIds : [];
+    if (pl) {
+      // Use same dedup + sort as renderView for consistent queue order
+      const seenIds = new Set();
+      const seenTitles = new Set();
+      const plSongs = pl.songIds
+        .map(id => getSong(id))
+        .filter(s => {
+          if (!s || seenIds.has(s.id)) return false;
+          const titleKey = (s.title || '').trim().toLowerCase();
+          if (seenTitles.has(titleKey)) return false;
+          seenIds.add(s.id);
+          seenTitles.add(titleKey);
+          return true;
+        });
+      if (!pl.userOrdered) plSongs.sort(compareSongTitles);
+      currentQueue = plSongs.map(s => s.id);
+    } else {
+      currentQueue = [];
+    }
   }
   if (!currentQueue.length) currentQueue = songs.map(s => s.id);
 }
@@ -914,7 +1068,7 @@ function toggleFavorite(id) {
 // ==================== PLAYLISTS ====================
 
 function createPlaylist(name) {
-  const pl = { id: 'pl-' + Date.now(), name: name.trim(), songIds: [] };
+  const pl = { id: 'pl-' + Date.now(), name: name.trim(), songIds: [], userOrdered: true };
   playlists.push(pl);
   
   // Re-sort playlists: user playlists with 4-digit prefix first (sorted numerically), then seeded, then other user playlists
@@ -1370,7 +1524,7 @@ function loadFromStorage() {
       state.isMuted = s.isMuted || false;
       state.shuffle = s.shuffle || false;
       state.repeat = s.repeat || 'off';
-      // Always start with library view (All Songs) on page load
+      // View is set after loadSongs() to default to Super Songs
       state.activeView = 'library';
       state.activePlaylistId = null;
     }
@@ -1379,59 +1533,6 @@ function loadFromStorage() {
   try { playlists = JSON.parse(localStorage.getItem(STORAGE.PLAYLISTS)) || []; } catch { playlists = []; }
   try { recentlyPlayed = JSON.parse(localStorage.getItem(STORAGE.RECENT)) || []; } catch { recentlyPlayed = []; }
   try { const t = JSON.parse(localStorage.getItem(STORAGE.THEME)); if (t) theme = t; } catch {}
-}
-
-function exportSettings() {
-  const data = { exportedAt: new Date().toISOString(), version: 1,
-    state: { volume: state.volume, isMuted: state.isMuted, shuffle: state.shuffle, repeat: state.repeat },
-    favorites, playlists, recentlyPlayed, theme };
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
-  a.download = `musicbox-v2-backup-${new Date().toISOString().slice(0, 10)}.json`;
-  a.click();
-  
-  // Track settings export
-  trackEvent('settings_export', {
-    favorites_count: favorites.length,
-    playlists_count: playlists.filter(p => !p.seeded).length,
-    recent_count: recentlyPlayed.length
-  });
-}
-
-function importSettings(file) {
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    try {
-      const d = JSON.parse(e.target.result);
-      if (d.version !== 1) { alert('Incompatible version.'); return; }
-      if (d.favorites) { favorites = d.favorites; saveFavorites(); }
-      if (d.playlists) { playlists = d.playlists; savePlaylists(); }
-      if (d.recentlyPlayed) { recentlyPlayed = d.recentlyPlayed; saveRecent(); }
-      if (d.theme) { theme = d.theme; saveTheme(); applyTheme(); }
-      if (d.state) {
-        state.volume = d.state.volume ?? state.volume;
-        state.isMuted = d.state.isMuted ?? state.isMuted;
-        state.shuffle = d.state.shuffle ?? state.shuffle;
-        state.repeat = d.state.repeat ?? state.repeat;
-        audio.volume = state.isMuted ? 0 : state.volume / 100;
-        $('#volumeSlider').value = state.volume;
-        updateVolumeIcon(); updateVolumeSliderFill();
-        $('#btnShuffle').classList.toggle('active', state.shuffle);
-        updateRepeatBtn(); saveState();
-      }
-      renderView(); updateNowPlaying();
-      
-      // Track settings import
-      trackEvent('settings_import', {
-        favorites_count: favorites.length,
-        playlists_count: playlists.filter(p => !p.seeded).length,
-        recent_count: recentlyPlayed.length
-      });
-      
-      alert('Imported!');
-    } catch { alert('Invalid file.'); }
-  };
-  reader.readAsText(file);
 }
 
 function clearAllData() {
@@ -1474,7 +1575,11 @@ function setupEvents() {
     t.id === 'tabPlaylists' ? togglePLDropdown() : switchView(t.dataset.view);
   }));
 
-  $('#btnSettings').addEventListener('click', () => openModal('settingsModal'));
+  $('#btnSettings').addEventListener('click', () => {
+    const countEl = $('#totalSongCount');
+    if (countEl) countEl.textContent = songs.length;
+    openModal('settingsModal');
+  });
   $('#btnNewPlaylist').addEventListener('click', (e) => { e.stopPropagation(); closePLDropdown(); openNewPL(false); });
 
   $$('[data-close]').forEach(b => b.addEventListener('click', () => closeModal(b.dataset.close)));
@@ -1487,9 +1592,11 @@ function setupEvents() {
 
   $$('.mode-btn').forEach(b => b.addEventListener('click', () => setTheme(null, b.dataset.mode)));
 
-  $('#btnExport').addEventListener('click', exportSettings);
-  $('#btnImport').addEventListener('click', () => $('#importFile').click());
-  $('#importFile').addEventListener('change', (e) => { if (e.target.files[0]) importSettings(e.target.files[0]); e.target.value = ''; });
+  $('#btnSongCount').addEventListener('click', () => {
+    const countEl = $('#totalSongCount');
+    if (countEl) countEl.textContent = songs.length;
+  });
+  $('#btnCreatePlaylist').addEventListener('click', () => { closeModal('settingsModal'); openNewPL(false); });
   $('#btnClearData').addEventListener('click', clearAllData);
 
   $('#btnDoneAddToPlaylist').addEventListener('click', saveAddToPL);
@@ -1560,10 +1667,9 @@ async function fetchLastUpdated() {
 
 function displayLastUpdated(dateString) {
   const versionDateEl = $('#versionDate');
-  if (!versionDateEl) return;
   
   if (!dateString) {
-    versionDateEl.innerHTML = '<strong>Unknown</strong>';
+    if (versionDateEl) versionDateEl.innerHTML = '<strong>Unknown</strong>';
     return;
   }
   
@@ -1577,9 +1683,9 @@ function displayLastUpdated(dateString) {
       minute: '2-digit'
     };
     const formattedDate = date.toLocaleDateString('en-US', options);
-    versionDateEl.innerHTML = `<strong>${formattedDate}</strong>`;
+    if (versionDateEl) versionDateEl.innerHTML = `<strong>${formattedDate}</strong>`;
   } catch (e) {
-    versionDateEl.innerHTML = `<strong>${dateString}</strong>`;
+    if (versionDateEl) versionDateEl.innerHTML = `<strong>${dateString}</strong>`;
   }
 }
 

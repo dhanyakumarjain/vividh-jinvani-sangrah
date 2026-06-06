@@ -36,6 +36,15 @@
 
 .modal-header h3 { font-size: 0.9rem; font-weight: 700; }
 
+.settings-author {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #1a7a3a;
+  letter-spacing: 0.2px;
+  opacity: 0.85;
+  margin-left: 2.5rem;
+}
+
 .modal-close { font-size: 1.2rem; color: var(--text-secondary); }
 .modal-close:hover { color: var(--text); }
 
@@ -99,8 +108,53 @@
 .mode-btn:hover { border-color: var(--text-secondary); }
 .mode-btn.active { border-color: var(--accent); color: var(--text); }
 
-.data-btns { display: flex; gap: 6px; }
+.data-btns { display: flex; gap: 6px; flex-wrap: wrap; }
 .hint { margin-top: 5px; font-size: 0.65rem; color: var(--text-dim); }
+
+/* Help & Song Count buttons */
+.btn-help {
+  background: #7B2FBE;
+  color: #fff;
+}
+.btn-help:hover { background: #6A28A0; }
+
+.btn-info {
+  background: #1a8a5a;
+  color: #fff;
+}
+.btn-info:hover { background: #157048; }
+
+/* Help modal */
+.modal-help {
+  width: 480px;
+  max-height: 90vh;
+}
+
+.help-modal-body {
+  padding: 0 !important;
+  overflow-y: auto;
+}
+
+.help-guide-img {
+  width: 100%;
+  display: block;
+  border-radius: 0 0 12px 12px;
+}
+
+.help-img-missing {
+  padding: 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.8;
+}
+
+.help-img-missing code {
+  background: var(--bg-accent-area);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+}
 
 /* ==================== BUTTONS & FORMS ==================== */
 .btn {

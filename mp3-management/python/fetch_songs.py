@@ -58,10 +58,19 @@ if __name__ == "__main__":
             "size_mb": entry["size_mb"],
         }
 
-        folder = entry["folder"] or "0000 Daily Songs"
+        folder = entry["folder"] or "0000 Super Songs"
         if folder not in playlists_map:
             playlists_map[folder] = []
         playlists_map[folder].append(song_id)
+        
+        # Check if filename ends with single ✽ (not ✽✽ or more)
+        # Add to "0000 Super Songs" if it ends with exactly one ✽
+        if entry["name"].endswith("✽") and not entry["name"].endswith("✽✽"):
+            if "0000 Super Songs" not in playlists_map:
+                playlists_map["0000 Super Songs"] = []
+            # Only add if not already in the playlist (avoid duplicates)
+            if song_id not in playlists_map["0000 Super Songs"]:
+                playlists_map["0000 Super Songs"].append(song_id)
 
     songs_out = {"songs": songs_dict}
 

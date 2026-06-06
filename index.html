@@ -80,11 +80,23 @@
     </div>
 
     <div class="tabs">
-      <button class="tab active" data-view="library">All</button>
-      <button class="tab" data-view="favorites">&#9829;</button>
-      <button class="tab" data-view="recent">Recent</button>
+      <button class="tab active" data-view="library">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        <span>All</span>
+      </button>
+      <button class="tab" data-view="favorites">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span>Fav</span>
+      </button>
+      <button class="tab" data-view="recent">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Recent</span>
+      </button>
       <div class="tab-dd-wrap">
-        <button class="tab" id="tabPlaylists" data-view="playlist">Playlists &#9662;</button>
+        <button class="tab" id="tabPlaylists" data-view="playlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="18" x2="14" y2="18"/><polyline points="3 6 4 7 6 5"/><polyline points="3 12 4 13 6 11"/><polyline points="3 18 4 19 6 17"/></svg>
+          <span>Lists &#9662;</span>
+        </button>
         <div class="tab-dropdown" id="playlistDropdown">
           <button class="dd-item dd-new" id="btnNewPlaylist">+ New Playlist</button>
           <div id="ddPlaylistList"></div>
@@ -105,19 +117,17 @@
   <div class="modal-overlay" id="settingsModal">
     <div class="modal">
       <div class="modal-header">
-        <h3>Settings</h3>
+        <h3>Settings <span class="settings-author">✦ धन्यकुमार जैन द्वारा संकलित ✦</span></h3>
         <button class="icon-btn modal-close" data-close="settingsModal">&times;</button>
       </div>
       <div class="modal-body">
         <div class="s-section">
           <h4>Data</h4>
           <div class="data-btns">
-            <button class="btn" id="btnExport">&#8595; Export</button>
-            <button class="btn" id="btnImport">&#8593; Import</button>
+            <button class="btn btn-info" id="btnSongCount">&#9835; Songs: <span id="totalSongCount">...</span></button>
+            <button class="btn btn-danger" id="btnCreatePlaylist">+ Create Playlist</button>
             <button class="btn btn-danger" id="btnClearData">&#128465; Clear Playlists</button>
-            <input type="file" id="importFile" accept=".json" hidden>
           </div>
-          <p class="hint">Export/import favorites, playlists, history &amp; preferences.</p>
           <p class="hint">Clear Playlists: Deletes user-created playlists, favorites, and history.</p>
         </div>
         <div class="s-section">
@@ -186,6 +196,24 @@
       <div class="modal-footer">
         <button class="btn" data-close="confirmDeleteModal">Cancel</button>
         <button class="btn btn-danger" id="btnConfirmDelete">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help Modal -->
+  <div class="modal-overlay" id="helpModal">
+    <div class="modal modal-help">
+      <div class="modal-header">
+        <h3>&#10067; Help Guide</h3>
+        <button class="icon-btn modal-close" data-close="helpModal">&times;</button>
+      </div>
+      <div class="modal-body help-modal-body">
+        <img src="img/help-guide.jpg" alt="Help Guide" class="help-guide-img" id="helpGuideImg"
+          onerror="this.style.display='none';document.getElementById('helpImgMissing').style.display='block'">
+        <p class="help-img-missing" id="helpImgMissing" style="display:none">
+          &#128218; Help image not found.<br>
+          Please save your help guide image as <code>img/help-guide.jpg</code>
+        </p>
       </div>
     </div>
   </div>

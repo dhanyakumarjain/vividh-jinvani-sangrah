@@ -166,19 +166,41 @@ def main():
     songs_list = existing_songs.copy()
     playlists_map = {}
     
-    # Rebuild playlists map from existing playlists
-    for playlist in existing_playlists:
-        playlists_map[playlist["name"]] = playlist["songIds"].copy()
+    # DO NOT pre-seed playlists_map from existing playlists.json.
+    # Playlists are rebuilt purely from what is on disk so that deleted
+    # folders are automatically removed and renamed folders appear correctly.
     
     counter = max_song_id + 1
     new_songs_count = 0
+    removed_songs_count = 0
     
+    # Build a lookup map: file path -> song id, for existing songs
+    existing_file_to_id = {song["file"]: song["id"] for song in existing_songs}
+    
+    # Collect the set of file paths actually on disk right now
+    disk_file_paths = {f"media/{entry['file']}" for entry in entries}
+    
+    # Remove songs whose files no longer exist on disk
+    songs_list = [s for s in existing_songs if s["file"] in disk_file_paths]
+    removed_songs_count = len(existing_songs) - len(songs_list)
+    if removed_songs_count:
+        print(f"  [REMOVED] {removed_songs_count} song(s) whose files no longer exist on disk")
+
     for entry in entries:
         file_path = f"media/{entry['file']}"
         
+        # Determine folder for this file
+        folder = entry["folder"] or "0000 Super Songs"
+        
         # Check if this file already exists
         if file_path in existing_song_files:
-            # File already exists, skip it
+            # File already exists — map it to its current folder on disk
+            existing_song_id = existing_file_to_id.get(file_path)
+            if existing_song_id:
+                if folder not in playlists_map:
+                    playlists_map[folder] = []
+                if existing_song_id not in playlists_map[folder]:
+                    playlists_map[folder].append(existing_song_id)
             continue
         
         # New file - add it
@@ -198,20 +220,56 @@ def main():
         }
         songs_list.append(song_obj)
         
-        folder = entry["folder"] or "0000 Daily Songs"
         if folder not in playlists_map:
             playlists_map[folder] = []
         playlists_map[folder].append(song_id)
         
+        # Check if filename ends with single ✽ (not ✽✽ or more)
+        # Add to "0000 Super Songs" if it ends with exactly one ✽
+        if entry["name"].endswith("✽") and not entry["name"].endswith("✽✽"):
+            if "0000 Super Songs" not in playlists_map:
+                playlists_map["0000 Super Songs"] = []
+            # Only add if not already in the playlist (avoid duplicates)
+            if song_id not in playlists_map["0000 Super Songs"]:
+                playlists_map["0000 Super Songs"].append(song_id)
+        
         print(f"  [NEW] [{folder}] {entry['name']} -> {song_id}")
     
-    if new_songs_count == 0:
-        print("[INFO] No new songs to add. All files already exist.")
+    # Also re-add existing ✽ songs to "0000 Super Songs" from disk scan
+    # (since we no longer pre-seed from playlists.json, we must rebuild this too)
+    for entry in entries:
+        file_path = f"media/{entry['file']}"
+        if file_path in existing_song_files:
+            if entry["name"].endswith("✽") and not entry["name"].endswith("✽✽"):
+                existing_song_id = existing_file_to_id.get(file_path)
+                if existing_song_id:
+                    if "0000 Super Songs" not in playlists_map:
+                        playlists_map["0000 Super Songs"] = []
+                    if existing_song_id not in playlists_map["0000 Super Songs"]:
+                        playlists_map["0000 Super Songs"].append(existing_song_id)
+    
+    if new_songs_count == 0 and removed_songs_count == 0:
+        print("[INFO] No new or removed songs. Checking if folder structure changed...")
         print()
-        return
+        
+        old_playlist_names = {pl["name"] for pl in existing_playlists}
+        new_playlist_names = set(playlists_map.keys())
+        
+        if old_playlist_names == new_playlist_names:
+            print("[INFO] No playlist changes detected. Nothing to update.")
+            print()
+            return
+        
+        added = new_playlist_names - old_playlist_names
+        removed = old_playlist_names - new_playlist_names
+        if added:
+            print(f"[INFO] New folder(s): {', '.join(sorted(added))}")
+        if removed:
+            print(f"[INFO] Removed folder(s): {', '.join(sorted(removed))}")
+        print()
     
     print()
-    print(f"[OK] Added {new_songs_count} new song(s)")
+    print(f"[OK] Added {new_songs_count} new song(s), removed {removed_songs_count} deleted song(s)")
     
     # Write songs.json
     songs_out = {"songs": songs_list}
@@ -243,9 +301,10 @@ def main():
     print("=" * 60)
     print()
     print(f"Summary:")
-    print(f"  - New songs added: {new_songs_count}")
-    print(f"  - Total songs: {len(songs_list)}")
-    print(f"  - Total playlists: {len(playlists_list)}")
+    print(f"  - New songs added:    {new_songs_count}")
+    print(f"  - Songs removed:      {removed_songs_count}")
+    print(f"  - Total songs:        {len(songs_list)}")
+    print(f"  - Total playlists:    {len(playlists_list)}")
     print()
     print("Next steps:")
     print("  1. Test website locally: Test-Website.bat")
