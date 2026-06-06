@@ -1,3 +1,24 @@
 {
-  "songs": []
+  "songs": [
+    {
+      "id": "s0001",
+      "title": "0103.01 सामायिक दिग्वंदना (नमोस्तु चारो दिशावोमे स्थित) ✽",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0103%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%A8%E0%A4%AE%E0%A5%8B%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%81%20%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A5%8B%20%E0%A4%A6%E0%A4%BF%E0%A4%B6%E0%A4%BE%E0%A4%B5%E0%A5%8B%E0%A4%AE%E0%A5%87%20%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%BF%E0%A4%A4%29/0103.01%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%A8%E0%A4%AE%E0%A5%8B%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%81%20%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A5%8B%20%E0%A4%A6%E0%A4%BF%E0%A4%B6%E0%A4%BE%E0%A4%B5%E0%A5%8B%E0%A4%AE%E0%A5%87%20%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%BF%E0%A4%A4%29%20%E2%9C%BD.mp3",
+      "size_mb": 1.1
+    },
+    {
+      "id": "s0002",
+      "title": "0103.02 सामायिक दिग्वंदना (नमोस्तु चारो दिशावोमे स्थित) nomu CORUS",
+      "artist": "",
+      "album": "",
+      "altName": [],
+      "duration": 0,
+      "file": "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main/0103%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%A8%E0%A4%AE%E0%A5%8B%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%81%20%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A5%8B%20%E0%A4%A6%E0%A4%BF%E0%A4%B6%E0%A4%BE%E0%A4%B5%E0%A5%8B%E0%A4%AE%E0%A5%87%20%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%BF%E0%A4%A4%29/0103.02%20%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%BF%E0%A4%95%20%E0%A4%A6%E0%A4%BF%E0%A4%97%E0%A5%8D%E0%A4%B5%E0%A4%82%E0%A4%A6%E0%A4%A8%E0%A4%BE%20%28%E0%A4%A8%E0%A4%AE%E0%A5%8B%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%81%20%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A5%8B%20%E0%A4%A6%E0%A4%BF%E0%A4%B6%E0%A4%BE%E0%A4%B5%E0%A5%8B%E0%A4%AE%E0%A5%87%20%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%BF%E0%A4%A4%29%20nomu%20CORUS.mp3",
+      "size_mb": 2.4
+    }
+  ]
 }
