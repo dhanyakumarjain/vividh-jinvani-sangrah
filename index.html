@@ -32,7 +32,10 @@
         <h2 class="player-title2" id="playerTitle2"></h2>
         <p class="player-subtitle" id="playerSubtitle"></p>
       </div>
-      <button class="icon-btn" id="btnSettings" title="Settings">&#9881;</button>
+      <div class="header-btns">
+        <button class="icon-btn" id="btnSettings" title="Settings">&#9881;</button>
+        <button class="icon-btn btn-close-player" id="btnClosePlayer" title="Close Player">&#10006;</button>
+      </div>
     </div>
 
     <div class="now-playing">
@@ -124,8 +127,8 @@
         <div class="s-section">
           <h4>Data</h4>
           <div class="data-btns">
-            <button class="btn btn-info" id="btnSongCount">&#9835; Songs: <span id="totalSongCount">...</span></button>
             <button class="btn btn-danger" id="btnCreatePlaylist">+ Create Playlist</button>
+            <button class="btn btn-info" id="btnSongCount">&#9835; Songs: <span id="totalSongCount">...</span></button>
             <button class="btn btn-danger" id="btnClearData">&#128465; Clear Playlists</button>
           </div>
           <p class="hint">Clear Playlists: Deletes user-created playlists, favorites, and history.</p>

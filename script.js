@@ -1580,6 +1580,20 @@ function setupEvents() {
     if (countEl) countEl.textContent = songs.length;
     openModal('settingsModal');
   });
+
+  $('#btnClosePlayer').addEventListener('click', () => {
+    if (confirm('Close the player?')) {
+      // Pause audio before closing
+      if (!audio.paused) audio.pause();
+      // Try window.close(), fallback to hiding the player
+      try { window.close(); } catch(e) {}
+      // If window.close() was blocked (direct browser tab), hide the player
+      setTimeout(() => {
+        document.querySelector('.player').style.display = 'none';
+        document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#888;font-size:1.1rem;">Player closed. Reload the page to reopen.</div>';
+      }, 100);
+    }
+  });
   $('#btnNewPlaylist').addEventListener('click', (e) => { e.stopPropagation(); closePLDropdown(); openNewPL(false); });
 
   $$('[data-close]').forEach(b => b.addEventListener('click', () => closeModal(b.dataset.close)));

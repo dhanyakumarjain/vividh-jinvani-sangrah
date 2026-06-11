@@ -203,6 +203,29 @@ body {
   background: var(--bg-accent-area);
 }
 
+/* Close + Settings button group */
+.header-btns {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+  align-self: start;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.btn-close-player {
+  color: #DC3545 !important;
+  font-size: 1rem !important;
+  font-weight: 700;
+}
+.btn-close-player:hover {
+  background: rgba(220, 53, 69, 0.15) !important;
+  color: #ff2233 !important;
+}
+
 /* ==================== NOW PLAYING ==================== */
 
 .now-playing {
