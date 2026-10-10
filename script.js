@@ -6,6 +6,7 @@ const STORAGE = {
   THEME: 'mp2_theme'
 };
 const MAX_RECENT = 10;
+const MAX_RECENT_HOME = 3;
 
 // ==================== THEMES ====================
 // The six themes are defined purely as [data-theme="..."] blocks in style.css.
@@ -16,7 +17,7 @@ const THEMES = [
   { id: 'green', name: 'Green', dot: '#059669', swatch2: '#14b8a6' },
   { id: 'pink', name: 'Pink', dot: '#db2777', swatch2: '#7c3aed' },
   { id: 'purple', name: 'Purple', dot: '#7c3aed', swatch2: '#d946ef' },
-  { id: 'dark', name: 'Dark', dot: '#f59e0b', swatch2: '#6366f1' }
+  { id: 'dark', name: 'Lotus', dot: '#f59e0b', swatch2: '#6366f1' }
 ];
 const VIEWS = ['home', 'playlists', 'favorites', 'search', 'settings'];
 
@@ -401,7 +402,7 @@ function renderHome() {
   const grid = $('#homePlaylists');
   if (grid) renderPlaylistGrid(grid, playlists);
 
-  const recent = recentlyPlayed.map(r => getSong(r.songId)).filter(Boolean);
+  const recent = recentlyPlayed.map(r => getSong(r.songId)).filter(Boolean).slice(0, MAX_RECENT_HOME);
   const block = $('#homeRecentBlock');
   const box = $('#homeRecent');
   if (block && box) {
@@ -642,6 +643,16 @@ function openFullPlayer() {
 function closeFullPlayer() {
   $('#fullPlayer').hidden = true;
   document.body.style.overflow = '';
+}
+
+function exitPlayer() {
+  try { audio.pause(); } catch (e) {}
+  state.isPlaying = false;
+  state.currentSongId = null;
+  closeFullPlayer();
+  updatePlaybackUI();
+  saveState();
+  try { window.close(); } catch (e) {}
 }
 
 function renderQueue() {
@@ -1262,6 +1273,7 @@ function setupEvents() {
 
   // Full player
   $('#btnCloseFull').addEventListener('click', closeFullPlayer);
+  $('#btnExitPlayer').addEventListener('click', exitPlayer);
   $('#fullFav').addEventListener('click', () => { if (state.currentSongId) toggleFavorite(state.currentSongId); });
   $('#fpQueue').addEventListener('click', (e) => {
     const item = e.target.closest('.fp-queue-item');

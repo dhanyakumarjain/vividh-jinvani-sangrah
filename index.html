@@ -85,7 +85,10 @@
           </div>
 
           <section class="block">
-            <h2 class="block-title">Playlists</h2>
+            <div class="block-head">
+              <h2 class="block-title">Playlists</h2>
+              <button class="block-action" id="btnExitPlayer" aria-label="Close player" title="Close player"><svg><use href="#i-x"/></svg></button>
+            </div>
             <div class="playlist-grid" id="homePlaylists"></div>
           </section>
 
@@ -161,8 +164,8 @@
             </div>
             <div class="card-actions">
               <button class="btn-ghost" id="btnHelp"><svg><use href="#i-help"/></svg>Help</button>
-              <button class="btn-ghost" id="btnNewPlaylist"><svg><use href="#i-list"/></svg>Playlist</button>
-              <button class="btn-ghost" id="btnClearData"><svg><use href="#i-trash"/></svg>Clear all data</button>
+              <button class="btn-ghost" id="btnNewPlaylist"><svg><use href="#i-list"/></svg><span class="btn-label">Create<br>Playlist</span></button>
+              <button class="btn-ghost" id="btnClearData"><svg><use href="#i-trash"/></svg><span class="btn-label">Clear all<br>data</span></button>
             </div>
           </section>
 
