@@ -278,8 +278,9 @@ img { max-width: 100%; display: block; }
 
 .block { margin-bottom: 1.5rem; }
 .block-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; }
-.block-head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.75rem; }
+.block-head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
 .block-head .block-title { margin-bottom: 0; }
+.page-top .block-head { margin-top: 0.5rem; }
 .block-action { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0.15rem; }
 .block-action-icon { width: 2.25rem; height: 2.25rem; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--exit-red) 12%, transparent); color: var(--exit-red); transition: background 0.15s; }
 .block-action:hover .block-action-icon { background: color-mix(in srgb, var(--exit-red) 22%, transparent); }
