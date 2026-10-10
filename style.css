@@ -269,7 +269,7 @@ img { max-width: 100%; display: block; }
 .ph-home-btn:hover .ph-home-icon { background: color-mix(in srgb, var(--primary) 22%, transparent); }
 .ph-home-icon svg { width: 1.35rem; height: 1.35rem; }
 .ph-home-label { font-size: 0.62rem; font-weight: 600; color: var(--primary); }
-.ph-brand-img { height: 3rem; width: auto; object-fit: contain; display: block; }
+.ph-brand-img { height: 3.5rem; width: auto; object-fit: contain; display: block; }
 @media (min-width: 1024px) { .ph-brand-img { display: none; } }
 .page-top .search-bar { margin-top: 0.6rem; }
 

@@ -1269,7 +1269,7 @@ function setupEvents() {
   });
 
   // Settings
-  $('#btnCreatePlaylist').addEventListener('click', () => openNewPL(false));
+  $('#btnNewPlaylist').addEventListener('click', () => openNewPL(false));
   $('#btnClearData').addEventListener('click', clearAllData);
   $('#btnHelp').addEventListener('click', () => openModal('helpModal'));
   $('#autoNextToggle').addEventListener('click', () => {
