@@ -58,19 +58,19 @@ if __name__ == "__main__":
             "size_mb": entry["size_mb"],
         }
 
-        folder = entry["folder"] or "0000 Super Songs"
+        folder = entry["folder"] or "0000 सुपर जैन भक्ति संग्रह"
         if folder not in playlists_map:
             playlists_map[folder] = []
         playlists_map[folder].append(song_id)
         
         # Check if filename ends with single ✽ (not ✽✽ or more)
-        # Add to "0000 Super Songs" if it ends with exactly one ✽
+        # Add to "0000 सुपर जैन भक्ति संग्रह" if it ends with exactly one ✽
         if entry["name"].endswith("✽") and not entry["name"].endswith("✽✽"):
-            if "0000 Super Songs" not in playlists_map:
-                playlists_map["0000 Super Songs"] = []
+            if "0000 सुपर जैन भक्ति संग्रह" not in playlists_map:
+                playlists_map["0000 सुपर जैन भक्ति संग्रह"] = []
             # Only add if not already in the playlist (avoid duplicates)
-            if song_id not in playlists_map["0000 Super Songs"]:
-                playlists_map["0000 Super Songs"].append(song_id)
+            if song_id not in playlists_map["0000 सुपर जैन भक्ति संग्रह"]:
+                playlists_map["0000 सुपर जैन भक्ति संग्रह"].append(song_id)
 
     songs_out = {"songs": songs_dict}
 

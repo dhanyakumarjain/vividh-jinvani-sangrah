@@ -190,7 +190,7 @@ def main():
         file_path = f"media/{entry['file']}"
         
         # Determine folder for this file
-        folder = entry["folder"] or "0000 Super Songs"
+        folder = entry["folder"] or "0000 सुपर जैन भक्ति संग्रह"
         
         # Check if this file already exists
         if file_path in existing_song_files:
@@ -225,17 +225,17 @@ def main():
         playlists_map[folder].append(song_id)
         
         # Check if filename ends with single ✽ (not ✽✽ or more)
-        # Add to "0000 Super Songs" if it ends with exactly one ✽
+        # Add to "0000 सुपर जैन भक्ति संग्रह" if it ends with exactly one ✽
         if entry["name"].endswith("✽") and not entry["name"].endswith("✽✽"):
-            if "0000 Super Songs" not in playlists_map:
-                playlists_map["0000 Super Songs"] = []
+            if "0000 सुपर जैन भक्ति संग्रह" not in playlists_map:
+                playlists_map["0000 सुपर जैन भक्ति संग्रह"] = []
             # Only add if not already in the playlist (avoid duplicates)
-            if song_id not in playlists_map["0000 Super Songs"]:
-                playlists_map["0000 Super Songs"].append(song_id)
+            if song_id not in playlists_map["0000 सुपर जैन भक्ति संग्रह"]:
+                playlists_map["0000 सुपर जैन भक्ति संग्रह"].append(song_id)
         
         print(f"  [NEW] [{folder}] {entry['name']} -> {song_id}")
     
-    # Also re-add existing ✽ songs to "0000 Super Songs" from disk scan
+    # Also re-add existing ✽ songs to "0000 सुपर जैन भक्ति संग्रह" from disk scan
     # (since we no longer pre-seed from playlists.json, we must rebuild this too)
     for entry in entries:
         file_path = f"media/{entry['file']}"
@@ -243,10 +243,10 @@ def main():
             if entry["name"].endswith("✽") and not entry["name"].endswith("✽✽"):
                 existing_song_id = existing_file_to_id.get(file_path)
                 if existing_song_id:
-                    if "0000 Super Songs" not in playlists_map:
-                        playlists_map["0000 Super Songs"] = []
-                    if existing_song_id not in playlists_map["0000 Super Songs"]:
-                        playlists_map["0000 Super Songs"].append(existing_song_id)
+                    if "0000 सुपर जैन भक्ति संग्रह" not in playlists_map:
+                        playlists_map["0000 सुपर जैन भक्ति संग्रह"] = []
+                    if existing_song_id not in playlists_map["0000 सुपर जैन भक्ति संग्रह"]:
+                        playlists_map["0000 सुपर जैन भक्ति संग्रह"].append(existing_song_id)
     
     if new_songs_count == 0 and removed_songs_count == 0:
         print("[INFO] No new or removed songs. Checking if folder structure changed...")
