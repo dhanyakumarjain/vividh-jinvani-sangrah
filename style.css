@@ -157,13 +157,14 @@ img { max-width: 100%; display: block; }
 .content {
   max-width: 48rem;
   margin: 0 auto;
-  padding: 1rem 1rem 10rem;
+  padding: 0 1rem 10rem;
 }
 
 @media (min-width: 1024px) {
   .sidebar { display: flex; }
   .main-wrap { padding-left: 14rem; }
-  .content { padding: 1.5rem 2rem 7rem; }
+  .content { padding: 0 2rem 7rem; }
+  .page-top { margin: 0 -2rem 0.75rem; padding: 1.25rem 2rem 0.5rem; }
 }
 
 /* ==================== BRAND / NAV ==================== */
@@ -231,14 +232,23 @@ img { max-width: 100%; display: block; }
 
 .page { animation: fade-in 0.2s ease; }
 
-@keyframes fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+.page-top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  margin: 0 -1rem 0.75rem;
+  padding: 1rem 1rem 0.5rem;
+  background: var(--background);
+  box-shadow: 0 10px 14px -12px var(--shadow);
+}
 
 .page-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  margin-bottom: 1rem;
 }
 
 .ph-text { min-width: 0; }
@@ -254,8 +264,14 @@ img { max-width: 100%; display: block; }
 .ph-actions { display: flex; align-items: center; gap: 0.5rem; flex: 0 0 auto; }
 .pl-header .ph-side { flex: 1 1 0; }
 .pl-header .ph-actions { flex: 1 1 0; justify-content: flex-end; }
-.ph-home { flex: 0 0 auto; background: color-mix(in srgb, var(--primary) 12%, transparent); color: var(--primary); }
-.ph-home:hover { background: color-mix(in srgb, var(--primary) 22%, transparent); }
+.ph-home-btn { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0.15rem; }
+.ph-home-icon { width: 2.5rem; height: 2.5rem; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--primary) 12%, transparent); color: var(--primary); }
+.ph-home-btn:hover .ph-home-icon { background: color-mix(in srgb, var(--primary) 22%, transparent); }
+.ph-home-icon svg { width: 1.35rem; height: 1.35rem; }
+.ph-home-label { font-size: 0.62rem; font-weight: 600; color: var(--primary); }
+.ph-brand-img { height: 3rem; width: auto; object-fit: contain; display: block; }
+@media (min-width: 1024px) { .ph-brand-img { display: none; } }
+.page-top .search-bar { margin-top: 0.6rem; }
 
 .block { margin-bottom: 1.5rem; }
 .block-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; }

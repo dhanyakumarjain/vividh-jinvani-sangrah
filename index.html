@@ -72,15 +72,17 @@
       <main class="content">
         <!-- ==================== HOME ==================== -->
         <section class="page" data-page="home" id="pageHome">
-          <header class="page-header">
-            <div class="ph-text">
-              <h1 id="homeTitle">विविध जिनवाणी संग्रह</h1>
-              <p id="homeSubtitle">YouTube Collection-Jain Pooja Paath by DSJain</p>
-            </div>
-            <div class="ph-actions">
-              <button class="icon-btn" data-nav="settings" title="Settings"><svg><use href="#i-settings"/></svg></button>
-            </div>
-          </header>
+          <div class="page-top">
+            <header class="page-header">
+              <div class="ph-text">
+                <h1 id="homeTitle">विविध जिनवाणी संग्रह</h1>
+                <p id="homeSubtitle">YouTube Collection-Jain Pooja Paath by DSJain</p>
+              </div>
+              <div class="ph-actions">
+                <img class="ph-brand-img" src="img/munisurvanath.png" alt="Muni Survanath">
+              </div>
+            </header>
+          </div>
 
           <section class="block">
             <h2 class="block-title">Playlists</h2>
@@ -95,13 +97,18 @@
 
         <!-- ==================== PLAYLISTS ==================== -->
         <section class="page" data-page="playlists" id="pagePlaylists" hidden>
-          <header class="page-header pl-header">
-            <span class="ph-side" aria-hidden="true"></span>
-            <button class="icon-btn ph-home" data-nav="home" id="btnPlaylistsHome" aria-label="Go to Home" title="Home"><svg><use href="#i-home"/></svg></button>
-            <div class="ph-actions">
-              <button class="btn-primary" id="btnCreatePlaylist"><svg><use href="#i-list"/></svg>New</button>
-            </div>
-          </header>
+          <div class="page-top">
+            <header class="page-header pl-header">
+              <span class="ph-side" aria-hidden="true"></span>
+              <button class="ph-home-btn" data-nav="home" id="btnPlaylistsHome" aria-label="Go to Home" title="Home">
+                <span class="ph-home-icon"><svg><use href="#i-home"/></svg></span>
+                <span class="ph-home-label">Home</span>
+              </button>
+              <div class="ph-actions">
+                <button class="btn-primary" id="btnCreatePlaylist"><svg><use href="#i-list"/></svg>New</button>
+              </div>
+            </header>
+          </div>
           <div class="playlist-grid" id="playlistsGrid"></div>
           <div id="playlistDetail" hidden>
             <button class="back-link" id="btnBackToPlaylists"><svg><use href="#i-chevron-left"/></svg>Playlists</button>
@@ -112,35 +119,41 @@
 
         <!-- ==================== FAVOURITES ==================== -->
         <section class="page" data-page="favorites" id="pageFavorites" hidden>
-          <header class="page-header">
-            <div class="ph-text"><h1>Favourites</h1><p>Songs you love, saved on this device</p></div>
-          </header>
+          <div class="page-top">
+            <header class="page-header">
+              <div class="ph-text"><h1>Favourites</h1><p>Songs you love, saved on this device</p></div>
+            </header>
+          </div>
           <div class="song-list card" id="favoritesList"></div>
         </section>
 
         <!-- ==================== SEARCH ==================== -->
         <section class="page" data-page="search" id="pageSearch" hidden>
-          <header class="page-header">
-            <div class="ph-text"><h1>Search</h1><p>Find any song instantly</p></div>
-          </header>
-          <form class="search-bar" id="pageSearchForm">
-            <span class="search-ic"><svg><use href="#i-search"/></svg></span>
-            <input type="search" id="searchInput" placeholder="Search songs, artists, albums…" aria-label="Search songs">
-            <button type="button" class="clear-btn" id="searchClear" hidden aria-label="Clear search"><svg><use href="#i-x"/></svg></button>
-          </form>
+          <div class="page-top">
+            <header class="page-header">
+              <div class="ph-text"><h1>Search</h1><p>Find any song instantly</p></div>
+            </header>
+            <form class="search-bar" id="pageSearchForm">
+              <span class="search-ic"><svg><use href="#i-search"/></svg></span>
+              <input type="search" id="searchInput" placeholder="Search songs, artists, albums…" aria-label="Search songs">
+              <button type="button" class="clear-btn" id="searchClear" hidden aria-label="Clear search"><svg><use href="#i-x"/></svg></button>
+            </form>
+          </div>
           <div class="song-list card" id="searchResults"></div>
         </section>
 
         <!-- ==================== SETTINGS ==================== -->
         <section class="page" data-page="settings" id="pageSettings" hidden>
-          <header class="page-header">
-            <div class="ph-text"><h1>Settings</h1><p>Personalise your player</p></div>
-          </header>
+          <div class="page-top">
+            <header class="page-header">
+              <div class="ph-text"><h1>Settings</h1><p>Personalise your player</p></div>
+            </header>
+          </div>
 
           <section class="card">
             <h2 class="card-title"><svg><use href="#i-info"/></svg>About</h2>
             <p class="muted-text" id="aboutText">
-              धन्यकुमार जैन द्वारा YouTube पर उपलब्ध जिनेंद्र भक्ति, पूजा-पाठ, स्तोत्र, भजन एवं अन्य
+              YouTube पर उपलब्ध जिनेंद्र भक्ति, पूजा-पाठ, स्तोत्र, भजन एवं अन्य
               धार्मिक रचनाओं को एकत्रित करके “विविध जिनवाणी संग्रह” तैयार किया गया है।
             </p>
             <div class="stats">
