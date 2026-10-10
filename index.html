@@ -78,7 +78,6 @@
               <p id="homeSubtitle">YouTube Collection-Jain Pooja Paath by DSJain</p>
             </div>
             <div class="ph-actions">
-              <button class="icon-btn" data-nav="search" title="Search"><svg><use href="#i-search"/></svg></button>
               <button class="icon-btn" data-nav="settings" title="Settings"><svg><use href="#i-settings"/></svg></button>
             </div>
           </header>
@@ -198,11 +197,11 @@
     <!-- ==================== FULL PLAYER ==================== -->
     <div class="full-player" id="fullPlayer" hidden>
       <div class="fp-header">
-        <div class="fp-header-left">
+        <button class="icon-btn" id="btnCloseFull" aria-label="Close player"><svg><use href="#i-chevron-down"/></svg></button>
+        <div class="fp-head-center">
+          <h2>Now Playing</h2>
           <button class="icon-btn fp-home" id="btnFullHome" aria-label="Go to Home"><svg><use href="#i-home"/></svg></button>
-          <button class="icon-btn" id="btnCloseFull" aria-label="Close player"><svg><use href="#i-chevron-down"/></svg></button>
         </div>
-        <h2>Now Playing</h2>
         <button class="icon-btn fav" id="fullFav" aria-label="Toggle favourite"><svg><use href="#i-heart"/></svg></button>
       </div>
 

@@ -284,17 +284,19 @@ function songRowHTML(s, opts = {}) {
   const fav = favorites.includes(s.id);
   const na = s.available === false;
   const durStr = s.duration && s.duration > 0 ? fmt(s.duration) : '';
-  const coverIcon = active && state.isPlaying ? 'pause' : 'music';
   const plv = opts.isPlView && !opts.seeded ? '1' : '';
   return `<div class="song-row${active ? ' active' : ''}${na ? ' unavailable' : ''}" data-id="${s.id}">
-    <span class="song-cover ph${active && state.isPlaying ? ' play' : ''}"><svg><use href="#i-${coverIcon}"/></svg></span>
-    <span class="song-meta">
+    <div class="song-top">
       <span class="song-title">${esc(s.title)}</span>
-      ${s.artist ? `<span class="song-artist">${esc(s.artist)}</span>` : ''}
-    </span>
-    ${durStr ? `<span class="song-dur">${durStr}</span>` : ''}
-    <button class="song-action fav${fav ? ' on' : ''}" data-fav="${s.id}" aria-label="Favourite"><svg><use href="#i-heart"/></svg></button>
-    <button class="song-action" data-menu="${s.id}" data-plv="${plv}" aria-label="More options"><svg><use href="#i-more"/></svg></button>
+      ${durStr ? `<span class="song-dur">${durStr}</span>` : ''}
+    </div>
+    <div class="song-bottom">
+      <span class="song-artist">${esc(s.artist || '')}</span>
+      <span class="song-actions">
+        <button class="song-action fav${fav ? ' on' : ''}" data-fav="${s.id}" aria-label="Favourite"><svg><use href="#i-heart"/></svg></button>
+        <button class="song-action" data-menu="${s.id}" data-plv="${plv}" aria-label="More options"><svg><use href="#i-more"/></svg></button>
+      </span>
+    </div>
   </div>`;
 }
 
@@ -324,13 +326,8 @@ function bindListInteractions(container) {
 // ==================== RENDER: PLAYLISTS ====================
 
 function playlistCardHTML(pl) {
-  const count = resolvePlaylistSongs(pl).length;
   return `<div class="playlist-card" data-plid="${pl.id}">
-    <span class="pc-cover">${pl.seeded ? '<svg><use href="#i-music"/></svg>' : '<svg><use href="#i-list"/></svg>'}</span>
-    <span class="pc-meta">
-      <span class="pc-name">${esc(pl.name)}</span>
-      <span class="pc-count"><svg><use href="#i-music"/></svg>${count} song${count === 1 ? '' : 's'}</span>
-    </span>
+    <span class="pc-name">${esc(pl.name)}</span>
     ${!pl.seeded ? `<button class="song-action" data-plmenu="${pl.id}" aria-label="Options"><svg><use href="#i-more"/></svg></button>` : ''}
   </div>`;
 }
@@ -347,15 +344,60 @@ function bindPlaylistCards(container) {
   });
 }
 
+const PL_INITIAL = 6;
+const PL_STEP = 12;
+let playlistsObserver = null;
+
+function renderPlaylistGrid(container, list) {
+  if (!container) return;
+  container._plList = list;
+  container._plShown = 0;
+  loadNextPlaylists(container);
+}
+
+function loadNextPlaylists(container) {
+  const list = container._plList || [];
+  if (!list.length) {
+    container.innerHTML = '<div class="empty-state">No playlists yet.</div>';
+    return;
+  }
+  const step = container._plShown === 0 ? PL_INITIAL : PL_STEP;
+  container._plShown = Math.min(container._plShown + step, list.length);
+  container.innerHTML = list.slice(0, container._plShown).map(playlistCardHTML).join('');
+  bindPlaylistCards(container);
+  if (container._plShown < list.length) {
+    const sentinel = document.createElement('div');
+    sentinel.className = 'pl-sentinel';
+    container.appendChild(sentinel);
+    observePlaylistSentinel(container, sentinel);
+  }
+}
+
+function observePlaylistSentinel(container, sentinel) {
+  if (playlistsObserver) playlistsObserver.disconnect();
+  if (typeof IntersectionObserver === 'undefined') {
+    sentinel.remove();
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-ghost pl-more';
+    btn.textContent = 'Load more';
+    btn.addEventListener('click', () => loadNextPlaylists(container));
+    container.appendChild(btn);
+    return;
+  }
+  playlistsObserver = new IntersectionObserver((entries) => {
+    if (entries.some(e => e.isIntersecting)) {
+      playlistsObserver.disconnect();
+      loadNextPlaylists(container);
+    }
+  }, { rootMargin: '200px' });
+  playlistsObserver.observe(sentinel);
+}
+
 // ==================== RENDER: PAGES ====================
 
 function renderHome() {
   const grid = $('#homePlaylists');
-  if (grid) {
-    grid.innerHTML = playlists.map(playlistCardHTML).join('') ||
-      '<div class="empty-state">No playlists yet.</div>';
-    bindPlaylistCards(grid);
-  }
+  if (grid) renderPlaylistGrid(grid, playlists);
 
   const recent = recentlyPlayed.map(r => getSong(r.songId)).filter(Boolean);
   const block = $('#homeRecentBlock');
@@ -386,9 +428,7 @@ function renderPlaylistsPage() {
     state.playlistDetailId = null;
     grid.hidden = false;
     detail.hidden = true;
-    grid.innerHTML = playlists.map(playlistCardHTML).join('') ||
-      '<div class="empty-state">No playlists yet.</div>';
-    bindPlaylistCards(grid);
+    renderPlaylistGrid(grid, playlists);
   }
 }
 
@@ -566,13 +606,7 @@ function updatePlaybackUI() {
   }
 
   $$('.song-row').forEach(row => {
-    const active = row.dataset.id === state.currentSongId;
-    row.classList.toggle('active', active);
-    const cover = row.querySelector('.song-cover');
-    if (cover) {
-      cover.classList.toggle('play', active && state.isPlaying);
-      setIcon(cover, active && state.isPlaying ? 'pause' : 'music');
-    }
+    row.classList.toggle('active', row.dataset.id === state.currentSongId);
   });
 
   renderQueue();
