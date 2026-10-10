@@ -1,0 +1,5 @@
+reduce size of repeat prev play next shuffle buttons make it simple so reduce space 
+
+interchange place of all button and list button 
+when clicked to list button it should display in middle of player with multicolour 
+by default show list details and not all files as previously all files should be shown when clicked or touch

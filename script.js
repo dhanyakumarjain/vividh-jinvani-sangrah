@@ -85,6 +85,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupControls();
   setupSwipeGestures(); // #6
   setupEvents();
+  // By default show the Lists sheet (list details), not all files
+  openListsSheet();
   restoreState();
   fetchLastUpdated();
   
@@ -742,17 +744,10 @@ function updateNowPlaying() {
   $('#btnPlay').innerHTML = state.isPlaying ? '&#9646;&#9646;' : '&#9654;';
   // #9 — toggle pulse glow
   $('#btnPlay').classList.toggle('playing', state.isPlaying);
-  
-  // Update play button label
-  const playLabel = $('#btnPlay').parentElement.querySelector('.ctrl-label');
-  if (playLabel) {
-    playLabel.textContent = state.isPlaying ? 'Pause' : 'Play';
-  }
 }
 
 function updateRepeatBtn() {
   const btn = $('#btnRepeat');
-  const label = btn.parentElement.querySelector('.ctrl-label');
   
   btn.classList.toggle('active', state.repeat === 'all');
   
@@ -760,12 +755,10 @@ function updateRepeatBtn() {
     btn.innerHTML = '&#8635;';
     btn.title = 'Repeat: Off';
     btn.style.opacity = '0.5';
-    if (label) label.textContent = 'Repeat';
   } else {
     btn.innerHTML = '&#8635;';
     btn.title = 'Repeat: All';
     btn.style.opacity = '1';
-    if (label) label.textContent = 'Rep All';
   }
 }
 
@@ -995,7 +988,7 @@ function switchView(view, plId) {
   state.activeView = view;
   state.activePlaylistId = plId || null;
   $('#searchInput').value = '';
-  closePLDropdown();
+  closeListsSheet();
   renderView();
   saveState();
   
@@ -1014,28 +1007,47 @@ function updateTabs() {
   else { const t = $(`.tab[data-view="${state.activeView}"]`); if (t) t.classList.add('active'); }
 }
 
-function renderPLDropdown() {
-  const el = $('#ddPlaylistList');
+function renderListsSheet() {
+  const el = $('#listsSheetList');
+  if (!el) return;
   el.innerHTML = playlists.map(pl => `
-    <div class="dd-item" data-plid="${pl.id}">
-      <span>${pl.name}${pl.seeded ? ' <span class="badge-seeded">&#128190;</span>' : ''}</span>
-      ${!pl.seeded ? `<button class="icon-btn" data-plmenu="${pl.id}">&#8943;</button>` : ''}
-    </div>`).join('');
+    <button class="lists-row${state.activeView === 'playlist' && state.activePlaylistId === pl.id ? ' active' : ''}" data-plid="${pl.id}">
+      <span class="lists-dot"></span>
+      <span class="lists-name">${pl.name}${pl.seeded ? ' <span class="badge-seeded">&#128190;</span>' : ''}</span>
+      ${!pl.seeded ? `<span class="icon-btn" data-plmenu="${pl.id}">&#8943;</span>` : ''}
+    </button>`).join('');
 
-  el.querySelectorAll('.dd-item').forEach(d => {
-    d.addEventListener('click', (e) => { if (!e.target.closest('[data-plmenu]')) switchView('playlist', d.dataset.plid); });
+  el.querySelectorAll('.lists-row').forEach(d => {
+    d.addEventListener('click', (e) => {
+      if (e.target.closest('[data-plmenu]')) return;
+      switchView('playlist', d.dataset.plid);
+    });
   });
   el.querySelectorAll('[data-plmenu]').forEach(b => {
     b.addEventListener('click', (e) => { e.stopPropagation(); showPLCtx(e, b.dataset.plmenu); });
   });
 }
 
-function togglePLDropdown() {
-  const dd = $('#playlistDropdown');
-  if (dd.classList.contains('open')) { closePLDropdown(); } else { renderPLDropdown(); dd.classList.add('open'); }
+function openListsSheet() {
+  const sheet = $('#listsSheet');
+  if (!sheet) return;
+  renderListsSheet();
+  sheet.classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
-function closePLDropdown() { $('#playlistDropdown').classList.remove('open'); }
+function closeListsSheet() {
+  const sheet = $('#listsSheet');
+  if (!sheet) return;
+  sheet.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function toggleListsSheet() {
+  const sheet = $('#listsSheet');
+  if (!sheet) return;
+  sheet.classList.contains('open') ? closeListsSheet() : openListsSheet();
+}
 
 // ==================== FAVORITES ====================
 
@@ -1277,7 +1289,7 @@ function showSongCtx(event, songId, isPlView) {
 }
 
 function showPLCtx(event, plId) {
-  closePLDropdown();
+  closeCtx();
   const menu = $('#contextMenu');
   menu.innerHTML = `
     <button class="ctx-item" data-action="rename">Rename</button>
@@ -1323,7 +1335,7 @@ function closeCtx() { $('#contextMenu').classList.remove('open'); }
 
 // ==================== MODALS ====================
 
-function openModal(id) { closeCtx(); closePLDropdown(); document.getElementById(id).classList.add('open'); }
+function openModal(id) { closeCtx(); closeListsSheet(); document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
 function openAddToPL(songId) {
@@ -1572,8 +1584,12 @@ function clearAllData() {
 
 function setupEvents() {
   $$('.tab[data-view]').forEach(t => t.addEventListener('click', () => {
-    t.id === 'tabPlaylists' ? togglePLDropdown() : switchView(t.dataset.view);
+    t.id === 'tabPlaylists' ? toggleListsSheet() : switchView(t.dataset.view);
   }));
+
+  $('#btnCloseLists').addEventListener('click', closeListsSheet);
+  $('#listsSheet').addEventListener('click', (e) => { if (e.target.id === 'listsSheet') closeListsSheet(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeListsSheet(); });
 
   $('#btnSettings').addEventListener('click', () => {
     const countEl = $('#totalSongCount');
@@ -1594,14 +1610,13 @@ function setupEvents() {
       }, 100);
     }
   });
-  $('#btnNewPlaylist').addEventListener('click', (e) => { e.stopPropagation(); closePLDropdown(); openNewPL(false); });
+  $('#btnNewPlaylist').addEventListener('click', (e) => { e.stopPropagation(); closeListsSheet(); openNewPL(false); });
 
   $$('[data-close]').forEach(b => b.addEventListener('click', () => closeModal(b.dataset.close)));
   $$('.modal-overlay').forEach(o => o.addEventListener('click', (e) => { if (e.target === o) o.classList.remove('open'); }));
 
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.context-menu') && !e.target.closest('.menu-btn') && !e.target.closest('[data-plmenu]')) closeCtx();
-    if (!e.target.closest('.tab-dd-wrap')) closePLDropdown();
   });
 
   $$('.mode-btn').forEach(b => b.addEventListener('click', () => setTheme(null, b.dataset.mode)));

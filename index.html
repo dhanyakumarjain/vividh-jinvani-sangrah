@@ -57,23 +57,18 @@
     <div class="controls">
       <div class="ctrl-wrap">
         <button class="ctrl-btn small" id="btnRepeat" title="Repeat">&#8635;</button>
-        <span class="ctrl-label">Repeat</span>
       </div>
       <div class="ctrl-wrap">
         <button class="ctrl-btn" id="btnPrev" title="Previous">&#9664;&#9664;</button>
-        <span class="ctrl-label">Prev</span>
       </div>
       <div class="ctrl-wrap">
         <button class="ctrl-btn play-btn" id="btnPlay" title="Play">&#9654;</button>
-        <span class="ctrl-label">Play</span>
       </div>
       <div class="ctrl-wrap">
         <button class="ctrl-btn" id="btnNext" title="Next">&#9654;&#9654;</button>
-        <span class="ctrl-label">Next</span>
       </div>
       <div class="ctrl-wrap">
         <button class="ctrl-btn small" id="btnShuffle" title="Shuffle">&#8652;</button>
-        <span class="ctrl-label">Shuffle</span>
       </div>
     </div>
 
@@ -83,9 +78,9 @@
     </div>
 
     <div class="tabs">
-      <button class="tab active" data-view="library">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-        <span>All</span>
+      <button class="tab active" id="tabPlaylists" data-view="playlist">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="18" x2="14" y2="18"/><polyline points="3 6 4 7 6 5"/><polyline points="3 12 4 13 6 11"/><polyline points="3 18 4 19 6 17"/></svg>
+        <span>Lists</span>
       </button>
       <button class="tab" data-view="favorites">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -95,16 +90,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         <span>Recent</span>
       </button>
-      <div class="tab-dd-wrap">
-        <button class="tab" id="tabPlaylists" data-view="playlist">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="18" x2="14" y2="18"/><polyline points="3 6 4 7 6 5"/><polyline points="3 12 4 13 6 11"/><polyline points="3 18 4 19 6 17"/></svg>
-          <span>Lists &#9662;</span>
-        </button>
-        <div class="tab-dropdown" id="playlistDropdown">
-          <button class="dd-item dd-new" id="btnNewPlaylist">+ New Playlist</button>
-          <div id="ddPlaylistList"></div>
-        </div>
-      </div>
+      <button class="tab" data-view="library">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        <span>All</span>
+      </button>
     </div>
 
     <div class="search-row">
@@ -217,6 +206,20 @@
           &#128218; Help image not found.<br>
           Please save your help guide image as <code>img/help-guide.jpg</code>
         </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lists Sheet (full-screen) -->
+  <div class="lists-sheet-overlay" id="listsSheet">
+    <div class="lists-sheet" role="dialog" aria-modal="true" aria-label="Lists">
+      <div class="lists-sheet-header">
+        <h3>&#9835; Lists</h3>
+        <button class="icon-btn lists-sheet-close" id="btnCloseLists" title="Close">&times;</button>
+      </div>
+      <div class="lists-sheet-body" id="listsSheetList"></div>
+      <div class="lists-sheet-footer">
+        <button class="lists-new-btn" id="btnNewPlaylist">+ New Playlist</button>
       </div>
     </div>
   </div>
