@@ -1193,23 +1193,6 @@ function setupEvents() {
     renderPlaylistsPage();
   });
 
-  // Search (home)
-  const homeForm = $('#homeSearchForm');
-  const homeInput = $('#homeSearchInput');
-  const homeClear = $('#homeSearchClear');
-  homeInput.addEventListener('input', () => toggleClearButton(homeInput, homeClear));
-  homeClear.addEventListener('click', () => { homeInput.value = ''; toggleClearButton(homeInput, homeClear); });
-  homeForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const q = homeInput.value.trim();
-    navigate('search');
-    const si = $('#searchInput');
-    si.value = q;
-    toggleClearButton(si, $('#searchClear'));
-    renderSearch();
-    si.focus();
-  });
-
   // Search (page)
   const searchInput = $('#searchInput');
   const searchClear = $('#searchClear');
@@ -1229,6 +1212,10 @@ function setupEvents() {
     toggleClearButton(searchInput, searchClear);
   });
   $('#pageSearchForm').addEventListener('submit', (e) => e.preventDefault());
+
+  // Full player home
+  const btnFullHome = $('#btnFullHome');
+  if (btnFullHome) btnFullHome.addEventListener('click', () => { closeFullPlayer(); navigate('home'); });
 
   // Mini player
   $('#miniOpen').addEventListener('click', (e) => {
