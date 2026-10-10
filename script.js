@@ -17,7 +17,7 @@ const THEMES = [
   { id: 'green', name: 'Green', dot: '#059669', swatch2: '#14b8a6' },
   { id: 'pink', name: 'Pink', dot: '#db2777', swatch2: '#7c3aed' },
   { id: 'purple', name: 'Purple', dot: '#7c3aed', swatch2: '#d946ef' },
-  { id: 'dark', name: 'Lotus', dot: '#f59e0b', swatch2: '#6366f1' }
+  { id: 'lotus', name: 'Lotus', dot: '#e75480', swatch2: '#f48fb1' }
 ];
 const VIEWS = ['home', 'playlists', 'favorites', 'search', 'settings'];
 
@@ -1192,6 +1192,7 @@ function loadFromStorage() {
   try { playlists = JSON.parse(localStorage.getItem(STORAGE.PLAYLISTS)) || []; } catch { playlists = []; }
   try { recentlyPlayed = JSON.parse(localStorage.getItem(STORAGE.RECENT)) || []; } catch { recentlyPlayed = []; }
   try { const t = JSON.parse(localStorage.getItem(STORAGE.THEME)); if (t && t.scheme) theme = t; } catch {}
+  if (theme.scheme === 'dark') theme.scheme = 'lotus';
 }
 
 function clearAllData() {
