@@ -136,6 +136,7 @@ echo.
 echo   [H] Help and Instructions
 echo.
 echo       Shows detailed instructions and examples
+echo       (Full guide: LATEST-HELP-GUIDE.md)
 echo.
 echo   ---
 echo.
@@ -218,7 +219,7 @@ echo.
 echo This takes 2-5 minutes.
 echo.
 pause
-call "SETUP-First-Time.bat"
+call "%~dp0SETUP-First-Time.bat"
 echo.
 echo ========================================================================
 echo Press any key to return to menu...
@@ -255,7 +256,7 @@ echo   - You'll see upload progress
 echo   - You may need to enter your password
 echo.
 pause
-call "STEP-1-Upload-Songs.bat"
+call "%~dp0STEP-1-Upload-Songs.bat"
 echo.
 echo ========================================================================
 echo.
@@ -288,7 +289,7 @@ echo.
 echo This takes 10-30 seconds.
 echo.
 pause
-call "STEP-2-Update-Website.bat"
+call "%~dp0STEP-2-Update-Website.bat"
 echo.
 echo ========================================================================
 echo.
@@ -320,7 +321,7 @@ echo.
 echo This takes 30 seconds to 2 minutes.
 echo.
 pause
-call "STEP-3-Publish-Website.bat"
+call "%~dp0STEP-3-Publish-Website.bat"
 echo.
 echo ========================================================================
 echo.
@@ -356,7 +357,7 @@ echo NOTE: Only you can see this - it's not live yet!
 echo       To make it live, run "Step 3: Publish Website"
 echo.
 pause
-call "TOOL-Test-Website.bat"
+call "%~dp0TOOL-Test-Website.bat"
 echo.
 echo Press any key to return to menu...
 pause >nul
@@ -446,6 +447,7 @@ echo           Check file names don't have special characters
 echo.
 echo ========================================================================
 echo.
+echo For the full step-by-step guide (software + order), see: LATEST-HELP-GUIDE.md
 echo For detailed technical documentation, see: README.md
 echo.
 echo Press any key to return to menu...
@@ -513,7 +515,7 @@ echo   - Your name (for Git)
 echo   - Your email (for Git)
 echo.
 pause
-call "SETUP-Fix-Problems.bat"
+call "%~dp0SETUP-Fix-Problems.bat"
 echo.
 echo ========================================================================
 echo Press any key to return to menu...
@@ -548,7 +550,7 @@ echo.
 echo WARNING: This cannot be undone!
 echo.
 pause
-call "TOOL-Reset-Data.bat"
+call "%~dp0TOOL-Reset-Data.bat"
 pause
 goto MENU
 

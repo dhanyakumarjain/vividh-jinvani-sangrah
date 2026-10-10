@@ -2,8 +2,16 @@ import http.server
 import socketserver
 import webbrowser
 import os
+import sys
 import pathlib
 from functools import partial
+
+# Make console output safe on Windows (cp1252 console) and other non-UTF8 envs
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
 
 PORT = 8080
 
@@ -134,15 +142,30 @@ RangeHTTPRequestHandler.extensions_map.update({
     '.mp4': 'video/mp4'
 })
 
+def _bind_server():
+    """Bind to the first free port starting at PORT (8080 -> 8089)."""
+    last_error = None
+    for port in range(PORT, PORT + 10):
+        try:
+            return socketserver.TCPServer(("", port), RangeHTTPRequestHandler), port
+        except OSError as err:
+            last_error = err
+            print(f"[WARN] Port {port} is busy, trying {port + 1}...")
+    print(f"[ERROR] No free port found in range {PORT}-{PORT + 9}: {last_error}")
+    sys.exit(1)
+
+httpd, ACTUAL_PORT = _bind_server()
+
 print(f"🎵 Music Player Server")
 print(f"📁 Serving from: {ROOT}")
-print(f"🌐 URL: http://localhost:{PORT}")
+print(f"🌐 URL: http://localhost:{ACTUAL_PORT}")
 print(f"✅ Range requests: ENABLED (audio seeking will work)")
 print(f"\nPress Ctrl+C to stop the server\n")
 
-with socketserver.TCPServer(("", PORT), RangeHTTPRequestHandler) as httpd:
-    webbrowser.open(f"http://localhost:{PORT}")
-    try:
-        httpd.serve_forever()
-    except KeyboardInterrupt:
-        print("\n\n👋 Server stopped")
+try:
+    webbrowser.open(f"http://localhost:{ACTUAL_PORT}")
+    httpd.serve_forever()
+except KeyboardInterrupt:
+    print("\n\n👋 Server stopped")
+finally:
+    httpd.server_close()

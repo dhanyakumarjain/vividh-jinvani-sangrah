@@ -9,6 +9,10 @@ that data in sync with your media.
 
 Live player: https://dhanyakumarjain.github.io/vividh-jinvani-sangrah/
 
+> **New computer?** Read **[LATEST-HELP-GUIDE.md](LATEST-HELP-GUIDE.md)** first - it
+> lists the software to install, the download links, and the exact order to run
+> each file.
+
 ## How It Works
 
 ```

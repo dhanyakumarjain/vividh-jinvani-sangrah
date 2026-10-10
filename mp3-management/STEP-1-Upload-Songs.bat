@@ -1,7 +1,7 @@
 @echo off
 REM ============================================
 REM Push to Hugging Face (Force Push with LFS)
-REM Works directly in hf-dataset folder
+REM Works directly in the media/ folder
 REM ============================================
 echo.
 echo ========================================

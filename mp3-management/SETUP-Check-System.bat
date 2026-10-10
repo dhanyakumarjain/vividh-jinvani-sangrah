@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 REM ============================================
 REM Preflight Check - System Requirements
 REM Checks all required software and configuration

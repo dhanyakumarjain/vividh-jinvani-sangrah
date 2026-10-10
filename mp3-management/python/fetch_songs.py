@@ -2,6 +2,14 @@ import json
 import re
 import urllib.request
 import urllib.parse
+import sys
+
+# Make console output safe on Windows (cp1252 console) and other non-UTF8 envs
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
 
 BASE_API = "https://huggingface.co/api/datasets/dhanyakumarjain/temp/tree/main"
 BASE_URL = "https://huggingface.co/datasets/dhanyakumarjain/temp/resolve/main"

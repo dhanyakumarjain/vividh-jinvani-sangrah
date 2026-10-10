@@ -129,6 +129,9 @@ player image/
 mp3-management/python/*.pyc
 mp3-management/python/__pycache__/
 
+# Generated git info (build-time artifact, not used by the player)
+data/git-info.json
+
 # Ignore cleanup and temporary documentation
 CLEANUP_PLAN.txt
 *-OLD.md

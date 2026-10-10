@@ -9,6 +9,13 @@ import sys
 from pathlib import Path
 from datetime import datetime
 
+# Make console output safe on Windows (cp1252 console) and other non-UTF8 envs
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 def get_last_commit_date():
     """Get the date of the last git commit"""
     try:

@@ -9,6 +9,15 @@ import json
 import re
 from datetime import datetime
 
+import sys
+
+# Make console output safe on Windows (cp1252 console) and other non-UTF8 envs
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 SCRIPT_DIR   = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MEDIA_DIR    = os.path.join(SCRIPT_DIR, "media")
 DATA_DIR     = os.path.join(SCRIPT_DIR, "data")
