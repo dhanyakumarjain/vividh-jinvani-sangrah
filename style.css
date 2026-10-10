@@ -104,7 +104,8 @@
 html { height: 100%; }
 
 body {
-  min-height: 100%;
+  height: 100%;
+  overflow: hidden;
   font-family: "Noto Sans Devanagari", "Nirmala UI", "Segoe UI", system-ui, -apple-system, sans-serif;
   background: var(--background);
   color: var(--text);
@@ -124,7 +125,13 @@ img { max-width: 100%; display: block; }
 
 /* ==================== APP SHELL ==================== */
 
-.app { min-height: 100vh; }
+.app {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
 
 .sidebar {
   display: none;
@@ -139,7 +146,13 @@ img { max-width: 100%; display: block; }
   z-index: 30;
 }
 
-.main-wrap { padding-left: 0; }
+.main-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-left: 0;
+}
 
 .content {
   max-width: 48rem;
@@ -239,9 +252,14 @@ img { max-width: 100%; display: block; }
 }
 .ph-text p { margin-top: 0.15rem; font-size: 0.85rem; color: var(--muted); }
 .ph-actions { display: flex; align-items: center; gap: 0.5rem; flex: 0 0 auto; }
+.pl-header .ph-side { flex: 1 1 0; }
+.pl-header .ph-actions { flex: 1 1 0; justify-content: flex-end; }
+.ph-home { flex: 0 0 auto; background: color-mix(in srgb, var(--primary) 12%, transparent); color: var(--primary); }
+.ph-home:hover { background: color-mix(in srgb, var(--primary) 22%, transparent); }
 
 .block { margin-bottom: 1.5rem; }
 .block-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; }
+#pageHome > .block:first-of-type > .block-title { text-align: center; }
 
 /* ==================== SEARCH BAR ==================== */
 
@@ -303,6 +321,8 @@ img { max-width: 100%; display: block; }
 .playlist-card:hover { border-color: color-mix(in srgb, var(--primary) 50%, transparent); background: color-mix(in srgb, var(--border) 25%, transparent); }
 
 .pc-name { min-width: 0; flex: 1; font-size: 0.95rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pc-icon { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 1.9rem; height: 1.9rem; border-radius: 0.6rem; background: color-mix(in srgb, var(--primary) 12%, transparent); color: var(--primary); }
+.pc-icon svg { width: 1.05rem; height: 1.05rem; }
 
 .pl-sentinel { grid-column: 1 / -1; height: 1px; }
 .pl-more { grid-column: 1 / -1; justify-self: center; margin-top: 0.25rem; }
@@ -326,6 +346,9 @@ img { max-width: 100%; display: block; }
 .song-row.unavailable { opacity: 0.55; }
 
 .song-top { display: flex; align-items: center; gap: 0.6rem; width: 100%; }
+.song-icon { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; color: var(--muted); }
+.song-icon svg { width: 0.95rem; height: 0.95rem; }
+.song-row.active .song-icon { color: var(--primary); }
 .song-title { flex: 1; min-width: 0; font-size: 0.9rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .song-row.active .song-title { color: var(--primary); }
 .song-dur { flex: 0 0 auto; font-size: 0.75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
@@ -493,12 +516,12 @@ input[type="range"].seek-bar::-moz-range-thumb {
   overflow: hidden;
   padding: 0.6rem 0.6rem;
   border-radius: 0;
-  background: var(--player);
+  background: color-mix(in srgb, var(--player) 72%, var(--surface));
   color: var(--player-text);
   box-shadow: 0 -4px 20px var(--shadow);
   text-align: left;
 }
-.mini-progress { position: absolute; inset: 0 auto 0 0; width: 0%; background: rgba(255, 255, 255, 0.16); }
+.mini-progress { position: absolute; inset: 0 auto 0 0; width: 0%; background: color-mix(in srgb, var(--player-text) 20%, transparent); }
 .mini-cover {
   position: relative;
   width: 2.75rem;
@@ -509,7 +532,7 @@ input[type="range"].seek-bar::-moz-range-thumb {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.15);
+  background: color-mix(in srgb, var(--player-text) 18%, transparent);
 }
 .mini-cover img { width: 100%; height: 100%; object-fit: cover; }
 .mini-cover svg { width: 1.25rem; height: 1.25rem; }
@@ -526,7 +549,7 @@ input[type="range"].seek-bar::-moz-range-thumb {
   align-items: center;
   justify-content: center;
 }
-.mini-btn.play { background: rgba(255, 255, 255, 0.2); }
+.mini-btn.play { background: color-mix(in srgb, var(--player-text) 24%, transparent); }
 .mini-btn svg { width: 1.15rem; height: 1.15rem; }
 
 @media (min-width: 1024px) {

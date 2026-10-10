@@ -287,6 +287,7 @@ function songRowHTML(s, opts = {}) {
   const plv = opts.isPlView && !opts.seeded ? '1' : '';
   return `<div class="song-row${active ? ' active' : ''}${na ? ' unavailable' : ''}" data-id="${s.id}">
     <div class="song-top">
+      <span class="song-icon"><svg><use href="#i-music"/></svg></span>
       <span class="song-title">${esc(s.title)}</span>
       ${durStr ? `<span class="song-dur">${durStr}</span>` : ''}
     </div>
@@ -327,6 +328,7 @@ function bindListInteractions(container) {
 
 function playlistCardHTML(pl) {
   return `<div class="playlist-card" data-plid="${pl.id}">
+    <span class="pc-icon"><svg><use href="#i-music"/></svg></span>
     <span class="pc-name">${esc(pl.name)}</span>
     ${!pl.seeded ? `<button class="song-action" data-plmenu="${pl.id}" aria-label="Options"><svg><use href="#i-more"/></svg></button>` : ''}
   </div>`;
