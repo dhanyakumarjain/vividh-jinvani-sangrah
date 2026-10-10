@@ -131,9 +131,8 @@ vividh-jinvani-sangrah/
 │   ├── TOOL-Sync-Local.bat
 │   └── TOOL-Reset-Data.bat
 │
-├── css/                    # Modular CSS files
 ├── img/                    # Images and artwork
-└── docs/                   # Documentation files
+└── git-push.bat            # Publish helper
 ```
 
 ---
