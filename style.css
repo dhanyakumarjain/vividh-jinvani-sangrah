@@ -284,7 +284,7 @@ img { max-width: 100%; display: block; }
 .block-action { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0.15rem; }
 .block-action-icon { width: 2.25rem; height: 2.25rem; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--exit-red) 12%, transparent); color: var(--exit-red); transition: background 0.15s; }
 .block-action:hover .block-action-icon { background: color-mix(in srgb, var(--exit-red) 22%, transparent); }
-.block-action-icon svg { width: 1.15rem; height: 1.15rem; }
+.block-action-icon svg, .block-action-img { width: 1.15rem; height: 1.15rem; object-fit: contain; display: block; }
 .block-action-label { font-size: 0.62rem; font-weight: 600; color: var(--exit-red); }
 
 /* ==================== SEARCH BAR ==================== */
