@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>विविध जिनवाणी संग्रह</title>
+  <meta name="description" content="Jain devotional music collection - pooja, paath, stotra and bhajan player." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" href="img/icon-192.png" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="जिनवाणी" />
   <link rel="stylesheet" href="style.css" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BD4VBH0SJT"></script>
@@ -207,6 +216,17 @@
             <div class="setting-row column">
               <p class="setting-name">Default volume: <span id="volLabel">80%</span></p>
               <input type="range" class="seek-bar" id="settingsVolume" min="0" max="100" value="80" aria-label="Default volume">
+            </div>
+          </section>
+
+          <section class="card" id="installCard" hidden>
+            <h2 class="card-title"><svg><use href="#i-download"/></svg>App</h2>
+            <div class="setting-row">
+              <div>
+                <p class="setting-name">Install app</p>
+                <p class="setting-desc">Add to your home screen and open it like a normal app</p>
+              </div>
+              <button class="btn-ghost" id="btnInstall">Install</button>
             </div>
           </section>
         </section>

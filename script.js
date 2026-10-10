@@ -139,6 +139,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupEvents();
   restoreState();
   startDataUpdateChecker();
+  setupPWA();
 });
 
 // ==================== DATA ====================
@@ -1285,6 +1286,7 @@ function setupEvents() {
   $('#btnNewPlaylist').addEventListener('click', () => openNewPL(false));
   $('#btnClearData').addEventListener('click', clearAllData);
   $('#btnHelp').addEventListener('click', () => openModal('helpModal'));
+  $('#btnInstall').addEventListener('click', handleInstallClick);
   $('#autoNextToggle').addEventListener('click', () => {
     state.autoNext = !state.autoNext;
     $('#autoNextToggle').classList.toggle('on', state.autoNext);
@@ -1381,3 +1383,75 @@ function reloadPage() {
   trackEvent('manual_reload', { source: 'update_notification' });
   window.location.reload(true);
 }
+
+// ==================== PWA / INSTALL ====================
+
+let deferredInstallPrompt = null;
+
+function isAppInstalled() {
+  const standalone = typeof window.matchMedia === 'function' &&
+    window.matchMedia('(display-mode: standalone)').matches;
+  return standalone || window.navigator.standalone === true;
+}
+
+function isIos() {
+  return /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+}
+
+function showInstallCard() {
+  const card = $('#installCard');
+  if (card && !isAppInstalled()) card.hidden = false;
+}
+
+function setupPWA() {
+  // Service worker (only in secure contexts: https or localhost)
+  if ('serviceWorker' in navigator && window.isSecureContext) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js').catch((err) => {
+        console.warn('Service worker registration failed:', err);
+      });
+    });
+  }
+
+  if (isAppInstalled()) return;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    showInstallCard();
+  });
+
+  // iOS Safari has no beforeinstallprompt - show manual instructions.
+  if (isIos() && /safari/i.test(window.navigator.userAgent)) {
+    showInstallCard();
+  }
+
+  window.addEventListener('appinstalled', () => {
+    deferredInstallPrompt = null;
+    const card = $('#installCard');
+    if (card) card.hidden = true;
+    trackEvent('app_installed');
+  });
+}
+
+async function handleInstallClick() {
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    const choice = await deferredInstallPrompt.userChoice;
+    trackEvent('install_prompt_result', { outcome: choice && choice.outcome });
+    deferredInstallPrompt = null;
+    if (choice && choice.outcome === 'accepted') {
+      const card = $('#installCard');
+      if (card) card.hidden = true;
+    }
+    return;
+  }
+
+  if (isIos()) {
+    alert('To install:\n\n1. Tap the Share button (square with arrow up)\n2. Scroll down and tap "Add to Home Screen"\n3. Tap "Add"');
+    return;
+  }
+
+  alert('To install this app, open your browser menu and tap "Install app" or "Add to Home screen".');
+}
+
