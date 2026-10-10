@@ -25,7 +25,7 @@ let songs = [];
 let playlists = [];
 let favorites = [];
 let recentlyPlayed = [];
-let theme = { scheme: 'saffron' };
+let theme = { scheme: 'blue' };
 let currentQueue = [];
 let currentDataVersion = null;
 let addToPlaylistSongId = null;
@@ -126,7 +126,7 @@ function sortPlaylists() {
 
 document.addEventListener('DOMContentLoaded', async () => {
   loadFromStorage();
-  if (!THEMES.some(t => t.id === theme.scheme)) theme = { scheme: 'saffron' };
+  if (!THEMES.some(t => t.id === theme.scheme)) theme = { scheme: 'blue' };
   applyTheme();
   renderThemeCards();
   await loadSongs();
