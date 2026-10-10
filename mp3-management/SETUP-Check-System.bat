@@ -164,7 +164,7 @@ REM Check if media folder exists and is a git repo
 if exist "..\media\.git" (
     cd /d "..\media"
     
-    REM Try to fetch from HF (this will fail if not authenticated)
+    REM Try to fetch from HF - this will fail if not authenticated
     git ls-remote origin >nul 2>&1
     if errorlevel 1 (
         echo   [WARN] Cannot connect to Hugging Face

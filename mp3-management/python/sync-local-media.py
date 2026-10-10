@@ -316,7 +316,7 @@ def main():
     print(f"  - Total playlists:    {len(playlists_list)}")
     print()
     print("Next steps:")
-    print("  1. Test website locally: Test-Website.bat")
+    print("  1. Test website locally: TOOL-Test-Website.bat")
     print("  2. Publish website: STEP-3-Publish-Website.bat")
 
 

@@ -73,7 +73,7 @@ if errorlevel 1 (
     echo [ERROR] Failed to push to Hugging Face
     echo.
     echo Troubleshooting:
-    echo   1. Check authentication (username + HF token)
+    echo   1. Check authentication - username + HF token
     echo   2. Verify Git LFS is installed: git lfs version
     echo   3. Check internet connection
     echo   4. Ensure you have write access to the dataset

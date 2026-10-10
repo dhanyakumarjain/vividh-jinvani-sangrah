@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 REM ============================================
 REM Clone Hugging Face Dataset Repository
 REM This becomes your media folder
@@ -16,8 +17,8 @@ REM Check if already cloned
 if exist "%CLONE_DIR%\.git" (
     echo [INFO] Repository already cloned at %CLONE_DIR%
     echo.
-    set /p UPDATE="Pull latest changes? (y/n): "
-    if /i "%UPDATE%"=="y" (
+    set /p UPDATE="Pull latest changes? [y/n]: "
+    if /i "!UPDATE!"=="y" (
         cd /d "%CLONE_DIR%"
         echo [INFO] Pulling latest changes...
         git pull origin main
@@ -69,7 +70,7 @@ if errorlevel 1 (
     echo [ERROR] Failed to clone repository
     echo.
     echo Troubleshooting:
-    echo   1. Check authentication (you may need to enter HF username and token)
+    echo   1. Check authentication - enter your HF username and token
     echo   2. Verify repository URL is correct
     echo   3. Check internet connection
     echo.
@@ -104,10 +105,10 @@ git lfs track "*.mov"
 git lfs track "*.webm"
 
 REM Check if .gitattributes needs to be committed
-git diff --quiet .gitattributes 2>nul
+git add .gitattributes
+git diff --cached --quiet 2>nul
 if errorlevel 1 (
     echo [INFO] Committing LFS configuration...
-    git add .gitattributes
     git commit -m "Configure Git LFS for MP3 files"
     git push origin main
 )

@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 REM ============================================
 REM Publish Website to GitHub Pages
 REM ============================================
@@ -57,7 +58,7 @@ REM Check if commit succeeded or if there was nothing to commit
 if errorlevel 1 (
     REM Check if there are unpushed commits
     for /f %%i in ('git rev-list @{u}..HEAD 2^>nul ^| find /c /v ""') do set UNPUSHED=%%i
-    if "%UNPUSHED%"=="0" (
+    if "!UNPUSHED!"=="0" (
         echo.
         echo [INFO] Nothing to commit and no unpushed commits
         cd /d "%~dp0"
@@ -65,7 +66,7 @@ if errorlevel 1 (
         exit /b 0
     ) else (
         echo.
-        echo [INFO] No new changes, but found %UNPUSHED% unpushed commit(s)
+        echo [INFO] No new changes, but found !UNPUSHED! unpushed commits
         echo [INFO] Will push existing commits...
     )
 )
